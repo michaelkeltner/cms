@@ -1,0 +1,491 @@
+/*
+body {
+   font: 1em Verdana, Arial, Helvetica, sans-serif;
+   background: #ddd;
+   color: #000;
+   margin: 0;
+   padding: 0;
+}
+*/
+html {
+   min-height: 100%;
+}
+
+body { 
+    border:0; 
+    margin:0; 
+    padding:0;
+    background: #A3A3A3;
+    font: 1em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif; 
+    /*font: 1em /*13px/150%*/ /*Verdana, Tahoma, sans-serif; */
+}
+
+#watermark {
+  position: fixed;
+  color: hsla(0,0%,20%,1);
+  text-shadow: hsla(0,0%,40%,.5) 0 -1px 0, hsla(0,0%,100%,.6) 0 2px 1px;
+  font-size: 24px;
+  -webkit-transition: color .2s;
+  bottom: 0px;
+  z-index: -1;
+  right:5px;
+  text-align: right;
+
+}
+
+
+.page_header h3{  
+    position: fixed;
+    top: 300px;
+    right: 0px;
+    -webkit-transition: color .2s; 
+    -webkit-transform: rotate(-90deg); 
+    -moz-transform: rotate(-90deg);	
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+    font: bold 24px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;  
+    text-align: center;  
+    color: hsla(0,0%,20%,1);  
+    text-shadow: hsla(0,0%,40%,.5) 0 -1px 0, hsla(0,0%,100%,.6) 0 2px 1px;  
+}
+
+.page_header h4{  
+    position: fixed;
+
+    top: 300px;
+    right: 50px;
+    -webkit-transition: color .2s; 
+    -webkit-transform: rotate(-90deg); 
+    -moz-transform: rotate(-90deg);	
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+    font: bold 18px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;  
+    text-align: center;  
+    color: hsla(0,0%,20%,1);  
+    text-shadow: hsla(0,0%,40%,.5) 0 -1px 0, hsla(0,0%,100%,.6) 0 2px 1px;  
+}
+
+.add_item a{
+    position: fixed;
+    width: 50px;
+    vertical-align: middle;
+    text-align: left;
+    margin-left: 75px;
+    padding: 0px 0px 0px 0px;
+}
+a img{
+    border: none;
+}
+
+div#wrapper {
+    position: relative;
+    margin: 0 auto;
+    margin-top: 100px;
+
+}
+
+.rounded-corners {
+    -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
+    -khtml-border-radius: 25px;
+    border-radius: 25px;
+}
+
+div.content_form_column_section {
+    float:left; 
+    width:25%; 
+    height:90%; 
+    background:#eeeeee;
+}
+
+div.alert_form_add {
+    background:#ff4040;
+    text-align: center;
+}
+
+.hide {
+    display:none;
+}
+
+
+/* ---------------  Copy Period Menu  ----------------*/
+
+.behind {
+    z-index: -999;
+}
+
+.menu_title {
+    text-align: center;
+    font-size:1em;
+    background: #0000B0;
+    color: #FFFFFE;
+    height:25px;
+    line-height: 25px;
+    text-indent: 10px;
+    z-index:999; 
+}
+
+.copy_menu_options {
+    display: block;
+    font-size:0.75em; 
+    width:150px; 
+    z-index:99; 
+    position:absolute}
+.copy_menu_options ul {margin:0px; padding:0px;}
+.copy_menu_options li {list-style: none;} 
+
+ul.top-level {}
+ul.top-level li {
+ border-bottom: #fff solid;
+ border-top: #fff solid;
+ border-width: 1px;
+}
+
+.copy_menu_options a {
+ color: #fff;
+ cursor: pointer;
+ display:block;
+ height:25px;
+ line-height: 25px;
+ text-indent: 10px;
+ text-decoration:none;
+ width:100%;
+}
+.copy_menu_options a:hover{
+ text-decoration:none;
+ background: #B22222;
+}
+
+.copy_menu_options li:hover {
+ background: #B22222;
+ position: relative;
+}
+
+
+
+/*  --------------------  FORMS  -------------------- */
+
+
+.form{
+    margin:auto;
+    width:550px;
+}
+
+input, textarea, select { 
+    position: relative; 
+    padding: 9px;
+    border: solid 1px #E5E5E5;
+    outline: 0;
+    font: normal 13px/100% Verdana, Tahoma, sans-serif;
+    width: 200px;
+    background: #FFFFFF url('../images/bg_form.png') left top repeat-x;  
+    background: -webkit-gradient(linear, left top, left 25, from(#FFFFFF), color-stop(4%, #EEEEEE), to(#FFFFFF));
+    background: -moz-linear-gradient(top, #FFFFFF, #EEEEEE 1px, #FFFFFF 25px);
+    box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+    -moz-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+    -webkit-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -khtml-border-radius: 3px;
+}
+
+.disabled {
+    background: #C9C9C9;
+}
+
+textarea { 
+    width: 400px;
+    max-width: 400px;
+    height: 80px;
+    line-height: 150%;
+}
+
+input:hover, textarea:hover, select:hover,
+input:focus, textarea:focus, select:focus{ 
+    border-color: #C9C9C9; 
+    -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 8px;
+}
+
+
+.form label { 
+    margin-left: 10px; 
+    color: #FFFFFF; 
+}
+
+.submit input {
+    width: auto;
+    padding: 9px 15px;
+    background: #617798;
+    background: #7187A8;
+    border: 0;
+    font-size: 14px;
+    color: #FFFFFF;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+.add_buttons{
+
+}
+
+.btn_section {
+    width: 100%;
+    padding: 9px 15px;
+    border: 0;
+    color: #FFFFFF;
+    font-size: 14px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+.btn_section_active {
+    background: #617798;
+}
+
+.btn_section_inactive {
+    background: #C0C0C0;
+}
+
+/*  -------------------- Always on the page -------------------- */
+
+
+
+.visible_div, #topLeft, #topRight, #bottomLeft, #bottomRight, #middleLeft
+{
+    position: fixed;
+    width: 150px;
+    vertical-align: middle;
+    text-align: left;
+
+}
+
+#top_left
+{
+    top: 50px;
+    left: 10px;
+
+}
+
+#middle_left{
+    left: 10px;
+    top: 150px;
+
+}
+
+#top_right
+{
+    top: 50px;
+    right: 100px;
+}
+
+#bottom_left
+{
+    bottom: 10px;
+    left: 10px;
+}
+
+#bottom_right
+{
+    bottom: 10px;
+    right: 10px;
+}
+
+/* -------------------- Messages -------------------- */
+
+
+#results_message{
+    position:absolute;
+    top:0px;
+    left:200px;
+    width:500px;
+    height: 50px;
+    text-align:center;
+    z-index: 9999;
+
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+    filter: alpha(opacity=80);
+    -moz-opacity: 0.8;
+    -khtml-opacity: 0.8;
+    opacity: 0.8;
+
+    -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
+    -khtml-border-radius: 25px;
+    border-radius: 25px;
+}
+
+.added{
+    background: #556B2F;
+    color: #000000;
+}
+
+.error{
+    background: #8B0000;
+    color: #FFFFFE;
+}
+
+
+/* -------------------- item listing style -------------------- */
+
+#listing_div{
+    margin-left: 150px;
+    border: 5px;
+    width: 700px;
+    text-decoration: none;
+    font-size: 18px;
+}
+#listing_div li.alt{
+    list-style: none;
+    background-color: #C0C0C0; 
+}
+
+#listing_div li{
+    background-color: #D1D1D1; 
+    list-style: none;
+    padding: 15px;
+
+}
+/*
+#listing_div li:hover{
+    background: #FFFFF0;
+}
+*/
+.listing_actions{
+    position: relative; 
+    float: right;
+    bottom: 25px;
+}
+
+
+/*
+.listing_delete {
+    position: relative; 
+    bottom: 25px;
+    float: right;
+    background: url("../images/delete.png") no-repeat;
+    padding: 0px 50px 50px 0px;
+
+}
+
+.listing_edit {
+    position: relative; 
+    bottom: 0px;
+    float: right;
+    background: url("../images/edit.png") no-repeat;
+    padding: 0px 30px 50px 10px;
+
+}
+*/
+.delete_item{
+    background: url("/cms/images/delete-small.png") no-repeat;
+    position: relative; 
+    bottom: 0px;
+    float: left;
+    height: 16px;
+    width: 16px;
+    margin-right: 32px;
+    margin-left: 32px;
+}
+.move_item{
+    background: url("/cms/images/move-small.png") no-repeat;
+    position: relative; 
+    bottom: 0px;
+    float: left;
+    height: 16px;
+    width: 16px;
+    margin-right: 32px;
+}
+
+
+.showing_details{
+    background: url("/cms/images/show-less.png") no-repeat;
+    position: relative; 
+    bottom: 0px;
+    float: left;
+    height: 16px;
+    width: 16px;
+    margin-right: 32px;
+
+}
+
+.hiding_details{
+    background: url("/cms/images/show-more.png") no-repeat;
+    position: relative; 
+    bottom: 0px;
+    float: left;
+    height: 16px;
+    width: 16px;
+    margin-right: 32px;
+
+}
+
+
+
+
+/*  -------------------- content add section -------------------- */
+
+/* Fade at bottom of page */
+
+#bottom-fade-dark{
+    z-index: 99;
+    position: fixed;
+    bottom: 0%;
+    background:#E0E0E0;
+    width: 100%;
+    height: 10px;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=95)";
+    filter: alpha(opacity=95);
+    -moz-opacity: 0.95;
+    -khtml-opacity: 0.95;
+    opacity: 0.95;
+}
+
+#bottom-fade-medium{
+    z-index: 99;
+    position: fixed;
+    bottom: 10px;
+    background:#E0E0E0;
+    width: 100%;
+    height: 10px;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+    filter: alpha(opacity=80);
+    -moz-opacity: 0.8;
+    -khtml-opacity: 0.8;
+    opacity: 0.8;
+}
+
+#bottom-fade-light{
+    z-index: 99;
+    position: fixed;
+    bottom: 20px;
+    background:#E0E0E0;
+    width: 100%;
+    height: 10px;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+    filter: alpha(opacity=70);
+    -moz-opacity: 0.7;
+    -khtml-opacity: 0.7;
+    opacity: 0.7;
+}
+
+/* -------------------- Sub listings (nested ul's) --------------------*/
+
+.sub_list ul{
+    margin: 0; 
+    padding-left: 5px;
+    float: left;
+}
+
+.sub_list ul li{
+    display: inline;
+}
+
+.sub_list ul li a{
+    float: left; text-decoration: none;
+    color: white;
+    padding: 10.5px 19px;
+    background-color: #D1D1D1; 
+
+}
+
+.sub_list .alt{
+     background-color: #C0C0C0; 
+}

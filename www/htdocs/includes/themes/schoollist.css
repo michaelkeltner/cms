@@ -1,0 +1,97 @@
+
+body{
+    background: #333;
+}
+
+.rounded-corners {
+     -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
+    -khtml-border-radius: 25px;
+    border-radius: 25px;
+}
+#wrapper {
+    width: 780px;
+    margin: 0 auto;
+    background: #ffffff;
+    text-align: left;
+
+}
+#search_school{
+    margin: 0 auto;
+}
+
+.search{
+    padding: 0 0 0 0;
+    font-kerning: auto;
+    font-weight: bold;
+    font-size:20px;
+    margin-bottom: 1em;
+    text-align: left;
+    text-indent: 30px;
+    width: 640px;
+    background: transparent url("/includes/images/search.png") no-repeat;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -khtml-border-radius: 10px;
+    border-radius: 10px;
+    outline: 0;
+}
+
+#title {
+    text-align: center;
+    font-size:24px;
+    font-weight: bold;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+#footer{
+    text-align: center;
+    background: #555;
+    width: 780px;
+    margin: 0 auto;
+}
+#button {
+    width: 670px;
+    margin: 0 auto;
+    padding: 0 0 1em 0;
+    margin-bottom: 1em;
+    font-family: 'Trebuchet MS', 'Lucida Grande',
+        Verdana, Lucida, Geneva, Helvetica, 
+        Arial, sans-serif;
+    background-color: #ffffff;
+    color: #333;
+}
+
+#button ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+#button li {
+    border-bottom: 1px solid #CD5C5C;
+    margin: 0;
+}
+
+
+#button li a {
+    display: block;
+    padding: 5px 5px 5px 0.5em;
+    border-left: 10px solid #8B0000;
+    background-color: #b22222;
+    color: #fff;
+    text-decoration: none;
+    width: 100%;
+}
+
+html>body #button li a {
+    width: auto;
+}
+
+#button li a:hover {
+    
+    background-color: #8B0000;
+    color: #fff;
+}

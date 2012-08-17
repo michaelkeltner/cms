@@ -1,0 +1,36 @@
+.MSG_homepage{
+	background-color:#007DC3;
+	color:#FFFFFF;
+	height:34px;
+	border-bottom:none;
+}
+.MSG_homepage a{
+	color:#FFFFFF;
+	text-decoration: none;
+}
+.MSG_homepage a:hover{
+	text-decoration: underline;
+}
+#schoolName, .sectionTitle{
+	color:#007DC3;
+}
+.alart_message{
+	background-color:#007DC3;
+	color:#FFFFFF;
+	border-bottom:none;
+}
+#column0 ul li a, .sidebar_link a{
+	color:#007DC3;
+}
+h2{
+	color:#007DC3;
+}
+#schoolLinkRequest b{
+	color:blue;
+	cursor:pointer;
+	font-weight:bold;
+	padding:2px;
+}
+#schoolLinkRequest b:hover{
+	background-color:#CCCCCC;
+}

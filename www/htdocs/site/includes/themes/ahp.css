@@ -1,0 +1,620 @@
+body {
+	margin: 10px auto;
+	position: relative;
+}
+
+#container {
+	position: absolute;
+	min-width: 1014px;
+}
+
+#header #globalLinks {
+	position: absolute;
+	top: -5px;
+	right: 29px;
+	width: 275px;
+	text-align: right;
+	font-size: 11px;
+	color: #a4a4a4;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+#header #globalLinks a {
+	color: #0000b0;
+	text-decoration: none;
+	padding: 0 5px;
+}
+
+#header #globalLinks a:focus, #header #globalLinks a:hover {
+	text-decoration: underline;
+}
+
+#header {
+	position: absolute;
+
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 185px;
+	
+	margin: 0;
+	padding: 0;
+
+	background-image: url('/site/includes/images/AHP-Vert1px.gif');
+}
+
+#header .placeholderLeft {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 40px;
+	height: 185px;
+	
+	background-image: url('/site/includes/images/AHP-Frame-Corner.jpg');
+}
+
+#header .placeholderRight {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 40px;
+	height: 185px;
+	
+	background-image: url('/site/includes/images/AHP-Frame-Corner.jpg');
+        background-position: -40px 0px;
+}
+
+#header #Logo {
+	position: absolute;
+	top: 18px;
+	left: 40px;
+	width: 328px;
+	height: 55px;
+}
+
+#header #Logo img {
+	border: 0;
+}
+
+#header #needAssistance {
+	position: absolute;
+	top: 18px;
+	right: 29px;
+	height: 29px;
+	width: 275px;
+	background-image: url('/site/includes/images/AHP-Vert1px.gif');
+        background-position:0px -185px;
+}
+
+#header #needAssistance div {
+	position: absolute;
+	top: 5px;
+	right: -3px;
+	line-height: 18px;
+
+	font-family: Arial, Helvetica, sans-serif;
+	color: #fff;
+	font-size: 18px;
+	white-space: nowrap;	
+}
+
+#header #needAssistance .placeholderLeft {
+	position: absolute;
+	top: 0;
+	left: -2px;
+	width: 12px;
+	height: 29px;
+
+	background-image: url('/site/includes/images/AHP-header-assist-L.gif');
+}
+
+#footer {
+	position: absolute;
+	bottom: -35px;
+	left: 0;
+	width: 100%;
+	height: 101px;
+	margin: 0;
+	padding: 0;
+	background-image: url('/site/includes/images/AHP-Vert1px.gif');
+        background-position:0px -214px;
+}
+
+#footer .placeholderLeft {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 40px;
+	height: 101px;
+	
+	background-image: url('/site/includes/images/AHP-Frame-Corner.jpg');
+        background-position: 0px -185px;
+}
+
+#footer .placeholderRight {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	width: 40px;
+	height: 101px;
+	
+	background-image: url('/site/includes/images/AHP-Frame-Corner.jpg');
+        background-position: -40px -185px;
+}
+
+#footer #footerLinks {
+	position: absolute;
+	bottom: 28px;
+	left: 35px;
+	font-size: 12px;
+	color: #a4a4a4;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+#footer #footerLinks a {
+	color: #0000b0;
+	text-decoration: none;
+	padding: 0 5px;
+}
+
+#footer #footerLinks a:focus, #footer #footerLinks a:hover {
+	text-decoration: underline;
+}
+
+#footer #copyright {
+	position: absolute;
+	bottom: 28px;
+	right: 35px;
+	font-size: 10px;
+	color: #a4a4a4;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.MSG_homepage{
+	background-color:#C30000;
+	color:#FFFFFF;
+	height:34px;
+	border-bottom:none;
+}
+.MSG_homepage a{
+	color:#FFFFFF;
+	text-decoration: none;
+}
+.MSG_homepage a:hover{
+	text-decoration: underline;
+}
+
+#content {
+	min-height: 478px;
+	position: relative;
+    top: 73px;
+	margin: 0 21px 123px 23px;
+	padding: 0;
+
+}
+
+#defineMinWidth {
+	display: none;
+}
+
+#defineMinHeight {
+	display: none;
+}
+/**/
+
+
+#miscLinks, #enrollmentLinks, #benefitLinks, #claimsLinks {
+	font-family: arial;
+	text-align: center;
+	position: relative;
+	width: 220px;
+	float: left;
+	padding: 0 7px;
+	margin: 20px 0;
+	height: 425px;	
+}
+#miscLinks a img {
+	border: 0 none;	
+}
+
+#miscLinks ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+#miscLinks ul li {
+	padding: 1px 10px;
+}
+
+#miscLinks ul li a {
+	text-align: left;
+	position: relative;
+	line-height: 17px;
+	font-size: 14px;
+}
+
+#miscLinks ul li.formatFix div {
+	display: block;
+	text-decoration: none;
+	font-size: 10px;
+	line-height: 10px;
+}
+
+h2 {text-align: center; margin: 0; color: #a3620a}
+
+#miscLinks { background-color: #d0c7c0; margin: 20px 10px; padding: 0; width: 234px; text-align: left;}
+
+#benefitLinks {
+	border-left: 1px solid #f00;
+	border-right: 1px solid #f00;
+}
+
+#enrollmentLinks ul, #benefitLinks ul, #claimsLinks ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+#enrollmentLinks ul li, #benefitLinks ul li, #claimsLinks ul li {
+	border-bottom: 1px solid #ddd;
+	padding: 3px 0;
+}
+
+#enrollmentLinks ul li a, #benefitLinks ul li a, #claimsLinks ul li a {
+	text-align: left;
+	position: relative;
+	display: block;
+	text-decoration: none;
+	padding: 2px;
+	color: #00f;
+	line-height: 15px;
+	font-size: 12px;
+	vertical-align: middle;
+}
+
+#enrollmentLinks ul li.formatFix div, #benefitLinks ul li.formatFix div, #claimsLinks ul li.formatFix div {
+	display: block;
+	text-decoration: none;
+}
+
+#enrollmentLinks ul li a:hover, #benefitLinks ul li a:hover, #claimsLinks ul li a:hover {
+	display: block;
+	background-color: #ddd;
+}
+
+#enrollmentLinks a.disabled,
+#benefitLinks a.disabled,
+#claimsLinks a.disabled {
+	color: #888;
+}
+
+#enrollmentContact, #benefitContact, #claimsContact {
+	font-family: arial;
+	text-align: center;
+	position: relative;
+	width: 220px;
+	float: left;
+	padding: 0 7px;
+	margin: 20px 0;
+	height: 425px;	
+}
+#benefitContact {
+	border-left: 1px solid #f00;
+	border-right: 1px solid #f00;
+}
+
+#enrollmentContact ul, #benefitContact ul, #claimsContact ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+#enrollmentContact ul li, #benefitContact ul li, #claimsContact ul li {
+	border-bottom: 1px solid #ddd;
+	padding: 3px 0;
+}
+
+#enrollmentContact ul li a, #benefitContact ul li a, #claimsContact ul li a {
+	text-align: left;
+	text-decoration: none;
+	color: #00f;
+	width: 103px;
+}
+
+#enrollmentContact ul li.formatFix div, #benefitContact ul li.formatFix div, #claimsContact ul li.formatFix div {
+	display: block;
+	text-decoration: none;
+}
+
+
+/**/
+
+.header{
+	color:#007DC3;
+}
+
+#column0{
+    background-color: #d0c7c0;
+	font-family: arial;
+	text-align: center;
+	position: relative;
+	float: left;
+	padding: 0;
+	margin: 20px 10px;
+	border-bottom:20px solid #D0C7C0;
+	min-height:405px;
+    width: 234px; 
+    text-align: left;
+}
+
+
+#column1, #column2, #column3, #column4 {
+	font-family: arial;
+	text-align: center;
+	position: relative;
+	float: left;
+	padding: 0 7px;
+	margin: 0 0;
+	height: 425px;	
+}
+
+#column0 img{
+    margin-left: -10px;
+    /*
+    width: 234px;
+    height: 156px;
+    */
+}
+
+#column0 a img {
+	border: 0 none;	
+}
+
+#column0 ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+#column0 ul li {
+	padding: 1px 10px 0px 10px;
+}
+
+#column0 ul li a {
+	text-align: left;
+	position: relative;
+	line-height: 17px;
+	font-size: 14px;
+	color: #00f;
+}
+
+#column0 ul li.formatFix div {
+	display: block;
+	text-decoration: none;
+	font-size: 10px;
+	line-height: 10px;
+}
+
+
+
+/*
+#column1 img, #column2 img, #column3 img, #column4 img{
+    width: 204px;
+    height: 136px;
+}
+*/
+.oneColumn #column1 {
+	width: 660px;
+}
+
+.twoColumn #column2 {
+	border-left: 1px solid #f00;
+}
+
+.twoColumn #column1, .twoColumn #column2 {
+	width: 340px;
+}
+
+.threeColumn #column2 {
+	border-left: 1px solid #f00;
+	border-right: 1px solid #f00;
+}
+
+.threeColumn #column1, .threeColumn #column2, .threeColumn #column3 {
+	width: 220px;
+}
+
+.fourColumn #column1, .fourColumn #column2, .fourColumn #column3 {
+	border-right: 1px solid #f00;
+}
+
+.fourColumn #column1, .fourColumn #column2, .fourColumn #column3, .fourColumn #column4 {
+	width: 234px;
+}
+
+#column1 ul, #column2 ul, #column3 ul, #column4 ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+    text-align: left;
+    font-size: 14px
+}
+
+#column1 ul li, #column2 ul li, #column3 ul li, #column4 ul li {
+	border-bottom: 1px solid #ddd;
+	padding: 3px 0;
+}
+
+#column1 ul li a, #column2 ul li a, #column3 ul li a, #column4 ul li a {
+	text-align: left;
+	text-decoration: none;
+	color: #00f;
+}
+
+#column1 ul li.formatFix div, #column2 ul li.formatFix div, #column3 ul li.formatFix div, #column4 ul li.formatFix div {
+	display: block;
+	text-decoration: none;
+}
+
+/* Page Specific Overrides */
+#pageYearSelect #column1 a, #pageYearSelect #column2 a {
+	text-decoration: none;
+}
+
+#pageYearSelect #column1 a img, #pageYearSelect #column2 a img {
+	border: 0 none;
+}
+
+#pageSchoolHome #column1 ul li a,
+#pageSchoolHome #column2 ul li a,
+#pageSchoolHome #column3 ul li a,
+#pageSchoolHome #column4 ul li a {
+	text-align: left;
+	position: relative;
+	display: block;
+	text-decoration: none;
+	padding: 2px;
+	color: #00f;
+	line-height: 15px;
+	font-size: 12px;
+	vertical-align: middle;
+}
+
+#pageSchoolHome #column1 ul li a:hover,
+#pageSchoolHome #column2 ul li a:hover,
+#pageSchoolHome #column3 ul li a:hover,
+#pageSchoolHome #column4 ul li a:hover {
+	display: block;
+	background-color: #ddd;
+}
+
+#pageSchoolHome #column1 a.disabled,
+#pageSchoolHome #column2 a.disabled,
+#pageSchoolHome #column3 a.disabled,
+#pageSchoolHome #column4 a.disabled {
+	color: #888;
+}
+
+#pageContactUs #column0, #pageContactUs #column1, #pageContactUs #column2, #pageContactUs #column3, #pageContactUs #column4 {
+	height: 500px;
+}
+/*****************************************************************************************/
+
+#hpbtns {
+	float: left;
+	position: relative;
+	margin: 28px 0 0 30px;
+}
+
+.hpbox {
+	display: block;
+	width: 278px;
+	height: 133px;
+	padding: 0;
+	margin: 0 15px 7px 0;
+}
+
+.hpbox img{
+	border: 0 none;
+}
+
+#findMySchool, #otherServices {
+	position: relative;
+	float: left;
+	width: 400px;
+}
+
+#otherServices {
+	position: relative;
+	float: left;
+	clear: right;
+	width: 500px;
+
+}
+
+#findMySchoolResults {
+	width: 100%;
+}
+
+#findMySchoolResults a {
+	color: #0000b0;
+	text-decoration: none;
+	padding: 0 5px;
+}
+
+#findMySchoolResults a:focus, #findMySchoolResults a:hover {
+	text-decoration: underline;
+}
+
+
+#fileManagerFolderList, #fileManagerFolderList ul {
+	list-style: none;
+}
+
+.ahpplus-link{
+	color:#333333;
+	font-size:13px;
+	font-variant:small-caps;
+	font-weight:bold;
+	text-decoration:none;
+}
+a.ahpplus-link:hover{
+	color:#111111;
+	text-decoration:underline;
+}
+/*#thenumber1{
+	display:block;
+	float:right;
+	text-align:right;
+	width:127px;
+	clear:right;
+	padding-right:3px;
+}
+#thenumber2{
+	float:right;
+	display:none;
+	float:right;
+	text-align:right;
+	width:142px;
+	padding-right:3px;
+}*/
+#thenumber2{
+	display:none;
+}
+#needAssistance{padding-left:3px;}
+
+.ahpplus-link{
+	color:#247ED6;
+	cursor:pointer;
+	text-decoration:none;
+}
+a.ahpplus-link:hover{
+	text-decoration:underline;
+	color:#0D467C;
+}
+
+/* --- Embedded content ---*/
+
+#embed_content{
+    position: absolute;
+    z-index: -1;
+    height:90%;
+    width:73%;
+    bottom: 10px;
+    left: 260px;
+    
+}
+
+a.close_embed{
+    z-index: 9999;
+    position: absolute;
+    width: 60px;
+    vertical-align: middle;
+    text-align: center;
+    left: 410px;
+    top: -45px;
+    font-size: 24px;
+    background: #b22222;
+    color: #FFFFFF; 
+}

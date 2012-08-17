@@ -1,0 +1,15 @@
+RewriteBase /
+
+RewriteEngine On
+
+
+RewriteCond %{REQUEST_FILENAME} !-f 
+RewriteCond %{REQUEST_FILENAME} !-d 
+
+RewriteCond %{REQUEST_FILENAME} !\.(css|gif|ico|jpg|js|png|swf|txt|pdf).*$
+
+RewriteRule ^.*$ index.php
+
+RewriteCond %{REQUEST_URI} cms
+RewriteCond %{REQUEST_FILENAME} !\.(css|gif|ico|jpg|js|png|swf|txt|pdf).*$
+RewriteRule ^.*$ ./index.php

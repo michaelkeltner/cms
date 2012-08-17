@@ -1,0 +1,1 @@
+ALTER TABLE  `user` ADD  `temp_password` VARCHAR( 255 ) NULL AFTER  `password`
