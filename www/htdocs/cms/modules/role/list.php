@@ -1,6 +1,7 @@
 <?php
 //used to determine the menu link that should have the class "active" on it
 $sActiveLink = getParam(2);
+$sModule = $sActiveLink;
 require_once (CMS_INCLUDES . 'header.php');
 $oRole = new Role();
 
@@ -39,10 +40,10 @@ if (isset($_SESSION['sMessage'])){
                 <td><?php echo $oItem->name ?></td>
                 <td class="actions">
                     <?php if ($oUser->canAccess('update')):?>
-                    <a href="/cms/user/edit/<?php echo $oItem->id ?>" target="_self" alt="edit user"><img src="/cms/images/edit.png" alt="edit" class="edit"></a>&nbsp;&nbsp;&nbsp;
+                    <a href="/cms/role/edit/<?php echo $oItem->id ?>" target="_self" alt="edit user"><img src="/cms/images/edit.png" alt="edit" class="edit"></a>&nbsp;&nbsp;&nbsp;
                     <?php endif;?>
                     <?php if ($oUser->canAccess('delete') && $oItem->id != 1):?>
-                    <a href="" target="" alt="delete user" class="delete user" id="<?php echo $oItem->id ?>"><img src="/cms/images/delete.png" alt="delete"></a>
+                    <a href="" target="" alt="delete role" class="delete role" id="<?php echo $oItem->id ?>"><img src="/cms/images/delete.png" alt="delete"></a>
                     <?php endif;?>
                 </td>
             </tr>
