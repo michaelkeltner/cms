@@ -38,6 +38,45 @@ class Field extends Action {
         return parent::getAllActive($sQueryModification);
     }
     
+    public function listValue($oFieldItem, $oItem, $sFieldName){
+        $sType = $oFieldItem->type;
+        if ($sType == 'active'){
+            return ($oItem->active)?'Yes':'No';
+        }elseif ($sType == 'association'){
+            $sReturn = '';
+            $aOptions = unserialize($oFieldItem->options);
+            $oModuleBuilder = new ModuleBuilder();
+            $aLinkToThisField = $oModuleBuilder->getModuleField($aOptions['module_id'], $aOptions['field_id']);
+            $oLinkTothisField = $aLinkToThisField[0];
+            $oAssociation = new Association();
+            $aData = $oAssociation->getAssocationValues($oFieldItem->module_id, $sFieldName, $oItem->id);
+            if (!$aData){
+                return $sReturn;
+            }
+            foreach ($aData as $oValue){
+                $sReturn .= $oValue->{$oLinkTothisField->name} . ', ';
+            }
+            return substr($sReturn, 0, -2);
+        }elseif ($sType == 'file'){
+            $sReturn = '';
+            $oAsset = new Asset();
+            $aData = unserialize($oItem->{$sFieldName});
+            $aAsset = $oAsset->getAll(' WHERE `id` in (' . implode (',', $aData). ')');
+            if (count($aAsset)){
+                foreach ($aAsset as $oAssetItem){
+                    $sReturn .= $oAssetItem->display_name . '<br/>';
+                }
+            }
+            return $sReturn;
+        }elseif (is_array($oItem->{$sFieldName})){
+            $aData = unserialize($oItem->{$sFieldName});
+            $sReturn = implode('<br/>', $aData);
+            return $sReturn;
+        }else{
+            return $oItem->{$sFieldName};
+        }
+    }
+    
 }
 
 ?>

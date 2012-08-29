@@ -25,7 +25,7 @@ define('MODULES_ROOT', CMS_ROOT . 'modules'.$sDs);
 define('BASE_URL', $_SERVER['HTTP_HOST']);
 
 define ('SITE_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/');
-define("FILE_DECACHER", "08162012");
+define("FILE_DECACHER", "08292012");
 define("APIKEY", "MB00ar82S2a027oyN08do0n5");
 define("JQUERYFILE", "jquery-1.8.0.min.js");
 define("JQUERYUIJSFILE", "jquery-ui-1.8.22.custom.min.js");

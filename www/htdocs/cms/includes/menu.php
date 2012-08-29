@@ -10,7 +10,9 @@ $oUser = new User();
 
 $oLoggedInUser = $oUser->getActiveUser();
 $oModule = new Module();
-$aModules = $oModule->getAll(); 
+$aModules = $oModule->getAll();
+$oMenuBuilder = new MenuBuilder();
+$aMenu = $oMenuBuilder->getMenu();
 ?>
 
 <div class="menu">
@@ -18,10 +20,10 @@ $aModules = $oModule->getAll();
         <li>
             <a href="/cms/home/" target="_self"<?php if ($sActiveLink == 'home'):?> class="active"<?php endif; ?>><img src="/cms/images/menu/menu-home.png" alt="home"/><br/>Home</a>
         </li>
-        <?php foreach($aModules as $oModuleItem):?>
-            <?php if (($oModuleItem->name == 'modules') || !isset($oLoggedInUser->permissions[$oModuleItem->name])){continue;}?>
+        <?php foreach($aMenu as $oMenuItem):?>
+            <?php if (!isset($oLoggedInUser->permissions[$oMenuItem->module])){continue;}?>
             <li>
-                <a href="/cms/<?php echo $oModuleItem->name?>/list/" target="_self"<?php if ($sActiveLink == $oModuleItem->name):?> class="active"<?php endif; ?>><img src="/cms/images/menu/menu-<?php echo $oModuleItem->name?>.png" alt="<?php echo $oModuleItem->name?>"/><br/><?php echo $oModuleItem->display_name?></a>
+                <a href="/cms/<?php echo $oMenuItem->module?>/list/" target="_self"<?php if ($sActiveLink == $oMenuItem->module):?> class="active"<?php endif; ?>><img src="/cms/images/menu/<?php echo $oMenuItem->icon?>" alt="<?php echo $oMenuItem->display_name?>"/><br/><?php echo $oMenuItem->display_name?></a>
             </li>
         <?php endforeach; ?>
         <li>

@@ -21,5 +21,6 @@ $iId = isset($oFieldItem->id)?$oFieldItem->id:'';
     <input type="hidden" value="<?php echo $iId?>" name="module_field[id][]"/><br/>
     
 </p>
+<?php include('options.php') ?>
     </div>
 </div>

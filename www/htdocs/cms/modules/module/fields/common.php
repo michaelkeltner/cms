@@ -17,4 +17,5 @@ $iId = isset($oFieldItem->id)?$oFieldItem->id:'';
     <input type="hidden" name="module_field[orig_name][]" value="<?php echo $sFieldName?>"/>
     <input type="hidden" value="<?php echo $iId?>" name="module_field[id][]"/><br/>
     
+    
 </p>

@@ -4,8 +4,9 @@
     position: fixed;
     font-size: 12px;
     text-align: center;
-    top: 0px;
     width: 100%;
+    top: 0px;
+    white-space: nowrap;
     background-color: #C0C0C0; 
     z-index: 999;
     

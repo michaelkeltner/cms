@@ -7,16 +7,34 @@ require_once(APP_INCLUDES . 'functions.php');
 $mResult = '';
 
 switch (postVar('action')) {
-    case 'delete_school':
-        $sClass = 'School';
+    case 'load_wysiwyg_content':
+        $sTable =  postVar('module_name');
+        $iItemId = postVar('item_id');
+        $sColumnName = postVar('field_name');
+        $oDb = new DB();
+        $sSql = 'SELECT `' . $sColumnName . '` FROM `' . $sTable . '` WHERE `id` = ' . $iItemId;
+        $aData = $oDb->getRowsAsObjects($sSql);
+        $oReturn = array_shift($aData);
+        $sReturn = unserialize($oReturn->{$sColumnName});
+        echo json_encode($sReturn);
+        exit;
         break;
-    case 'delete_period':
-        $sClass = 'Period';
+    case 'load_module_fields':
+        $oModuleBuilder = new ModuleBuilder;
+        echo json_encode($oModuleBuilder->getModuleFields(postVar('module_id')));
+        exit;
+    case 'delete':
+        echo deleteItem(postVar('module'), postVar('id'));
+        exit;
         break;
-    default:
-    case 'delete_section':
-        $sClass = 'Section';
-        break;
+    case 'delete_module':
+        $oModuleBuilder = new ModuleBuilder;
+        if ($oModuleBuilder->delete(postVar('id'))){
+            echo json_encode(true);
+        }else{
+            echo json_encode($oModuleBuilder->__get('aMessage'));
+        }
+        exit;
    case 'delete_asset':
         $oAsset = new Asset();
         $oAsset->deleteAndRemove(postVar('id'), postVar('school_slug'));
@@ -27,18 +45,11 @@ switch (postVar('action')) {
         $oTheme->deleteAndRemove(postVar('id'));
         exit;
         break;
-     
     case 'delete_user':
         $sClass = 'User';
         break;
     case 'delete_role':
         $sClass = 'Role';
-        break;
-    case 'delete_carrier':
-        $sClass = 'Carrier';
-        break;
-    case 'delete_contact':
-        $sClass = 'Contact';
         break;
     case 'edit_content':
         echo getContentData(postVar('school_id'), postVar('period_id'), postVar('section_id'));
@@ -79,6 +90,14 @@ $mResult = $oClass->delete(postVar('id'));
 echo $mResult;
 exit;
 
+function deleteItem($sModule, $iId){
+    $oModuleGeneric = new ModuleGeneric($sModule);
+    $mResult = $oModuleGeneric->delete($iId);
+    return $mResult;
+}
+
+
+
 function copySchoolPeriod($sSchoolSlug, $sCopyFromPeriodSlug, $sCopyToPeriodSlug){
     $oSchoolPeriod = new SchoolPeriod();
     $oSchool = new School();
@@ -115,9 +134,8 @@ function getCopyPeriodMenu($sSchoolSlug, $sPeriodSlug, $sPeriodName){
 function getImageUrl($iId){
     $oAsset = new Asset();
     $oItem = $oAsset->getWithId($iId);
-    $aReturn = array();
     $oObject = new stdClass();
-    $oObject->src = '/assets/' . $oItem->school_slug . '/images/'. $oItem->name;
+    $oObject->src = '/assets/images/'. $oItem->name;
     //$aReturn[0] = $oObject;
     return json_encode($oObject);
     

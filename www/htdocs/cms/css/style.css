@@ -213,11 +213,22 @@ input:focus, textarea:focus, select:focus{
 .submit input {
     width: auto;
     padding: 9px 15px;
-    background: #617798;
     background: #7187A8;
     border: 0;
     font-size: 14px;
     color: #FFFFFF;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+.submit input:hover {
+    width: auto;
+    padding: 9px 15px;
+    background: #617798;
+    /*background: #7187A8;*/
+    border: 0;
+    font-size: 14px;
+    color: #EEEEEE;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
 }
@@ -327,27 +338,56 @@ input:focus, textarea:focus, select:focus{
 
 #listing_div{
     margin-left: 150px;
+    margin-bottom: 50px;
     border: 5px;
-    width: 700px;
+    width: 900px;
     text-decoration: none;
     font-size: 18px;
 }
-#listing_div li.alt{
+
+#listing_div table{
+    width: 100%;
+border-collapse:collapse;
+border:0px;
+color:#282828;
+}
+
+#listing_div table td{
+border:0px;
+margin: 5px;
+
+}
+
+#listing_div tr.header{
+border:0px;
+background: #7187A8;
+background: #111111;
+color: #EEEEEE;
+text-align: left;
+}
+
+#listing_div #header_actions{
+    width:100px;
+}
+
+
+#listing_div li.alt, tr.alt{
     list-style: none;
     background-color: #C0C0C0; 
 }
 
-#listing_div li{
+#listing_div li, tr{
     background-color: #D1D1D1; 
     list-style: none;
     padding: 15px;
 
 }
-/*
-#listing_div li:hover{
-    background: #FFFFF0;
+
+#listing_div li:hover, tr:hover{
+    /*background: #FFFFF0;*/
+    background: #7187A8;
 }
-*/
+
 .listing_actions{
     position: relative; 
     float: right;

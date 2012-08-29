@@ -3,20 +3,23 @@ $sActiveLink = 'menu';
 $oMenuBuilder = new MenuBuilder();
 $oModule = new Module();
 $aModule = $oModule->getAll();
-$aMenuOptions = $oMenuBuilder->getAll();
-$bError = false;
-$sError = '';
+$aMenuOptions = $oMenuBuilder->getAll('ORDER BY `sort_order` ASC');
+$aError = array();
 if (formSubmit()){
-    
+    if ($oMenuBuilder->updateMenu($_POST)){
+        gotoURL('/cms/home/'); 
+    }else{
+        $aError = $oMenuBuilder->get('aMessage');
+    }
 }
 
 ?>
 
 <?php require_once (CMS_INCLUDES . 'header.php');?>
-<?php if ($oMenuBuilder->__get('bError')):?>
+<?php if (count($aError)):?>
 <div id="error" class="error">
     <?php 
-    foreach ($oMenuBuilder->__get('aMessage') as $sMessage){
+    foreach ($aError as $sMessage){
         echo $sMessage . '<br/>';
     }
     ?>
@@ -30,27 +33,33 @@ if (formSubmit()){
     <?php endforeach; ?>
 </div>
 
-<div id="module_option_list">
+<div id="menu_option_list">
     
     <?php foreach(scandir(CMS_ROOT .'images/menu/') as $sImage): ?>
     <?php if (strlen($sImage) < 4){continue;}?>
-    <div class="image_option sortable">
+    <div class="image_option">
         <img src="/cms/images/menu/<?php echo $sImage?>" width="47" height="47"/>
-    </div>
+        <input type="hidden" name="menu[icon][]" value="<?php echo $sImage?>"/>
+     </div>
+
     <?php endforeach; ?>
 </div>
-
+<div id="trash">
+    <img src="/cms/images/trash.png" width="48" height="48"/>
+</div>
 <div class="form">
 <form action="<?php echo currentURL() ?>" method="post" class="menu_builder noEnterSubmit">
     <div id="used_menu_modules" class="sortable">
         <?php if (count($aMenuOptions)):?>
         <?php foreach ($aMenuOptions as $oItem):?>
-        <div>
-            <input type="text" name="menu[name]" value="<?php echo $oItem->name?>"
-            <input type="hidden" name="menu[id]" value="<?php echo $oItem->id?>"/>
-            <input type="hidden" name="menu[module_id]" value="<?php echo $oItem->module_id?>"/>
-            <input type="hidden" name="menu[icon]" value="<?php echo $oItem->icon?>"/>
-            <img src="/cms/images/menu/<?php echo $oItem->icon?>" width="47" height="47"/>
+        <div class="menu_module">
+            <input type="text" name="menu[name][]" value="<?php echo $oItem->name?>"/>
+            <input type="hidden" name="menu[id][]" value="<?php echo $oItem->id?>"/>
+            <input type="hidden" name="menu[module_id][]" value="<?php echo $oItem->module_id?>"/>
+            <div class="menu_image">
+                <img src="/cms/images/menu/<?php echo $oItem->icon?>" width="48" height="48"/>
+                <input type="hidden" name="menu[icon][]" value="<?php echo $oItem->icon?>"/>
+            </div>
         </div>
         <?php endforeach ?>
         <?php endif; ?>

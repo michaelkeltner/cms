@@ -2,12 +2,12 @@
 /**
  * Class Render acs as a wrapper for the front end to get site content 
  */
-class Render {
+class Render extends ModuleGeneric{
 
     static $sSchoolSlug;
     static $sPeriodSlug;
-    function __construct() {
-        
+    function __construct($sModule) {
+        parent::__construct($sModule);
     }
 
     function __destruct() {
@@ -26,7 +26,7 @@ class Render {
     static function getPeriodSlug(){
         return self::$sPeriodSlug;
     }
-    
+     
     public function getThemeFile(){
         $oSchool = new School();
         $oItem = $oSchool->getTheme(Render::getSchoolSlug());

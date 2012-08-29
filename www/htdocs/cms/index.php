@@ -4,13 +4,14 @@ require_once(APP_INCLUDES . 'init.php');
 require_once(APP_INCLUDES . 'functions.php');
 
 //are we at the cms main page
-
 if (getParam(2) == 'login'){
     $sFile = CMS_ROOT . 'login.php';
 }elseif(getParam(2) == 'logout'){
     $sFile = CMS_ROOT . 'logout.php';
 }elseif(getParam(2) == 'reset'){
     $sFile = CMS_ROOT . 'reset.php';
+}elseif(getParam(2) == '_asset'){
+    $sFile = APP_INCLUDES . 'tp/upload/index.php';
 }else{
     $oUser = new User();
     $oUser->checkLogin();
@@ -21,11 +22,14 @@ if (getParam(2) == 'login'){
     }
 }
 
-if (file_exists($sFile))
-{//load the file
+if (file_exists($sFile)){
+    //load the file
     include_once($sFile);
+}elseif (file_exists(MODULES_ROOT . 'generic/' . getParam(3) . '.php')){
+    //load the generic file
+    include_once(MODULES_ROOT . 'generic/' . getParam(3) . '.php');
 }else{
-    //load the dashboard
+    //nothing found, load the dashboard
     include_once(MODULES_ROOT . 'home/index.php');
 }
  exit;

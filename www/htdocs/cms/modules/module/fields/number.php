@@ -4,5 +4,6 @@
     <div class="field_item">
         <?php include('action_buttons.php') ?>
         <?php include('common.php') ?> 
+        <?php include('options.php') ?>
     </div>
 </div>

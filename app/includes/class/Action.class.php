@@ -21,6 +21,12 @@ class Action {
     public function __set($sName, $mValue) {
         $this->{$sName} = $mValue;
     }
+    
+    public function addArrayItem($sName, $mValue){
+        $aArray = $this->__get($sName);
+        array_push($aArray, $mValue);
+        $this->__set($sName, $aArray);
+    }
 
     function __destruct() {
         unset($this);
@@ -54,7 +60,7 @@ class Action {
 
     public function update($iId) {
         $oDb = $this->__get('oDb');
-        $sSql = "UPDATE `" . $this->__get('sTable') . "` SET " . $this->__get('sValues') . " WHERE id = $iId";
+        $sSql = "UPDATE `" . $this->__get('sTable') . "` SET " . $this->__get('sValues') . " WHERE `id` = $iId";
         return $oDb->executeQuery($sSql);
     }
 
@@ -88,7 +94,7 @@ class Action {
     }
 
     public function getAllActive($sQueryModification = null) {
-        return $this->getAll(' WHERE `status` = 1' . $sQueryModification);
+        return $this->getAll(' WHERE `active` = 1' . $sQueryModification);
     }
 
     public function getNameFromSlug($sSlug) {

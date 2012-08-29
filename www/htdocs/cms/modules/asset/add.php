@@ -17,15 +17,14 @@ if (formSubmit()) {
     }
 }
 
-$oClass = new School();
-$aSchools = $oClass->getAllActive();
+
+
 ?>
 
 <div class="message">
     <?php echo $sMessage; ?>
 </div>
 </div>
-<?php if (count($aSchools)): ?>
 
     <form class="form" action="" method="post" enctype="multipart/form-data">
          <p class="name">
@@ -36,26 +35,9 @@ $aSchools = $oClass->getAllActive();
             <input type="text" name="display_name" id="display_name" />
             <label for="name">Display Name</label>
         </p>
-        <p class="name">
-            <select name="school_slug">
-                <option value="ahp-global">All Schools</option>
-                <?php foreach ($aSchools as $oItem): ?>
-                    <option value="<?php echo $oItem->slug ?>"><?php echo $oItem->name ?></option>
-                <?php endforeach; ?>
-            </select>
-            <label for="school_slug">School</label>
-        </p>
-       
         <p class="submit">
             <input type="submit" value="add" />
         </p>
     </form>
-
-<?php else: ?>
-    There are no schools available to load an asset for
-    <div class="add_link">
-        <a href="/cms/school/add/" alt="add school"><img src="images/add.png"/>Add School</a>
-    </div>
-<?php endif; ?>
 </body>
 </html>

@@ -1,6 +1,8 @@
 <?php 
 $sActiveLink = 'module';
 $oModuleBuilder = new ModuleBuilder();
+$oModule = new Module();
+$aModule = $oModule->getAll(' WHERE `type` = "generic"');
 $oField = new Field();
 $aField = $oField->getAll();
 $aModuleFields = array();
@@ -43,45 +45,73 @@ if (isset($_SESSION['module_action'] )){
 ?>
 
 <?php require_once (CMS_INCLUDES . 'header.php');?>
-<?php if ($oModuleBuilder->__get('bError')):?>
-<div id="error" class="error">
-    <?php 
-    foreach ($oModuleBuilder->__get('sMessage') as $sMessage){
-        echo $sMessage . '<br/>';
-    }
-    ?>
-</div>
-<?php endif;?>
+
 <form action="<?php echo currentURL() ?>" method="post" class="module_builder noEnterSubmit">
-    <div id="module_details">
-        Name: <input name="module_details[name]" type="text" value="<?php echo $sName ?>"/><br/>
-        Display Name: <input name="module_details[display_name]" type="text" value="<?php echo $sDisplayName ?>"/><br/>
-        Description: <textarea name="module_details[description]"><?php echo $sDescription ?></textarea><br/>
-        Is Active: <select name="module_details[active]">
-            <option value="1"<?php  if ($iActive):?>selected="selected"<?php endif;?>>Yes</option>
-            <option value="0"<?php  if (!$iActive):?>selected="selected"<?php endif;?>>No</option>
-        </select><br/>
-        <input type="hidden" name="module_details[orig_name]" value="<?php echo $sName ?>"/>
-    </div>
-    <div id="field_option_list">
-        <?php foreach($aField as $oItem): ?>
-        <div class="field_option">
-            <a href="#" id="link_clone_field_<?php echo $oItem->type ?>" class="add_field" alt="add <?php echo $oItem->name ?>"><image src="/cms/images/add-item.png" alt="Add <?php echo $oItem->name ?>" width="32" heigth="32"/></a><?php echo $oItem->name?>
-        </div>
-        <?php endforeach; ?>
+    <?php if ($oModuleBuilder->__get('bError')):?>
+<div id="topsection">
+    <div class="innertube">
         
+        <div id="error" class="error">
+        <?php 
+            foreach ($oModuleBuilder->__get('aMessage') as $sMessage){
+                echo $sMessage . '<br/>';
+            }
+        ?>
+        </div>
+
+       
     </div>
-    <div id="used_field_list" class="sortable">
-        <?php if (count($aModuleFields)):?>
-        <?php $sFieldClass = ''?>
-            <?php foreach ($aModuleFields as $oFieldItem):?>
-            <?php include(MODULES_ROOT .'module/fields/' . $oFieldItem->type . '.php');?>
-            <?php endforeach?>
-        <?php endif;?>
+</div>
+    <?php endif;?>
+<div id="contentwrapper">
+    <div id="contentcolumn">
+        <div class="innertube">
+            <div id="used_field_list" class="sortable">
+                <?php if (count($aModuleFields)):?>
+                <?php $sFieldClass = ''?>
+                    <?php foreach ($aModuleFields as $oFieldItem):?>
+                    <?php include(MODULES_ROOT .'module/fields/' . $oFieldItem->type . '.php');?>
+                    <?php endforeach?>
+                <?php endif;?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="leftcolumn">
+    <div class="innertube">
+        <div id="field_option_list">
+            <?php foreach($aField as $oItem): ?>
+            <div class="field_option">
+                <?php echo $oItem->name?><a href="#" id="link_clone_field_<?php echo $oItem->type ?>" class="add_field" alt="add <?php echo $oItem->name ?>"><image src="/cms/images/add-item.png" alt="Add <?php echo $oItem->name ?>" width="32" heigth="32"/></a>
+            </div>
+            <?php endforeach; ?>
+        </div>
     </div>
     
-    <input type="submit" value="<?php echo $sFormSubmitText?>"/>
-    <input type="cancel" value="Cancel"/>
+</div>
+
+<div id="rightcolumn">
+    <div class="innertube">
+        <div class="module_details">
+            Name: <input name="module_details[name]" type="text" value="<?php echo $sName ?>"/><br/>
+            Display Name: <input name="module_details[display_name]" type="text" value="<?php echo $sDisplayName ?>"/><br/>
+            Description: <textarea name="module_details[description]"><?php echo $sDescription ?></textarea><br/>
+            Is Active: <select name="module_details[active]">
+                <option value="1"<?php  if ($iActive):?>selected="selected"<?php endif;?>>Yes</option>
+                <option value="0"<?php  if (!$iActive):?>selected="selected"<?php endif;?>>No</option>
+            </select><br/>
+            <input type="hidden" name="module_details[orig_name]" value="<?php echo $sName ?>"/>
+        </div>
+        <div class="form_actions">
+            <p class="submit">
+                <input type="submit" value="<?php echo $sFormSubmitText?>"/>
+            </p>
+        </div>
+
+    </div>
+</div>
+
 </form>
 
 <div id="clone_field" class="hide">

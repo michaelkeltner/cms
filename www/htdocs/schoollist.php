@@ -3,8 +3,8 @@
 require_once('../../app/includes/config.php');
 require_once('../../app/includes/init.php');
 require_once('../../app/includes/functions.php');
-$oSchool = new School();
-$aSchools = $oSchool->getAllActive();
+$oSchool = new Render('school');
+$aSchools = $oSchool->getAllActive(' ORDER BY `name` ASC');
 ?>
 <html>
     <head>

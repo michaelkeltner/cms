@@ -25,7 +25,7 @@ class Asset extends Action {
     }
 
     public function upload($sSchoolSlug, $sDisplayName) {
-        $sAssetPath = SITE_ROOT . 'assets/' . $sSchoolSlug . '/';
+        $sAssetPath = SITE_ROOT . 'assets/';
         if (!file_exists($sAssetPath)){
             
             if(!mkdir($sAssetPath)){
@@ -49,7 +49,7 @@ class Asset extends Action {
         }
         
         $aAllowedImages = array("image/gif", "image/png", "image/jpeg", "image/pjpeg", "image/jpg");
-        $aAllowedDocs = array("application/pdf");
+        $aAllowedDocs = array("application/pdf", "text/css");
          if (in_array($_FILES["file"]["type"], $aAllowedImages)) {
             $sType = 'image';
             $sUploadHere = $sImagePath;
@@ -91,8 +91,8 @@ class Asset extends Action {
     }
 
     private function addItem($sSchoolSlug, $sName, $sDisplayName, $sType, $iSize) {
-        parent::__set('sColumns', '`school_slug`, `name`, `display_name`, `type`, `size`, `create_date`, `modify_date`');
-        parent::__set('sValues', '\'' . $sSchoolSlug . '\', \'' . $sName . '\', \'' . $sDisplayName . '\', \'' . $sType . '\', ' . $iSize . ', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP');
+        parent::__set('sColumns', ' `name`, `display_name`, `type`, `size`, `create_date`, `modify_date`');
+        parent::__set('sValues', '\'' . $sName . '\', \'' . $sDisplayName . '\', \'' . $sType . '\', ' . $iSize . ', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP');
         return $this->add();
     }
     
@@ -137,7 +137,7 @@ class Asset extends Action {
             return '/assets/ahp-global/' . $sAssetTypeDir .'s/'. $sFile;
         }
     }
-
+    
 }
 
 ?>

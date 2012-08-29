@@ -1,0 +1,97 @@
+body{
+margin:0;
+padding:0;
+line-height: 1.5em;
+}
+
+b{font-size: 110%;}
+em{color: red;}
+
+
+#topsection{
+position: fixed;
+
+width: 100%;
+background-color: #C0C0C0; 
+color: #FFF;
+text-align: center;
+padding: 0 0;
+z-index: 10;
+
+}
+
+#topsection h1{
+margin: 0;
+padding-top: 15px;
+}
+
+#contentwrapper{
+float: left;
+width: 100%;
+}
+
+#contentcolumn{
+margin: 0 15% 0 20%; /*Margins for content column. Should be "0 RightColumnWidth 0 LeftColumnWidth*/
+}
+
+#leftcolumn{
+position: fixed;
+top: 100px;
+left: 0px;
+float: left;
+width: 180px; /*Width of left column in percentage*/
+margin-right: 5px;
+z-index: 20;
+background-color: #C0C0C0; 
+
+}
+
+.module_details textarea{
+    width: 90%;
+}
+
+
+#rightcolumn{
+position: fixed;
+top: 100px;
+right: 35px;
+float: left;
+width: 15%; /*Width of right column in pixels*/
+margin-left: -15%; /*Set margin to that of -(RightColumnWidth)*/
+z-index: 20;
+background-color: #C0C0C0;
+}
+
+#rightcolumn input{
+
+width: 90%; /*Width of right column in pixels*/
+
+}
+
+#rightcolumn select{
+
+width: 90%; /*Width of right column in pixels*/
+
+}
+
+#footer{
+clear: left;
+width: 100%;
+background: black;
+color: #FFF;
+text-align: center;
+padding: 4px 0;
+}
+
+#footer a{
+color: #FFFF80;
+}
+
+.innertube{
+margin: 10px; /*Margins for inner DIV inside each column (to provide padding)*/
+margin-top: 0;
+}
+
+#field_option_list{
+    text-align: right;
+}

@@ -20,7 +20,8 @@ $iId = isset($oFieldItem->id)?$oFieldItem->id:'';
     <input type="hidden" name="module_field[field_id][]" value="<?php echo $iFieldId?>"/>
     <input type="hidden" name="module_field[orig_name][]" value="sort_order"/>
     <input type="hidden" name="module_field[id][]" value="<?php echo $iId?>"/><br/>
-    
+
 </p>
+    <?php include('options.php') ?>
     </div>
 </div>

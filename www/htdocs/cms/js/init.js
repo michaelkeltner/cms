@@ -16,7 +16,110 @@ $(document).ready(function() {
     closeSite();
     toggleAllChecks();
     validateForm();
+    setupGenericModuleForm();
 });
+
+function setupGenericModuleForm(){
+    
+    $('.add').qtip({
+        content: 'Add an item',
+        position: {
+                    my: 'bottom left',  // Position my top left...
+                    at: 'top right' // at the bottom right of...
+                    
+        }
+    });
+    
+    $('.edit').qtip({
+        content: 'Edit this',
+        position: {
+                    my: 'center right',  // Position my top left...
+                    at: 'center left' // at the bottom right of...
+        }
+    });
+    
+    $('.delete').qtip({
+        content: 'Delete this',
+        position: {
+                    my: 'center right',  // Position my top left...
+                    at: 'center left' // at the bottom right of...
+                    
+        }
+    });
+    
+    $('.header_description').mouseover(function(){
+        inputId = 'description_' + (this.id).substring(7,(this.id).length);
+        content = $('input#'+ inputId).val();
+        if (content != undefined){
+            $(this).qtip({
+                content: content,
+                position: {
+                    my: 'bottom left',  // Position my top left...
+                    at: 'top left', // at the bottom right of...
+                    target: $(this) // my target
+                }
+            }); 
+        }
+    });
+   
+
+    $('.field_wysiwyg').markItUp(mySettings);
+    var WYSIWYGitems = $("form .field_wysiwyg").map(function(index, elm) {
+        return {name: elm.name};
+    });
+    item_id = $('#item_id').val();
+    module_name = $('#module_name').val();
+    for(i=0; i<WYSIWYGitems.length; i++) {
+        field_name = WYSIWYGitems[i].name;
+        $.post('/cms/ajax.php', {
+                action: 'load_wysiwyg_content',
+                module_name: module_name,
+                item_id: item_id,
+                field_name: field_name
+            }, function (data){
+                if (data != undefined){
+
+                    $('textarea#' + field_name).html(data);
+
+                }
+            }, 'JSON');
+
+    }
+    /*
+    $('textarea.field_wysiwyg').htmlarea({
+    toolbar: [
+        "p",
+        "|",
+        "bold", "italic", "underline",
+        "|",
+        "h1", "h2", "h3", "h4", "h5", "h6",
+        "|",
+        "link", "unlink",
+        "|",
+         "orderedList", "unorderedList","horizontalrule",
+    ],
+    loaded: function () {
+       
+    }
+});
+
+*/
+    $('.form_datetime').datetimepicker({ampm: true,hourGrid: 4,minuteGrid: 15, timeFormat: 'hh:mm TT'});
+    $('.form_date').datepicker();
+    $('.form_time').timepicker({ampm: true, hourGrid: 4,minuteGrid: 15, timeFormat: 'hh:mm TT'});   
+    //Fix to make sure the loaded values are not default values of 
+    $('.datetime_value_fix').each(function(){
+       field_name = $(this).attr('id');
+       field_value = $(this).val();
+       $(' :input').each(function(){
+           if ($(this).attr('name') == field_name){
+               if ($(this).val() != field_value){
+                   $(this).val(field_value);
+               }
+           }
+       });
+   });
+}
 
 function validateForm(){
     $('#btn_login').click(function(e){
@@ -184,6 +287,7 @@ function formImageSelect(){
                 action:'get_image_src',
                 asset_id:asset_id 
             }, function(data) {
+                
                 if (data != undefined){
                     previewDiv.html($("<img/>", {src:data.src}));
                 }
@@ -483,7 +587,6 @@ function loadSchoolPeriodContent(iSchoolId, iPeriodId){
         //populate the available assets select options based on the school
         //image assets
         var mySelect = cloneImageDiv.find('select');
-        alert(mySelect.html())
         $.each(aAssetImages, function(imageAsset) {
             mySelect.append(
                 $('<option></option>').val(imageAsset.id).html(imageAsset.display_name)
@@ -643,71 +746,75 @@ function loadSchoolPeriodContent(iSchoolId, iPeriodId){
 function deleteItem(){
     $('a.delete').click(function(e){
         e.preventDefault();
-        var $deleteMe = $(this).closest('li');
-        var $action = '';
-        if ($(this).hasClass('school')){
-            $action = 'delete_school';
-        }else if($(this).hasClass('period')){
-            $action = 'delete_period';
-        }else if($(this).hasClass('role')){
-            $action = 'delete_role';
-        }else if($(this).hasClass('section')){
-            $action = 'delete_section';
-        }else if($(this).hasClass('contact')){
-            $action = 'delete_contact';
-        }else if($(this).hasClass('asset')){
-            $action = 'delete_asset';
-            $school_slug = $(this).attr('rel');
+        var deleteMe = $(this).closest('tr');
+        $(this).removeClass('delete');
+        var action = 'delete';
+        var module = $(this).attr('class')
+        if(module == 'module'){
+            action = 'delete_module';
             if (confirmDelete()){
                 $.post('/cms/ajax.php',{
-                    action:$action, 
-                    school_slug:$school_slug,
+                    action:action, 
                     id:this.id
                 }, function(data) {
-                    $deleteMe.fadeOut(500);
-                    $deleteMe.remove();
-                    $('li').removeClass('alt');
-                    $('li:odd').addClass('alt');
+                    deleteMe.fadeOut(500);
+                    deleteMe.remove();
+                    $('tr').removeClass('alt');
+                    $('tr:odd').addClass('alt');
                 });
            
             }
             return 0;
-        }else if($(this).hasClass('theme')){
-            $action = 'delete_theme';
+        }else if(module == 'asset'){
+            action = 'delete_asset';
+            school_slug = $(this).attr('rel');
             if (confirmDelete()){
                 $.post('/cms/ajax.php',{
-                    action:$action, 
-                    id:this.id
+                    action:action, 
+                    school_slug:school_slug,
+                    id:this.id,
+                    module:module
                 }, function(data) {
-                    $deleteMe.fadeOut(500);
-                    $deleteMe.remove();
-                    $('li').removeClass('alt');
-                    $('li:odd').addClass('alt');
+                    deleteMe.fadeOut(500);
+                    deleteMe.remove();
+                    $('tr').removeClass('alt');
+                    $('tr:odd').addClass('alt');
+                });
+           
+            }
+            return 0;
+        }else if(module == 'theme'){
+            action = 'delete_theme';
+            if (confirmDelete()){
+                $.post('/cms/ajax.php',{
+                    action:action, 
+                    id:this.id,
+                    module:module
+                }, function(data) {
+                    deleteMe.fadeOut(500);
+                    deleteMe.remove();
+                    $('tr').removeClass('alt');
+                    $('tr:odd').addClass('alt');
                 });
             }
             return 0;
-        }else if($(this).hasClass('user')){
-            $action = 'delete_user';
-        }else if($(this).hasClass('carrier')){
-            $action = 'delete_carrier';
-        }else{
-            return 0;
-        }
-        if (confirmDelete()){
+        }else if (confirmDelete()){
             $.post('/cms/ajax.php',{
-                action:$action, 
-                id:this.id
+                action:action, 
+                id:this.id,
+                module:module
             }, function(data) {
-                $deleteMe.fadeOut(500);
-                $deleteMe.remove();
+                deleteMe.fadeOut(500);
+                deleteMe.remove();
                 $('li').removeClass('alt');
                 $('li:odd').addClass('alt');
             });
-            $deleteMe.remove();
+            deleteMe.remove();
             //need to put the class alt on the on the appropriate li now that an
             //item has been removed
-            $('li').removeClass('alt');
-            $('li:odd').addClass('alt');
+            $('tr').removeClass('alt');
+            $('tr:odd').addClass('alt');
+            return 0;
         }
     });
 }

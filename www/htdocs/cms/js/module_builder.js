@@ -8,7 +8,29 @@ $(document).ready(function() {
     hideColumnContent();
     addField();
     removeFormItem();
+    setupAssociationActions();
 });
+
+function setupAssociationActions(){
+    $('.association_module_select').change(function(){
+        mySelect = $(this).siblings().next('.association_field_select');
+        mySelect.html('');
+        mySelect.append($('<option></option>').val('0').html('--Select field value to show--'));
+        $.post('/cms/ajax.php', {
+            action: 'load_module_fields',
+            module_id: $(this).val()
+        }, function (data){
+            if (data != undefined){
+               $.each(data, function(index) {
+                   if (data[index].type != 'header'){
+                        mySelect.append($('<option></option>').val(data[index].id).html(data[index].display_name));
+                    }
+                });
+                mySelect.removeClass('hide');
+            }
+        }, 'JSON');
+    });
+}
 
 function cleanLoadedFields(){
     $('#used_field_list').find('div').each(function(){

@@ -9,7 +9,30 @@ class ModuleBuilder extends Action {
     function __destruct() {
         unset($this);
     }
+    
+    public function delete($iId, $sIdColumn = 'id'){
+        $oModule = $this->getWithId($iId);
+        //remove the entry from the module table
+        if (!parent::delete($iId, $sIdColumn)){
+            $this->__set('bError', true);
+            $this->addArrayItem('aMessage', 'Could not remove the module from the module list');
+            return false;
+        }
+        //drop the table from the DB
+        if (!$this->_dropTable($oModule->name)){
+            $this->__set('bError', true);
+            $this->addArrayItem('aMessage', 'Could not remove module table');
+            return false;
+        }
+        //no errors
+        return true;
+    }
 
+    private function _deleteAllFields($iId){
+        $oDb = $this->__get('oDb');
+        $sSql = 'DELETE FROM `module_field` WHERE `module_id` = ' . $iId;
+        return $oDb->ExecuteQuery($iId);
+    }
     
     private function _getDeleteFields($aModuleFields, $aFormFieldIds){
         $aReturn['delete'] = array();
@@ -33,7 +56,9 @@ class ModuleBuilder extends Action {
         $aReturn['edit'] = array();
         //find the new fields
         foreach($aFormFieldIds as $iFormFieldId){
-            //store the data into an object
+                //store the data into an object
+                unset($aStoreMe);
+                $aStoreMe = array();
                 $oField = new stdClass();
                 $oField->type = $aFieldProperties['type'][$i];
                 $oField->id = isset($aFieldProperties['id'][$i])?$aFieldProperties['id'][$i]:0;
@@ -44,7 +69,11 @@ class ModuleBuilder extends Action {
                 $oField->orig_name = $aFieldProperties['orig_name'][$i];
                 $oField->display_name = $aFieldProperties['display_name'][$i];
                 $oField->description = $aFieldProperties['description'][$i];
-                $oField->properties = '';
+                //get all the options available for this array
+                foreach ($aFieldProperties['options'] as $sKey => $sValue){
+                    $aStoreMe[$sKey] = isset($aFieldProperties['options'][$sKey][$i])?$aFieldProperties['options'][$sKey][$i]:'';
+                }
+                $oField->options = serialize($aStoreMe);
                 $oField->active = 1;
             if (!isset($aSearchMe[$iFormFieldId])) {
                 //new field
@@ -62,6 +91,7 @@ class ModuleBuilder extends Action {
         $oDb = $this->__get('oDb');
         $this->__set('sTable', 'module_field');
         $sMethod = '_' . $sAction . 'Field';
+        $aIgnoreFields = array(5,2);
         foreach($aField as $oField){
             $oField->name = $this->_cleanDBStringName($oField->name);
             if(!$this->{$sMethod}($oField)){
@@ -70,7 +100,7 @@ class ModuleBuilder extends Action {
                 return false;
             }
             //Headers do not exist in the table
-            if ($oField->field_id == 5){continue;}
+            if (in_array($oField->field_id, $aIgnoreFields)){continue;}
             $sSql = $this->_getColumnAlterStatement($oField, $sModuleName, $sAction);
             if(!$oDb->executeQuery($sSql)){
                 $this->__set('bError', true);
@@ -85,9 +115,9 @@ class ModuleBuilder extends Action {
         return $this->delete($oField->id);
     }
     
-    private function _addField($oField){
-        $sColumns = '`module_id` , `field_id` , `sort_order` , `name` , `display_name` , `description` , `properties` , `active`, `create_date`';
-        $sValues = getParam(4) . ', ' . $oField->field_id . ', ' . $oField->sort_order . ', \'' . $oField->name . '\', \'' . $oField->display_name . '\', \''. $oField->description . '\', \'\', 1, CURRENT_TIMESTAMP';
+    private function _addField($oField){ 
+        $sColumns = '`module_id` , `field_id` , `sort_order` , `name` , `display_name` , `description` , `options` , `active`, `create_date`';
+        $sValues = getParam(4) . ', ' . $oField->field_id . ', ' . $oField->sort_order . ', \'' . $oField->name . '\', \'' . $oField->display_name . '\', \''. $oField->description . '\', \''. $oField->options . '\', 1, CURRENT_TIMESTAMP';
         $this->__set('sColumns', $sColumns);
         $this->__set('sValues', $sValues);
         return $this->add();
@@ -95,7 +125,7 @@ class ModuleBuilder extends Action {
     
     private function _editField($oField){
 
-        $sValues = '`sort_order` = ' . $oField->sort_order . ', `name` =  \'' . $oField->name . '\', `display_name` =\'' . $oField->display_name . '\' , `description`=\''. $oField->description . '\'';
+        $sValues = '`sort_order` = ' . $oField->sort_order . ', `name` =  \'' . $oField->name . '\', `display_name` =\'' . $oField->display_name . '\' , `description`=\''. $oField->description . '\', `options`=\''. $oField->options . '\'';
         $this->__set('sValues', $sValues);
         return $this->update($oField->id);
         
@@ -224,28 +254,36 @@ class ModuleBuilder extends Action {
                     $aFieldDisplayNames = $aFieldProperties['display_name'];
                     $aFieldDescription = $aFieldProperties['description'];
                     $aFieldId = $aFieldProperties['field_id'];
-                    $aColumns = array('properties' => '', 'active' => 1);
+                    $aFieldOptions = $aFieldProperties['options'];
+                    $aOptions = array('list', 'multiple', 'module_id', 'field_id');
+                    $aColumns = array('active' => 1);
                     foreach ($aFieldNames as $iIndex => $sValue) {
+                        unset($aStoreMe);
+                        $aStoreMe = array();
                         $aColumns['module_id'] = $iModuleId;
                         $aColumns['field_id'] = $aFieldId[$iIndex];
                         $aColumns['sort_order'] = $iIndex;
                         $aColumns['name'] = $this->_cleanDBStringName($sValue);
                         $aColumns['display_name'] = $aFieldDisplayNames[$iIndex];
                         $aColumns['description'] = $aFieldDescription[$iIndex];
+                        foreach ($aOptions as $sKey){
+                            $aStoreMe[$sKey] = isset($aFieldOptions[$sKey][$iIndex])?$aFieldOptions[$sKey][$iIndex]:'';
+                        }
+                        $aColumns['options'] = serialize($aStoreMe);
                         $this->addModuleField($aColumns);
                     }
                     $this->bResult = true;
                     $this->aMessage[] = 'Module ' . $sModuleName . ' was created';
                     return true;
                 } else {//we could not add the new module to the module table
-                    $this->bResult = false;
-                    $this->aMessage[] = 'was not able to create the database table for ' . $sModuleName;
+                    $this->__set('bError',true);
+                    $this->addArrayItem('aMessage', 'was not able to create the database table for ' . $sModuleName);
                     return false;
                 }
             }
         }else{
-            $this->bResult = true;
-            $this->aMessage[] = $aModuleDetails['name'] . ' is already an existing module';
+            $this->__set('bError',true);
+            $this->addArrayItem('aMessage', $aModuleDetails['name'] . ' is already an existing module');
             return false;
         }
 
@@ -257,7 +295,7 @@ class ModuleBuilder extends Action {
     }
     
     public function updateItem($sName, $sDisplayName, $iId){
-        $sValues = ' `name` = "' . $sName. '", display_`name` = "' . $sDisplayName. '", `modify_date` = CURRENT_TIMESTAMP';
+        $sValues = ' `name` = "' . $sName. '", `display_name` = "' . $sDisplayName. '", `modify_date` = CURRENT_TIMESTAMP';
         parent::__set('sValues', $sValues);
         return $this->update($iId);
     }
@@ -280,6 +318,16 @@ class ModuleBuilder extends Action {
         $sSql .= ' ORDER BY `mf`.`sort_order` ASC';
         return $oDb->getRowsAsObjects($sSql);
 
+    }
+    
+    public function getModuleField($iModuleId, $iFieldId){
+        $oDb = $this->__get('oDb');
+        
+        $sSql = 'SELECT `mf`.* from `module_field` `mf`' .
+                ' JOIN `module` `m` ON `mf`.`module_id` = `m`.`id`' .
+                ' WHERE `mf`.`id` = ' . $iFieldId . 
+                ' AND `m`.`id` = ' . $iModuleId;
+        return $oDb->getRowsAsObjects($sSql);
     }
     
     public function isModuleAvailable($sName){
@@ -306,10 +354,16 @@ class ModuleBuilder extends Action {
         $sValues .= ' CURRENT_TIMESTAMP, CURRENT_TIMESTAMP';
         $this->__set('sColumns', $sColumns);
         $this->__set('sValues', $sValues);
-
+        
         $bResult = $this->add();
         $this->__set('sTable', 'module');
         return $bResult;
+    }
+    
+    private function _dropTable($sTableName){
+        $oDb = $this->__get('oDb');
+        $sSql = 'DROP TABLE `' . $sTableName . '`';
+        return $oDb->ExecuteQuery($sSql);
     }
     
     public function createTable($sTableName, $aProperties){
@@ -344,6 +398,8 @@ class ModuleBuilder extends Action {
                 return 'tinyint(1)';
                 break;
             case 'text':
+            case 'file':
+            case 'image':
                 return 'varchar(255)';
                 break;
             case 'date':
@@ -358,6 +414,9 @@ class ModuleBuilder extends Action {
             case 'sortorder':
             case 'associative':
                 return 'int(11)';
+                break;
+            case 'wysiwyg':
+                return 'text';
                 break;
             default:
                 return null;
