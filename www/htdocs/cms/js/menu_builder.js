@@ -10,19 +10,22 @@ function setupAddMenuItem(){
         me = $(this);
         moduleId = me.attr('id');
         moduleName = me.parent().text().trim();
-        addThis = '<div class="menu_module ui-droppable">';
-        addThis += '<input type="text" name="menu[name][]" value="' + moduleName +'"/>';
+        addThis = '<div class="menu_module ui-droppable">'; 
+        addThis += '<img src="/cms/images/delete-small.png" class="delete_item"/>';
+        addThis += '<input type="text" name="menu[name][]" value="' + moduleName +'"/>'; 
         addThis += '<input type="hidden" name="menu[id][]" value="0"/>';
         addThis += '<input type="hidden" name="menu[module_id][]" value="' + moduleId +'"/>';
         addThis += '<div class="menu_image">';
         addThis += '<img src="/cms/images/menu/no-choice.png" width="47" height="47"/>';
-        addThis += '<input type="hidden" name="menu[icon][]" value="0"/>';
+        addThis += '<input type="hidden" name="menu[icon][]" value="no-choice.png"/>';
         addThis +='</div>';
         addThis +='</div>';
         addHere.append(addThis);
         
         //setup the dropable events on the new item
         setupDropable();
+        //bind the n delete action for the new menu item
+        removeFormItem();
     }).live();
         
 }

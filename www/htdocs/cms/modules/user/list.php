@@ -27,12 +27,14 @@ if (isset($_SESSION['sMessage'])){
         <?php if ($sMessage != ''):?>
         <div id="results_message" class="message<?php echo $sMessageClass ?>"><?php echo $sMessage ?></div>
         <?php endif; ?>
-        <table class="listings">
+        <table id="listings">
+            <thead>
             <tr class="header">
-            <td id="header_name" class="header_description">Name<input type="hidden" id="description_name" value="The User's display name"/></td>
-            <td id="header_email" class="header_description">Email<input type="hidden" id="description_email" value="User's email"/></td>
-            <td id="header_actions" class="header_description">Actions<input type="hidden" id="description_actions" value="Click the icons to take action on the items"/></td>
+            <th id="header_name" class="header_description">Name<input type="hidden" id="description_name" value="The User's display name"/>
+            <th id="header_email" class="header_description">Email<input type="hidden" id="description_email" value="User's email"/>
+            <th id="header_actions" class="header_description">Actions<input type="hidden" id="description_actions" value="Click the icons to take action on the items"/>
             </tr>
+            </thead>
         <?php $i = 0;?>
         <?php foreach ($aItems as $oItem):?> 
             <?php $sAltClass = (++$i % 2 == 0)?'class="alt"':'' ?>
@@ -50,6 +52,17 @@ if (isset($_SESSION['sMessage'])){
             </tr>
             <?php endforeach; ?>
         </table>
+        <div id="table_header">
+            <table id="listing_header">
+                <thead>
+                    <tr class="header">
+                        <th id="fixed_header_name" class="header_description">Name<input type="hidden" id="description_name" value="Asset's display name"/></th>
+                        <th id="fixed_header_email" class="header_description">Email<input type="hidden" id="description_preview" value="Users email"/></th>
+                        <th id="fixed_header_actions" class="header_description">Actions<input type="hidden" id="description_actions" value="Click the icons to take action on the items"/></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
     
     <?php
 else:

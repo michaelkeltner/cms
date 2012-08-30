@@ -63,6 +63,7 @@ if (isset($_SESSION['module_action'] )){
     </div>
 </div>
     <?php endif;?>
+<div id="listing_div">
 <div id="contentwrapper">
     <div id="contentcolumn">
         <div class="innertube">
@@ -77,6 +78,7 @@ if (isset($_SESSION['module_action'] )){
         </div>
     </div>
 </div>
+    </div>
 
 <div id="leftcolumn">
     <div class="innertube">

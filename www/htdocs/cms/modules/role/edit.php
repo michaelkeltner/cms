@@ -45,14 +45,15 @@ $aRolePermission = $oRole->getPermissions($oRoleItem->id);
             <input type="text" name="name" id="name" value="<?php echo $oRoleItem->name?>"/>
             <label for="name">Name</label>
         </p>
+        
         <?php if (count($aModules) && count($aPermissions)):?>
         <a href="#" class="toggle_all_checkbox">Click All</a>
         <a href="#" class="toggle_create_checkbox">Create All</a>
         <a href="#" class="toggle_delete_checkbox">Delete All</a>
         <a href="#" class="toggle_read_checkbox">Read All</a>
         <a href="#" class="toggle_update_checkbox">Update All</a>
-        <table class="listing">
-            <th>Module Permissions</th>
+        <div id="listing_div">
+        <table id="listings">
             <?php $i=0; ?>
             <?php foreach($aModules as $oModuleItem): ?>
                 <tr<?php echo ($i++ % 2 == 0)?' class="alt"':''?>>
@@ -73,7 +74,9 @@ $aRolePermission = $oRole->getPermissions($oRoleItem->id);
                
             
         </table>
+            </div>
         <?php endif;?>
+        
         <p class="submit">
             <input type="submit" value="update" />
         </p>

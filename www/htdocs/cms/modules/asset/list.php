@@ -25,12 +25,14 @@ if (isset($_SESSION['sMessage'])){
         <?php if ($sMessage != ''):?>
         <div id="results_message" class="message<?php echo $sMessageClass ?>"><?php echo $sMessage ?></div>
         <?php endif; ?>
-            <table class="listings">
-            <tr class="header">
-                <td id="header_name" class="header_description">Name<input type="hidden" id="description_name" value="Asset's display name"/></td>
-                <td id="header_preview" class="header_description">Preview<input type="hidden" id="description_preview" value="Preview of the file (if applicable)"/></td>
-                <td id="header_actions" class="header_description">Actions<input type="hidden" id="description_actions" value="Click the icons to take action on the items"/></td>
-            </tr>
+            <table id="listings">
+                <thead>
+                    <tr class="header">
+                        <th id="header_name" class="header_description">Name<input type="hidden" id="description_name" value="Asset's display name"/></th>
+                        <th id="header_preview" class="header_description">Preview<input type="hidden" id="description_preview" value="Preview of the file (if applicable)"/></th>
+                        <th id="header_actions" class="header_description">Actions<input type="hidden" id="description_actions" value="Click the icons to take action on the items"/></th>
+                    </tr>
+                </thead>
         <?php $i = 0; ?>
         <?php foreach ($aItems as $oItem):?>    
             <?php $sAltClass = (++$i % 2 == 0)?'class="alt"':'' ?>
@@ -52,8 +54,18 @@ if (isset($_SESSION['sMessage'])){
                     </td>
                 </tr>
             <?php endforeach; ?>
-        </table>
-
+        </table>     
+        <div id="table_header">
+            <table id="listing_header">
+                <thead>
+                    <tr class="header">
+                        <th id="fixed_header_name" class="header_description">Name<input type="hidden" id="description_name" value="Asset's display name"/></th>
+                        <th id="fixed_header_preview" class="header_description">Preview<input type="hidden" id="description_preview" value="Preview of the file (if applicable)"/></th>
+                        <th id="fixed_header_actions" class="header_description">Actions<input type="hidden" id="description_actions" value="Click the icons to take action on the items"/></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
 <?php else: ?>
     <div class="message">No Assets available.</div>
 <?php endif; ?>

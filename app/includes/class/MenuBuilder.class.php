@@ -31,7 +31,7 @@ class MenuBuilder extends Action {
         prePrint($aData);
         foreach($aData['menu']['name'] as $iIndex=>$sName){
             
-            $sIcon =$aData['menu']['icon'][$iIndex];
+            $sIcon = ($aData['menu']['icon'][$iIndex] != 'no-choice.png')?$aData['menu']['icon'][$iIndex]:'';
             $iId = $aData['menu']['id'][$iIndex];
             prePrint($sName,$iIndex, $sIcon,$iId );
             if ($iId){

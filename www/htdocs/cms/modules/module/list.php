@@ -28,13 +28,15 @@ if (isset($_SESSION['sMessage'])){
         <?php if ($sMessage != ''):?>
         <div id="results_message" class="message<?php echo $sMessageClass ?>"><?php echo $sMessage ?></div>
         <?php endif; ?>
-        <table class="listings">
+        <table id="listings">
             <tr class="header">
-                <td>Name</td>
-                <td>Description</td>
-                <td>Type</td>
-                <td>Actions</td>
+            <thead>
+                <th id="header_name">Name</th>
+                <th id="header_description">Description</th>
+                <th id="header_type">Type</th>
+                <th id="header_actions">Actions</th>
             </tr>
+            </thead>
 
             <?php $i = 0; ?>
         <?php foreach ($aItems as $oItem):?> 
@@ -57,6 +59,19 @@ if (isset($_SESSION['sMessage'])){
             </tr>
             <?php endforeach; ?>
         </table>
+                <div id="table_header">
+            <table id="listing_header">
+                <thead>
+                    <tr class="header">
+                        <th id="fixed_header_name" class="header_description">Name<input type="hidden" id="description_name" value="modules display name"/></th>
+                        <th id="fixed_header_description" class="header_description">Description<input type="hidden" id="description_actions" value="Moduel description"/></th>
+                        <th id="fixed_header_type" class="header_description">Type<input type="hidden" id="description_actions" value="type of module"/></th>
+                        <th id="fixed_header_actions" class="header_description">Actions<input type="hidden" id="description_actions" value="Click the icons to take action on the items"/></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    
     
     <?php
 else:

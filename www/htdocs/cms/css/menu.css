@@ -1,95 +1,129 @@
-/* horizonal menu */
+/* admin menu - horizonal menu */
 
-.menu{
+#banner_menu{
     position: fixed;
     font-size: 12px;
+    right: 0px;
     text-align: center;
-    width: 100%;
-    top: 0px;
+    top: 3px;
     white-space: nowrap;
-    background-color: #C0C0C0; 
     z-index: 999;
     
 }
 
-.menu ul{
+#banner_menu ul{
     margin: 0; 
     padding-left: 5px;
     float: left;
 }
 
-.menu ul li{
+#banner_menu ul li{
     display: inline;
 }
 
-.menu ul li a{
+#banner_menu ul li a{
     float: left; text-decoration: none;
     color: white;
-    padding: 10.5px 19px;
-    background-color: #C0C0C0; 
+    padding: 2px 10.5px 0px 19px;
+   
     
 }
 
-.menu ul li a:visited{
+#banner_menu ul li a:visited{
     color: white;
 }
 
-.menu ul li a:hover, .menu ul li .active{
+#banner_menu ul li a:hover, .menu ul li{
     color: #fff;
     /*  Reds */
-    /*background-color: #987777;*/
+   /* background-color: #987777;*/
     /*background-color: #b22222;*/
     /*  Blues */
    /* background-color: #8197A8;*/
-    background-color: #7187A8;
+    /*background-color: #7187A8; */
     /*   Green */
     /* background-color: #619877;*/
     /*   Brownish */
     /* background-color: #987761;*/
+    /*  Greyish */
+    background-color: #515151;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    border-radius: 3px;
+}
+#banner_menu.menu_icon{
+    width: 20px;
+    height:50px;
+}
+#banner_menu .active{
+     background-color: #515151;
+     -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    border-radius: 3px;
+}
+
+/*   modules' menu - vertical menu */
+
+.site_menu {
+    position: fixed;
+    float:left;
+    width: 250px;
+    height: 100%;
+    top: 59px;
+    left: 0px;
+    
+}
+.site_menu ul {
+	list-style: none;;
+    background: #617798;
+    /*background: #7187A8*/
+}
+
+.site_menu li{
+	font: 1em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif; 
+    margin-left: -40px;
+}
+
+.site_menu li a:link, .menu li a:visited {
+	font-size: 16px;
+	display: block;
+	text-decoration: none;
+}
+
+
+
+.site_menu li a {
+	color: #F0F0F0;
+	padding:0px 0px 5px 20px;
+	width:174px;
+
+}
+
+.site_menu ul li a:hover, .menu li a:focus{
+    /*background: #617798;*/
+    background: #7187A8;
+    width: 230px;
+	color: #F0F0F0;
+    
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     -khtml-border-radius: 3px;
     border-radius: 3px;
 }
 
-
-
-/*   vertical menu */
-/*
-.menu ul {
-	list-style: none;
-	margin: 0;
-    
+.site_menu .active{
+    /*background: #617798;*/
+     background: #7187A8;
+     -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    border-radius: 3px;
 }
 
-.menu li{
-	font-family: 'Helvetica', Arial, Verdana, sans serif;
-    
+.site_menu .menu_icon{
+    padding-right: 10px;
+    vertical-align:middle;
 }
-
-.menu li a:link, .menu li a:visited {
-    background: #617798;
-	font-size: 15px;
-	display: block;
-
-	margin-top:-10px;
-	color: #43433e;
-	text-decoration: none;
-	right:11px;
-}
-
-.menu li a:hover, .menu li a:focus .active{
-    background: #C0C0C0;
-	color: #fff;
-	margin-top:-10px;
-}
-
-.menu li a {
-	 background: #617798;
-	color: #fff;
-	left:-25px;
-	padding:18px 18px 18px 40px;
-	width:174px;
-
-}
-*/
+/**/

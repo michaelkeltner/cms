@@ -17,7 +17,17 @@ $(document).ready(function() {
     toggleAllChecks();
     validateForm();
     setupGenericModuleForm();
+    setTableheaderWidth();
 });
+
+function setTableheaderWidth(){
+    $('#listings th').each(function() {
+        var headerWidth = $(this).width(); 
+        thisId = $(this).attr('id');
+        $('#fixed_'+thisId).attr('width',headerWidth);
+        setupGenericModuleForm();
+    });
+}
 
 function setupGenericModuleForm(){
     
@@ -48,7 +58,7 @@ function setupGenericModuleForm(){
     });
     
     $('.header_description').mouseover(function(){
-        inputId = 'description_' + (this.id).substring(7,(this.id).length);
+        inputId = 'description_' + (this.id).substring(13,(this.id).length);
         content = $('input#'+ inputId).val();
         if (content != undefined){
             $(this).qtip({

@@ -31,35 +31,30 @@ if (isset($_SESSION['sMessage'])){
         <?php if ($sMessage != ''):?>
         <div id="results_message" class="message<?php echo $sMessageClass ?>"><?php echo $sMessage ?></div>
         <?php endif; ?>
-        
-        <table id="listings">
+        <table class="listings custom_scrollbar">
             <thead>
                 <tr class="header">
                     <?php $i = 0; ?>
-                    <?php $iColumnCount = 0; ?>
                     <?php //Show the table header
                     foreach ($aFields as $oFieldItem):
                         $aOptions = unserialize($oFieldItem->options);
                         if (!$aOptions['list']){continue;}
-                        $iColumnCount++;
                      ?>
                                 <th id="header_<?php echo $oFieldItem->name?>" class="header_description"><?php echo $oFieldItem->display_name ?><input type="hidden" id="description_<?php echo $oFieldItem->name?>" value="<?php echo $oFieldItem->description?>"/></th>
                      <?php endforeach; ?>
-                                <?php $iColumnCount++;?>
                                 <th id="header_actions" class="header_description">Actions<input type="hidden" id="description_actions" value="Click the icons to take action on the items"/></th>
                 </tr>
             </thead>
-            <tbody>
         <?php foreach ($aItems as $oItem):?> 
-            <?php $sAltClass = (++$i % 2 == 0)?' alt':'' ?>
-            <tr  class="listing_row<?php echo $sAltClass?>" id="item_<?php echo $oItem->id ?>">
+            <?php $sAltClass = (++$i % 2 == 0)?'class="alt"':'' ?>
+            <tr  <?php echo $sAltClass?> id="item_<?php echo $oItem->id ?>">
                <?php 
                     foreach ($aFields as $oFieldItem):
                         $aOptions = unserialize($oFieldItem->options);
                         if (!$aOptions['list']){continue;}
                         $sFieldName = $oFieldItem->name
                ?>
-                <td ><?php echo $oField->listValue($oFieldItem, $oItem, $sFieldName) ?></td>
+                <td><?php echo $oField->listValue($oFieldItem, $oItem, $sFieldName) ?></td>
                     <?php endforeach; ?>
                 <td class="actions">
                     <?php if ($oUser->canAccess('update')):?>
@@ -71,25 +66,7 @@ if (isset($_SESSION['sMessage'])){
                 </td>
             </tr>
             <?php endforeach; ?>
-            </tbody>
         </table>
-        
-        <div id="table_header">
-            <table id="listing_header">
-                <thead>
-                    <tr class="header">
-                        <?php //Show the table header
-                        foreach ($aFields as $oFieldItem):
-                            $aOptions = unserialize($oFieldItem->options);
-                            if (!$aOptions['list']){continue;}
-                        ?>
-                                    <th id="fixed_header_<?php echo $oFieldItem->name?>" class="header_description" ><?php echo $oFieldItem->display_name ?><input type="hidden" id="description_<?php echo $oFieldItem->name?>" value="<?php echo $oFieldItem->description?>"/></th>
-                        <?php endforeach; ?>
-                                    <th id="fixed_header_actions" class="header_description">Actions<input type="hidden" id="description_actions" value="Click the icons to take action on the items"/></th>
-                    </tr>
-                </thead>
-            </table>
-        </div>
     
     <?php
 else:
