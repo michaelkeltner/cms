@@ -18,7 +18,14 @@ $(document).ready(function() {
     validateForm();
     setupGenericModuleForm();
     setTableheaderWidth();
+    sortListing();
 });
+
+function sortListing(){
+    $('.header_description').click(function(){
+       $(this).find('form').submit(); 
+    });
+}
 
 function setTableheaderWidth(){
     $('#listings th').each(function() {

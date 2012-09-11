@@ -7,7 +7,10 @@ $oModuleGeneric = new ModuleGeneric(getParam(2));
 $oProperties = $oModuleGeneric->__get('oProperties');
 $aFields = $oModuleGeneric->__get('aFields');
 $sModule = $oProperties->name;
-$aItems = $oModuleGeneric->getAll(' ORDER BY `create_date` DESC');
+//order the results based on any field clicking action
+$sOrderField = (postVar('form_sort_field') && !stristr(postVar('form_sort_field'), '__'))?postVar('form_sort_field'):'create_date';
+$sOrderDirection = postVar('form_sort_direction')?postVar('form_sort_direction'):'DESC';
+$aItems = $oModuleGeneric->getAll(" ORDER BY `$sOrderField` $sOrderDirection");
 
 if (isset($_SESSION['sMessage'])){
     $sMessage = $_SESSION['sMessage'];
@@ -43,7 +46,14 @@ if (isset($_SESSION['sMessage'])){
                         if (!$aOptions['list']){continue;}
                         $iColumnCount++;
                      ?>
-                                <th id="header_<?php echo $oFieldItem->name?>" class="header_description"><?php echo $oFieldItem->display_name ?><input type="hidden" id="description_<?php echo $oFieldItem->name?>" value="<?php echo $oFieldItem->description?>"/></th>
+                                <th id="header_<?php echo $oFieldItem->name?>" class="header_description"><?php echo $oFieldItem->display_name ?>
+                                    <input type="hidden" id="description_<?php echo $oFieldItem->name?>" value="<?php echo $oFieldItem->description?>"/>
+                                    <form id="form_sort_field_<?php echo $oFieldItem->name?>" name="form_sort_field_<?php echo $oFieldItem->name?>" method="POST" action="<?php echo currentURL()?>"/>
+                                        <input type="hidden" name="form_sort_field" value="<?php echo $oFieldItem->name?>"/>
+                                        <?php $sNewSortOrder = ($sOrderDirection == 'DESC')?'ASC':'DESC'; ?>
+                                        <input type="hidden" name="form_sort_direction" value="<?php echo $sNewSortOrder ?>"/>
+                                    </form>
+                                </th>
                      <?php endforeach; ?>
                                 <?php $iColumnCount++;?>
                                 <th id="header_actions" class="header_description">Actions<input type="hidden" id="description_actions" value="Click the icons to take action on the items"/></th>
