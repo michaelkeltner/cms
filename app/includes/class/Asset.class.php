@@ -96,45 +96,18 @@ class Asset extends Action {
         return $this->add();
     }
     
-    
-    public function getImagesForSchool($iSchoolId){
-        return $this->getAssetsForSchool($iSchoolId, 'image');
-    }
-    
-    public function getDocsForSchool($iSchoolId){
-        return $this->getAssetsForSchool($iSchoolId, 'doc');
-    }
-    
-    public function getAssetsForSchool($iSchoolId, $sType = null){
-        $sTypeModification = '';
-        $sSchoolQueryModification = 'JOIN  `school` `s` ON  `s`.`slug` =  `asset`.`school_slug`' .  
-                ' WHERE  `s`.`id` = ' . $iSchoolId;
-        $sGlobalQueryModification = 'WHERE `asset`.`school_slug` = "ahp-global"';
-        if ($sType){
-            $sTypeModification = ' AND `asset`.`type` = \'' . $sType . '\'';
-        }
-        $sSchoolQueryModification .= $sTypeModification;
-        $sGlobalQueryModification .= $sTypeModification;
-        return array_merge($this->getAll($sSchoolQueryModification), $this->getAll($sGlobalQueryModification));
-
-    }
-    
      /**
-     * Determines the path to the asset with the asset name included.  This can 
-     * be used since there are assets only tied to specific school and there are
-     * global assets as well.  Any asset tied to a school has a higher priority 
-     * than a global asset.
+     * Determines the path to the asset with the asset name included.
      * @param type $sFile - the name of the file
-     * @param type $sSchoolSlug - the school slug
      * @param type $sAssetTypeDir - the base directory for the asset type (images or docs)
      * @return type String - the path to the file starting at the assets directory
      */
-     public function getAssetItemPath($sFile, $sSchoolSlug, $sAssetTypeDir){
-        $sFileFullPath = SITE_ROOT . 'assets/' . $sSchoolSlug . '/' . $sAssetTypeDir .'s/'. $sFile;
+     public function getAssetItemPath($sFile, $sAssetTypeDir){
+        $sFileFullPath = SITE_ROOT . 'assets/' . $sAssetTypeDir .'s/'. $sFile;
         if (file_exists($sFileFullPath)){
-            return '/assets/' . $sSchoolSlug  . '/' . $sAssetTypeDir .'s/'. $sFile;
+            return '/assets/' . $sAssetTypeDir .'s/'. $sFile;
         }else{
-            return '/assets/ahp-global/' . $sAssetTypeDir .'s/'. $sFile;
+            return '';
         }
     }
     

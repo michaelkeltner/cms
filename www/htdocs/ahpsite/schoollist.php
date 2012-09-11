@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <?php
-require_once('../../app/includes/config.php');
-require_once('../../app/includes/init.php');
-require_once('../../app/includes/functions.php');
 $oSchool = new Render('school');
-$aSchools = $oSchool->getAllActive(' ORDER BY `name` ASC');
+$oSchool->order('`name` ASC');
+$oSchool->limit(100);
+$aSchools = $oSchool->getData();
 ?>
 <html>
     <head>
@@ -24,8 +23,8 @@ $aSchools = $oSchool->getAllActive(' ORDER BY `name` ASC');
             <div id="button">
                 <ul>
                     <?php if (count($aSchools)): ?>
-                        <?php foreach ($aSchools as $oSchool): ?>
-                            <li><a href="http://ahpcare.com/<?php echo $oSchool->slug ?>/" target="_blank"><?php echo $oSchool->name ?></a></li>
+                        <?php foreach ($aSchools as $oData): ?>
+                            <li><a href="http://ahpcare.com/<?php $oData->show('slug') ?>/" target="_blank"><?php $oData->show('name') ?></a></li>
                         <?php endforeach; ?>
                     <?php else: ?>
                         <p>No schools available</p>

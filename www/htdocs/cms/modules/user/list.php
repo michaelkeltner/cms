@@ -1,6 +1,7 @@
 <?php
 //used to determine the menu link that should have the class "active" on it
 $sActiveLink = getParam(2);
+$sModule = $sActiveLink;
 require_once (CMS_INCLUDES . 'header.php');
 $oUser = new User();
 

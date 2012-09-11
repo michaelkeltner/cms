@@ -93,7 +93,7 @@ class Action {
         return $oDb->getRowsAsObjects($sSql);
     }
 
-    public function getAllActive($sQueryModification = null) {
+    public function getAllActive($sQueryModification = '') {
         return $this->getAll(' WHERE `active` = 1' . $sQueryModification);
     }
 

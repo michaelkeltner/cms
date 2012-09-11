@@ -37,7 +37,10 @@ class Module extends Action {
         $sQueryModification  = ($sQueryModification)?$sQueryModification:' ORDER BY `name` ASC';
         return parent::getAllActive($sQueryModification);
     }
+    
+    public function getWithId($iId){
+        return $this->getAll('WHERE `id` = ' . $iId);
+    }
    
 }
-
 ?>

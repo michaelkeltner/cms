@@ -49,7 +49,7 @@ class Field extends Action {
             $aLinkToThisField = $oModuleBuilder->getModuleField($aOptions['module_id'], $aOptions['field_id']);
             $oLinkTothisField = $aLinkToThisField[0];
             $oAssociation = new Association();
-            $aData = $oAssociation->getAssocationValues($oFieldItem->module_id, $sFieldName, $oItem->id);
+            $aData = $oAssociation->getAssocationValues($oFieldItem->module_id, $sFieldName, $oItem->id);             
             if (!$aData){
                 return $sReturn;
             }

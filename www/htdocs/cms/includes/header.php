@@ -5,17 +5,16 @@
         <script type="text/javascript" language="javascript" src="/cms/js/<?php echo JQUERYUIJSFILE ?>" ></script>
         <script type="text/javascript" language="javascript" src="/cms/plugins/jQueryUITimepicker/jquery-ui-sliderAccess.js?<?php echo FILE_DECACHER?>"  ></script>
         <script type="text/javascript" language="javascript" src="/cms/plugins/jQueryUITimepicker/jquery-ui-timepicker-addon.js?<?php echo FILE_DECACHER?>"  ></script>
-        <script type="text/javascript" language="javascript" src="/cms/plugins/qTip2/jquery.qtip.min.js?<?php echo FILE_DECACHER?>"  ></script>
+        <script type="text/javascript" language="javascript" src="/cms/plugins/qTip2/jquery.qtip.min.js?<?php echo FILE_DECACHER?>"></script>
         <?php if ($sActiveLink == 'module'):?>
-        <script type="text/javascript" language="javascript" src="/cms/js/module_builder.js?<?php echo FILE_DECACHER?>"  ></script>
+        <script type="text/javascript" language="javascript" src="/cms/js/module_builder.js?<?php echo FILE_DECACHER?>"></script>
         <?php endif?>
         <?php if ($sActiveLink == 'menu'):?>
         <script type="text/javascript" language="javascript" src="/cms/js/menu_builder.js?<?php echo FILE_DECACHER?>"  ></script>
         <?php endif?>
         <script type="text/javascript" language="javascript" src="/cms/plugins/markitup/jquery.markitup.js?<?php echo FILE_DECACHER?>"  ></script>
         <script type="text/javascript" language="javascript" src="/cms/plugins/markitup/sets/html/set.js?<?php echo FILE_DECACHER?>"  ></script>
-        <script type="text/javascript" language="javascript" src="/cms/js/init.js?<?php echo FILE_DECACHER?>"  ></script>
-
+        <script type="text/javascript" language="javascript" src="/cms/js/init.js?<?php echo FILE_DECACHER?>"></script>
         <?php if ($sActiveLink == 'module'):?>
         <link href="/cms/css/module_builder.css?<?php echo FILE_DECACHER?>" rel="stylesheet" type="text/css" media="screen" />
         <?php endif?>

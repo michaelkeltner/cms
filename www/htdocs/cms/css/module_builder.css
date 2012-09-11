@@ -50,6 +50,10 @@ background-color: #C0C0C0;
     width: 90%;
 }
 
+.field_item textarea{
+    width: 200px;
+}
+
 
 #rightcolumn{
 position: fixed;

@@ -18,41 +18,66 @@ $oProperties = $oModuleGeneric->__get('oProperties');
 $aFields = $oModuleGeneric->__get('aFields');
 $sModule = $oProperties->name;
 
-require_once (CMS_INCLUDES . 'header.php');
+
 $sMessage = '';
 $sMessageClass = '';
-
+$aInputError = array();
 if (formSubmit()) {
-    if (strtolower(getParam(3)) == 'edit'){
-        $bResults = $oModuleGeneric->updateItem($_POST);
-    }else{
-        $bResults = $oModuleGeneric->addItem($_POST);
+    //check to make sure all required fields have an entry
+    foreach($aFields as $oPropery){
+        $aOptions = isset($oPropery->options)?unserialize($oPropery->options):array();
+        $bRequiredSelected = (isset($aOptions['required']) && $aOptions['required'])?true:false;
+        if (!$bRequiredSelected || $oPropery->type == 'active'){continue;}
+        if (is_array($_POST[$oPropery->name])){
+            if (count($_POST[$oPropery->name]) == 0 || $_POST[$oPropery->name][0] == ''){
+                $aInputError[$oPropery->name] = 1;
+            }
+        }else{
+            if ($_POST[$oPropery->name] == ''){
+                $aInputError[$oPropery->name] = 1;
+            }
+        }
+       
     }
-    if ($bResults > 0) {
-        $sMessage = $sModule . ' updated.';
-        $sMessageClass = ' added';
-        $_SESSION['sMessage'] = $sMessage;
-        $_SESSION['sMessageClass'] = $sMessageClass;
-        gotoURL('/cms/'.$sModule.'/list');
-    } else {
-        $sMessage = 'The entry was not updated.';
+    if (count($aInputError)){
+        $sMessage = 'Please enter data for all required fields.';
         $sMessageClass = ' error';
+    }else{
+        if (strtolower(getParam(3)) == 'edit'){
+            $bResults = $oModuleGeneric->updateItem($_POST);
+        }else{
+            $bResults = $oModuleGeneric->addItem($_POST);
+        }
+        if ($bResults > 0) {
+            $sMessage = $sModule . ' updated.';
+            $sMessageClass = ' added';
+            $_SESSION['sMessage'] = $sMessage;
+            $_SESSION['sMessageClass'] = $sMessageClass;
+            gotoURL('/cms/'.$sModule.'/list');
+        } else {
+            $sMessage = 'The entry was not updated.';
+            $sMessageClass = ' error';
+        }
     }
 }
-
+require_once (CMS_INCLUDES . 'header.php');
 ?>
 <?php if ($sMessage != ''): ?>
     <div id="results_message" class="message<?php echo $sMessageClass ?>"><?php echo $sMessage ?></div>
 <?php endif; ?>
 <div class="form">
-    <form class="form" id="add_<?echo $sModule?>" method="post" action="">
+    <form class="form" id="add_<?echo $sModule?>" method="post" action="<?php echo currentUrl()?>">
          <input id="item_id" type="hidden" name="id"  value="<?php if (isset($oItem->id)){echo $oItem->id;} ?>" />
          <input id="module_name" type="hidden" name="module_name"  value="<?php echo getParam(2) ?>" />
         <?php 
             foreach($aFields as $oPropery){
                 $sDisplay = isset($oPropery->display_name)?$oPropery->display_name:'';
                 $sFieldName = $oPropery->name;
-                $sValue = isset($oItem->{$sFieldName})?$oItem->{$sFieldName}:'';
+                if (postVar($sFieldName)){
+                    $sValue = postVar($sFieldName);
+                }else{
+                    $sValue = isset($oItem->{$sFieldName})?$oItem->{$sFieldName}:'';
+                }
                 $sFieldDescription = isset($oPropery->description)?$oPropery->description:'';
                 include('fields/' . $oPropery->type . '.php');
                 include('fields/common.php');

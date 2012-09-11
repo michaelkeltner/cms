@@ -11,7 +11,7 @@ if (getParam(1) == 'cms') {
     exit;
 }
 if (getParam(1) == 'schoollist') {
-    include_once('schoollist.php');
+    include_once('ahpsite/schoollist.php');
     exit;
 }
 $sFile = '';

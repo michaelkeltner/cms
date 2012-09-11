@@ -99,23 +99,30 @@ div .image_option{
     margin: 3px;
 }
 
-div .menu_image{
-    float:left;
-   
-}
-
 div .menu_module{
      margin: 3px;
 }
 
 div .delete_item{
     clear:left;
+    float:right;
 }
 
 div #used_menu_modules{
     clear:right;
+    margin-left: 200px;
 }
 
 div .menu_module{
     margin-bottom: 15px;
+}
+.locked{
+    position: absolute;
+    top: 150px;
+    right:300px;
+}
+
+.innertube{
+margin: 10px; /*Margins for inner DIV inside each column (to provide padding)*/
+margin-top: 0;
 }

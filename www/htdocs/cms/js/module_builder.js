@@ -1,15 +1,15 @@
 $(document).ready(function() {
     cleanLoadedFields();
     sortable();
-    toggleComponent();
-    disableEnterKeyFormSubmit()
+    toggleModuleFields();
+    disableEnterKeyFormSubmit();
     fadeResultsMessage();
     removeColumnContent()
     hideColumnContent();
     addField();
     removeFormItem();
     setupAssociationActions();
-});
+})
 
 function setupAssociationActions(){
     $('.association_module_select').change(function(){
@@ -30,6 +30,22 @@ function setupAssociationActions(){
             }
         }, 'JSON');
     });
+    
+    $('.association_field_select').change(function(){
+
+        moduleName = $(this).parent('p').find('.association_module_select option:selected').text();
+        fieldName = $('option:selected', this).text();
+        
+        association_field_name = '__' + moduleName.replace(' ', '_') + '__' + fieldName.replace(' ', '_');
+        pName = $(this).parent().parent().find('p.name');
+        pName.find('input').each(function(){
+            if ($(this).attr('fieldtype') == 'association_name'){
+                $(this).val(association_field_name.toLowerCase());
+            }
+                
+            
+        })
+    });
 }
 
 function cleanLoadedFields(){
@@ -49,22 +65,12 @@ function sortable(){
     
 }
 
-function toggleComponent(){
-    $('.component_toggle').click(function(e){
-        e.preventDefault();
-        
-        $(this).parent().children('p').each(function(){
-                if (!$(this).hasClass('show')){
-                    $(this).toggle('500');
-                }
-            }
-        );
-        if ($(this).hasClass('showing_details')){
-            $(this).removeClass('showing_details').addClass('hiding_details');
-        }else{
-            $(this).removeClass('hiding_details').addClass('showing_details');
-        }
-    })
+function toggleModuleFields(){
+    $('.component_toggle').live('click', function(){
+        $(this).parent().find('.field_item').toggle('1000');
+        $(this).toggleClass('showing_details');
+        $(this).toggleClass('hiding_details');
+    });
 }
 
 function disableEnterKeyFormSubmit(){

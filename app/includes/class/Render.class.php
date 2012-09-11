@@ -4,8 +4,10 @@
  */
 class Render extends ModuleGeneric{
 
-    static $sSchoolSlug;
-    static $sPeriodSlug;
+    public $aOrder = array();
+    public $iLimit;
+    public $aWhere = array();
+    
     function __construct($sModule) {
         parent::__construct($sModule);
     }
@@ -14,105 +16,39 @@ class Render extends ModuleGeneric{
         unset($this);
     }
     
-    static function setSchoolSlug($sSlug){
-        self::$sSchoolSlug = $sSlug;
-    }
-     static function setPeriodSlug($sSlug){
-        self::$sPeriodSlug = $sSlug;
-    }
-    static function getSchoolSlug(){
-        return self::$sSchoolSlug;
-    }
-    static function getPeriodSlug(){
-        return self::$sPeriodSlug;
-    }
-     
-    public function getThemeFile(){
-        $oSchool = new School();
-        $oItem = $oSchool->getTheme(Render::getSchoolSlug());
-        return $oItem->css_file;
-        
+    public function order(){
+        if (!func_num_args()){return false;}
+        $this->aOrder = func_get_args();
+        return true;
     }
     
+    public function limit($iLimit){
+        $this->iLimit = $iLimit;
+        return true;
+    }
+    
+    public function where(){
+        if (!func_num_args()){return false;}
+        $this->aWhere = func_get_args();
+        return true;
+    }
+
+
     public function isValidURL(){
         $oContent = new Content();
         return $oContent->hasContent(getParam(1), getParam(2));
     }
     
     public function docExists($sFileName){
-        $sFile = '/assets/' . self::getSchoolSlug() . '/docs/' . $sFileName;
+        $sFile = '/assets/docs/' . $sFileName;
         return (file_exists($sFile));
     }
     
-    public function imageExists(){
-        $sFile = '/assets/' . self::getSchoolSlug() . '/images/' . $sFileName;
+    public function imageExists($sFileName){
+        $sFile = '/assets/images/' . $sFileName;
         return (file_exists($sFile));
     }
-    
-    public function showSiteContent($iSchoolId, $iPeriodId) {
-        
-        $oContent = new Content();
-        $aContent = $oContent->getAllBySchoolPeriod($iSchoolId, $iPeriodId);
-        if (!count($aContent) > 0) {
-            return '<div id="error">No content available</div>';
-        }
-        $sSchoolName =  $aContent[0]->school_name;
-        $sReturn = '<h1 id="header">' . $sSchoolName . '</h1>';
-        $aContent = $this->groupBySection($aContent);
-        $i = 1;
-        foreach ($aContent as $sSectionName => $aItemsBySection) {
-            //get the header divs
-            if ($i == 1) {
-                $sReturn .= '<div id="section1"> <div id="column1">';
-            } else if ($i == 2) {
-                $sReturn .= '<div id="column1">';
-            } elseif ($i == 3) {
-                $sReturn .= '<div id="section2"><div id="column3">';
-            } else {
-                $sReturn .= '<div id="column4">';
-            }
-            $sReturn .= $sSectionName;
-            $sReturn .= '<ul class="site_content_listing">';
-            foreach ($aItemsBySection as $oItem) {
-                $sReturn .= '<li class="site_content_item">' . $oItem->content . '</li>';
-            }
-            //close out the list and the column div
-            $sReturn .= '</ul></div>';
-            //close out the large sections for the css alignment
-            if ($i++ % 2 == 0) {
-                $sReturn .= '</div>';
-            }
-        }
-        return $sReturn;
-        
-    }
-
-    private function groupBySection($aContnet) {
-        $aReturn = array();
-        foreach ($aContnet as $oItem) {
-            $aReturn[$oItem->section_name][$oItem->sort_order] = $oItem;
-        }
-        return $aReturn;
-    }
-
-    public function getColumnContent($sSchoolSlug, $sPeriodSlug, $sColumnName, $bIgnoreSchedule = false){
-        $oContent = new Content();
-        $aData = $oContent->getSectionContent($sSchoolSlug, $sPeriodSlug, $sColumnName, $bIgnoreSchedule);
-        if (!count($aData)>0){
-            return null;
-        }
-        
-        $aReturn = $this->cleanData($aData);
-        
-        return $aReturn;
-        
-    }
-    
-    public function getAllColumnContent($sSchoolSlug, $sPeriodSlug, $sColumnName){
-        return $this->getColumnContent($sSchoolSlug, $sPeriodSlug, $sColumnName, true);
-        
-    }
-    
+     
     private function cleanData($aData){
         $aReturn = array();
         foreach ($aData as $oData){
@@ -142,22 +78,56 @@ class Render extends ModuleGeneric{
         return $aReturn;
     }
     
-    public function getSchoolNameFromSlug($sSlug){
-        $oSchool = new School();
-        return $oSchool->getNameFromSlug($sSlug);
-        
-    }
-    public function getPeriodNameFromSlug($sSlug){
-        $oPeriod = new Period();
-        return $oPeriod->getNameFromSlug($sSlug);
+    public function getData($iId=null){
+        return ($iId)?$this->_getSingleData($iId):$this->_getAllData();
     }
     
-    public function getActivePeriodCoverage($sSchoolSlug){
-        $oSchoolPeriod = new SchoolPeriod();
-        return $oSchoolPeriod->getAllActiveWithSlug($sSchoolSlug);
+    private function _getSingleData($iId){
+        $aData = array();
+        $oItem = $this->getWithId($iId);
+        $aFields = $this->__get('aFields');
+        $oData = new Data($oItem, $aFields);
+        $aData[] = $oData;
+        return $aData;
+    }  
+    
+    private function _getAllData(){
+        $aData = array();
+        $sSortOrder ='';
+        $sLimit = '';
+        $sWhere = '';
+        if ($this->aOrder){
+            $sSortOrder = ' ORDER BY ';
+            foreach($this->aOrder as $sSort){
+                $sSortOrder .= $sSort . ', ';
+            }
+           //strip off trailing ', '
+            $sSortOrder = substr($sSortOrder, 0, -2);
+        }
+        if ($this->iLimit){
+            $sLimit = ' LIMIT ' . $this->iLimit;
+        }
+        if (count($this->aWhere)){
+            $sWhere = ' WHERE ';
+            foreach ($this->aWhere as $sSearch){
+                $sWhere .= $sSearch . ' AND ';
+            }
+            $sWhere = substr($sWhere, 0, -5);
+        }
+        $aItemData = $this->getAll($sWhere . $sSortOrder . $sLimit);
+        $aFields = $this->__get('aFields');
         
+        //loop through each item
+        if (!$aItemData){return null;}
+        foreach ($aItemData as $oItem){
+            //loop through each property and set an instance of Data
+            $oData = new Data($oItem, $aFields);
+            $aData[] = $oData;
+           
+        }
+        return $aData;
     }
-
+    
 }
 
 ?>

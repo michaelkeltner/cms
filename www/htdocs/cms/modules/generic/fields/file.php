@@ -13,7 +13,7 @@
         $aId = array();
     }
 ?>
-<p class="name">
+<p class="name<?php include('options.php')?>">
     <?php if (count($aOptions)):?>
     <select name="<?php echo $sFieldName?>[]"<?php echo $sMultiple?>>
         <option value="0"><?php echo $sFirstEntry?></option>

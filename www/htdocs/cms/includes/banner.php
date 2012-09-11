@@ -16,5 +16,5 @@ $oMenuBuilder = new MenuBuilder();
 $aMenu = $oMenuBuilder->getMenu();
 ?>
 <div id="banner">
-    <h1>Academic Healthplans CMS</h1>
+    <h1>Academic HealthPlans CMS</h1>
 </div>

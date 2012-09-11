@@ -3,7 +3,7 @@
 #banner_menu{
     position: fixed;
     font-size: 12px;
-    right: 0px;
+    right: 10px;
     text-align: center;
     top: 3px;
     white-space: nowrap;
@@ -71,6 +71,7 @@
     float:left;
     width: 250px;
     height: 100%;
+    overflow: auto;
     top: 59px;
     left: 0px;
     

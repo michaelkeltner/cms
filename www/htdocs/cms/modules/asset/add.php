@@ -20,24 +20,25 @@ if (formSubmit()) {
 
 
 ?>
+<div id="wrapper">
+    <div class="message">
+        <?php echo $sMessage; ?>
+    </div>
+    </div>
 
-<div class="message">
-    <?php echo $sMessage; ?>
+        <form class="form" action="" method="post" enctype="multipart/form-data">
+            <p class="name">
+                <input type="file" name="file" id="file" />
+                <label for="name"></label>
+            </p>
+            <p class="name">
+                <input type="text" name="display_name" id="display_name" />
+                <label for="name">Display Name</label>
+            </p>
+            <p class="submit">
+                <input type="submit" value="add" />
+            </p>
+        </form>
 </div>
-</div>
-
-    <form class="form" action="" method="post" enctype="multipart/form-data">
-         <p class="name">
-            <input type="file" name="file" id="file" />
-            <label for="name"></label>
-        </p>
-        <p class="name">
-            <input type="text" name="display_name" id="display_name" />
-            <label for="name">Display Name</label>
-        </p>
-        <p class="submit">
-            <input type="submit" value="add" />
-        </p>
-    </form>
 </body>
 </html>

@@ -8,8 +8,8 @@ $iId = isset($oFieldItem->id)?$oFieldItem->id:'';
 ?>
 
 <div class="<?php echo $sFieldClass ?>" id="clone_field_<?php echo $sFieldType?>">
+    <?php include('action_buttons.php') ?>
     <div class="field_item">
-        <?php include('action_buttons.php') ?>
         <p class="name show">
     <input type="hidden" name="module_field[name][]" value="sort_order"/><br/>
     <label>Display Name</label><br/>

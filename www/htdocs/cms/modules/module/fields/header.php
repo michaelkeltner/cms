@@ -4,10 +4,10 @@ $sFieldDisplayName = isset($oFieldItem->display_name)?$oFieldItem->display_name:
 $iFieldId = isset($oFieldItem->field_id)?$oFieldItem->field_id:'';
 $iId = isset($oFieldItem->id)?$oFieldItem->id:'';
 ?>
-    
+    <?php $sFieldDisplayType = 'Header'?>
+    <?php include('action_buttons.php') ?>
     <div class="field_item">
-        <?php $sFieldDisplayType = 'Header'?>
-        <?php include('action_buttons.php') ?>
+        
         <p class="name show">
             <input type="hidden" name="module_field[name][]" value="header"/><br/>
             <label>Display</label><br/>
@@ -22,7 +22,7 @@ $iId = isset($oFieldItem->id)?$oFieldItem->id:'';
             <input type="hidden" name="module_field[options][module_id][]" value="0">
             <input type="hidden" name="module_field[options][field_id][]" value="0">
             <input type="hidden" name="module_field[options][multiple][]" value="0">
-            
+            <input type="hidden" name="module_field[options][required][]" value="0">          
         </p>
     </div>
 </div>

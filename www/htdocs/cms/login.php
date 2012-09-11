@@ -43,6 +43,9 @@ if (formSubmit()) {
                         </head>
                         <body>
                             <div id="main">
+                                <div id="banner">
+                                    <h1>Academic HealthPlans CMS</h1>
+                                </div>
                                 <div id="wrapper" class="rounded-corners">
                                     <?php if ($sMessage != ''): ?>
                                         <div id="results_message" class="message<?php echo $sMessageClass ?>"><?php echo $sMessage ?></div>

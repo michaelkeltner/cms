@@ -106,7 +106,7 @@ function gotoURL($sLocation){
     }else{
         echo '<script>
             <!--
-            window.location= "http://' . BASE_URL . $sLocation . '"
+            window.location= "http://' . BASE_URL . $sLocation . '/"
             //-->
             </script>';
     }

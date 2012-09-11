@@ -11,7 +11,7 @@ $iId = isset($oFieldItem->id)?$oFieldItem->id:'';
     <label>Display Name</label><br/>
     <input type="text" name="module_field[display_name][]" value="<?php echo $sFieldDisplayName?>"/><br/>
     <label>Description</label><br/>
-    <textarea rows="2" cols="20" name="module_field[description][]"><?php echo $sFieldDescription?></textarea><br/>
+    <textarea rows="2" cols="5" name="module_field[description][]"><?php echo $sFieldDescription?></textarea><br/>
     <input type="hidden" value="<?php echo $sFieldType?>" name="module_field[type][]"/>
     <input type="hidden" value="<?php echo $iFieldId?>" name="module_field[field_id][]"/>
     <input type="hidden" name="module_field[orig_name][]" value="<?php echo $sFieldName?>"/>
