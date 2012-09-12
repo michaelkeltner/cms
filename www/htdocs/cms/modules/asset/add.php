@@ -1,7 +1,6 @@
 <?php
 //used to determine the menu link that should have the class "active" on it
 $sActiveLink = 'asset';
-require_once (CMS_INCLUDES . 'header.php');
 $sMessage = '';
 if (formSubmit()) {
     $oClass = new Asset();
@@ -18,7 +17,7 @@ if (formSubmit()) {
 }
 
 
-
+require_once (CMS_INCLUDES . 'header.php');
 ?>
 <div id="wrapper">
     <div class="message">
