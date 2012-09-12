@@ -74,6 +74,8 @@ if (isset($_SESSION['sMessage'])){
                 <td class="actions">
                     <?php if ($oUser->canAccess('update')):?>
                     <a href="/cms/<?php echo $sModule ?>/edit/<?php echo $oItem->id ?>" target="_self" alt="edit <?php echo $sModule ?>"><img src="/cms/images/edit.png" alt="edit" class="edit"></a>&nbsp;&nbsp;&nbsp;
+                    <?php elseif ($oUser->canAccess('read')):?>
+                    <a href="/cms/<?php echo $sModule ?>/read/<?php echo $oItem->id ?>" target="_self" alt="view <?php echo $sModule ?>"><img src="/cms/images/view.png" alt="view" class="view"></a>&nbsp;&nbsp;&nbsp;
                     <?php endif;?>
                     <?php if ($oUser->canAccess('delete')):?>
                     <a href="" target="" alt="delete <?php echo $sModule ?>" class="delete <?php echo $sModule ?>" id="<?php echo $oItem->id ?>"><img src="/cms/images/delete.png" alt="delete"></a>

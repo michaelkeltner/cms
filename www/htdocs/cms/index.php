@@ -10,8 +10,6 @@ if (getParam(2) == 'login'){
     $sFile = CMS_ROOT . 'logout.php';
 }elseif(getParam(2) == 'reset'){
     $sFile = CMS_ROOT . 'reset.php';
-}elseif(getParam(2) == '_asset'){
-    $sFile = APP_INCLUDES . 'tp/upload/index.php';
 }else{
     $oUser = new User();
     $oUser->checkLogin();

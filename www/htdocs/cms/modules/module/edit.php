@@ -1,6 +1,7 @@
 <?php 
 $sActiveLink = 'module';
 $oModuleBuilder = new ModuleBuilder();
+$sRenderPage = strtolower(getParam(3));
 $oModule = new Module();
 $aModule = $oModule->getAll(' WHERE `type` = "generic"');
 $oField = new Field();
@@ -9,7 +10,7 @@ $aModuleFields = array();
 $bError = false;
 $sError = '';
 if (formSubmit()){
-    if (getParam(3) == 'edit' || getParam(3) == 'add'){
+    if ($sRenderPage == 'edit' || $sRenderPage == 'add'){
         $sModuleMethod = getParam(3) . 'Module';
         if ($oModuleBuilder->{$sModuleMethod}($_POST)){
             gotoUrl('/cms/module/list/');
@@ -45,8 +46,9 @@ if (isset($_SESSION['module_action'] )){
 ?>
 
 <?php require_once (CMS_INCLUDES . 'header.php');?>
-
+<?php if ($sRenderPage == 'edit'):?>
 <form action="<?php echo currentURL() ?>" method="post" class="module_builder noEnterSubmit">
+    <?php endif;?>
     <?php if ($oModuleBuilder->__get('bError')):?>
 <div id="topsection">
     <div class="innertube">
@@ -106,15 +108,18 @@ if (isset($_SESSION['module_action'] )){
             <input type="hidden" name="module_details[orig_name]" value="<?php echo $sName ?>"/>
         </div>
         <div class="form_actions">
+            <?php if ($sRenderPage == 'edit'):?>
             <p class="submit">
                 <input type="submit" value="<?php echo $sFormSubmitText?>"/>
             </p>
+            <?php endif;?>
         </div>
 
     </div>
 </div>
-
+<?php if ($sRenderPage == 'edit'):?>
 </form>
+<?php endif; ?>
 
 <div id="clone_field" class="hide">
    

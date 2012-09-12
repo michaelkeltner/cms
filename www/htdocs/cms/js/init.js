@@ -55,6 +55,14 @@ function setupGenericModuleForm(){
         }
     });
     
+    $('.view').qtip({
+        content: 'View details',
+        position: {
+                    my: 'center right',  // Position my top left...
+                    at: 'center left' // at the bottom right of...
+        }
+    });
+    
     $('.delete').qtip({
         content: 'Delete this',
         position: {

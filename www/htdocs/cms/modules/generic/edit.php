@@ -4,9 +4,9 @@ $oAsset = new Asset();
 $sActiveLink = getParam(2);
 $oModuleGeneric = new ModuleGeneric(getParam(2));
 $oAssociation = new Association();
-$sAction = getParam(3);
+$sRenderPage = strtolower(getParam(3));
 $iItemId = 0;
-if ($sAction == 'edit'){
+if ($sRenderPage == 'edit' || $sRenderPage == 'read'){
     $iItemId = getParam(4);
     $oItem = $oModuleGeneric->getWithId($iItemId);
     if (!$oItem){
@@ -43,10 +43,13 @@ if (formSubmit()) {
         $sMessage = 'Please enter data for all required fields.';
         $sMessageClass = ' error';
     }else{
-        if (strtolower(getParam(3)) == 'edit'){
+        if ($sRenderPage == 'edit'){
             $bResults = $oModuleGeneric->updateItem($_POST);
-        }else{
+        }elseif ($sRenderPage == 'add'){
             $bResults = $oModuleGeneric->addItem($_POST);
+        }else{//was this a view list but the submit button showed?
+            $sMessage = 'The entry was not updated.  Check your permissions';
+            $sMessageClass = ' error';
         }
         if ($bResults > 0) {
             $sMessage = $sModule . ' updated.';
@@ -66,7 +69,9 @@ require_once (CMS_INCLUDES . 'header.php');
     <div id="results_message" class="message<?php echo $sMessageClass ?>"><?php echo $sMessage ?></div>
 <?php endif; ?>
 <div class="form">
+    <?php if ($sRenderPage == 'edit'):?>
     <form class="form" id="add_<?echo $sModule?>" method="post" action="<?php echo currentUrl()?>">
+    <?php endif;?>
          <input id="item_id" type="hidden" name="id"  value="<?php if (isset($oItem->id)){echo $oItem->id;} ?>" />
          <input id="module_name" type="hidden" name="module_name"  value="<?php echo getParam(2) ?>" />
         <?php 
@@ -83,10 +88,12 @@ require_once (CMS_INCLUDES . 'header.php');
                 include('fields/common.php');
             }
         ?>
+         <?php if ($sRenderPage == 'edit'):?>
         <p class="submit">
             <input type="submit" value="update" />
         </p>
     </form>
+    <?php endif;?>
 </div>
 
 <?php require_once (CMS_INCLUDES . 'footer.php'); ?>

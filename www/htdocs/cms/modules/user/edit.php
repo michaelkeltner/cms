@@ -1,6 +1,7 @@
 <?php
 //used to determine the menu link that should have the class "active" on it
 $sActiveLink = 'user';
+$sRenderPage = strtolower(getParam(3));
 $sMessage = '';
 $sMessageClass = '';
 $oUser = new User();
@@ -52,7 +53,9 @@ require_once (CMS_INCLUDES . 'header.php');
     <div id="results_message" class="message<?php echo $sMessageClass ?>"><?php echo $sMessage ?></div>
 <?php endif; ?>
 <div class="form">
+    <?php if ($sRenderPage == 'edit'):?>
     <form class="form" id="edit_user" method="post" action="">
+    <?php endif;?>
         <input type="hidden"name="id"  value="<?php echo $iUserId ?>" />
         <p class="name">
             <input type="text" name="name" id="name" value="<?php echo $oUserItem->name ?>"/>
@@ -81,11 +84,12 @@ require_once (CMS_INCLUDES . 'header.php');
         </p>
         <?php endforeach?>
         <?php endif ?>
+        <?php if ($sRenderPage == 'edit'):?>
         <p class="submit">
             <input type="submit" value="update" />
         </p>
-
     </form>
+    <?php endif;?>
 </div>
 
 <?php require_once (CMS_INCLUDES . 'footer.php'); ?>

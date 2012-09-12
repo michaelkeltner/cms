@@ -1,7 +1,7 @@
 <?php
 //used to determine the menu link that should have the class "active" on it
 $sActiveLink = 'role';
-
+$sRenderPage = strtolower(getParam(3));
 $sMessage = '';
 $sMessageClass = '';
 $oModule = new Module();
@@ -39,7 +39,9 @@ require_once (CMS_INCLUDES . 'header.php');
     <div id="results_message" class="message<?php echo $sMessageClass ?>"><?php echo $sMessage ?></div>
 <?php endif; ?>
 <div class="form">
+    <?php if ($sRenderPage == 'edit'):?>
     <form class="form" id="add_role" method="post" action="">
+    <?php endif;?>
         <input type="hidden" name="id"  value="<?php echo $iRoleId ?>" />
         <input type="hidden" name="item"  value="role" />
         <p class="name">
@@ -77,12 +79,13 @@ require_once (CMS_INCLUDES . 'header.php');
         </table>
             </div>
         <?php endif;?>
-        
+         <?php if ($sRenderPage == 'edit'):?>
         <p class="submit">
             <input type="submit" value="update" />
         </p>
 
     </form>
+    <?php endif;?>
 </div>
 
 <?php require_once (CMS_INCLUDES . 'footer.php'); ?>

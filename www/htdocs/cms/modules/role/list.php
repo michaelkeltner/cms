@@ -42,7 +42,10 @@ if (isset($_SESSION['sMessage'])){
                 <td><?php echo $oItem->name ?></td>
                 <td class="actions">
                     <?php if ($oUser->canAccess('update')):?>
-                    <a href="/cms/role/edit/<?php echo $oItem->id ?>" target="_self" alt="edit user"><img src="/cms/images/edit.png" alt="edit" class="edit"></a>&nbsp;&nbsp;&nbsp;
+                    <a href="/cms/role/edit/<?php echo $oItem->id ?>" target="_self" alt="edit role"><img src="/cms/images/edit.png" alt="edit" class="edit"></a>&nbsp;&nbsp;&nbsp;
+                    <?php elseif ($oUser->canAccess('read')):?>
+                    <a href="/cms/role/read/<?php echo $oItem->id ?>" target="_self" alt="view role"><img src="/cms/images/view.png" alt="view" class="view"></a>&nbsp;&nbsp;&nbsp;
+                    
                     <?php endif;?>
                     <?php if ($oUser->canAccess('delete') && $oItem->id != 1):?>
                     <a href="" target="" alt="delete role" class="delete role" id="<?php echo $oItem->id ?>"><img src="/cms/images/delete.png" alt="delete"></a>
