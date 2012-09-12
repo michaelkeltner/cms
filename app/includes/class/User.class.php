@@ -159,6 +159,7 @@ class User extends Action {
 
         switch (getParam(3)) {
             case 'list':
+            case 'read':
                 $perm = 'read';
                 break;
             case 'add':
