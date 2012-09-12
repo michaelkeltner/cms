@@ -85,7 +85,6 @@ require_once (CMS_INCLUDES . 'header.php');
         ?>
         <p class="submit">
             <input type="submit" value="update" />
-            <input type="cancel" value="Cancel"/>
         </p>
     </form>
 </div>
