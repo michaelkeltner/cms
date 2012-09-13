@@ -10,11 +10,13 @@ if (getParam(1) == 'cms') {
     include_once('cms/index.php');
     exit;
 }
-if (getParam(1) == 'schoollist') {
+if (getParam(1) == 'schoollist' || getParam(1) == 'schoollist.php') {
     include_once('ahpsite/schoollist.php');
     exit;
 }
 $sFile = '';
+/**TODO Finish out rest of logic to host school sites*/
+/*
 Render::setSchoolSlug(getParam(1));
 Render::setPeriodSlug(getParam(2));
 $oRender = new Render();
@@ -82,5 +84,7 @@ if (file_exists($sFile)) {
 } else {
     require_once ('site/error.php');
 }
+ * 
+ */
 exit;
 ?>
