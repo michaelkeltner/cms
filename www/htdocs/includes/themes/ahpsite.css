@@ -75,6 +75,22 @@ body{
     margin: 0;
 }
 
+#button tr {
+    display: block;
+    padding: 5px 5px 5px 0.5em;
+    border-left: 10px solid #8B0000;
+    border-bottom: 1px solid #CD5C5C;
+    background-color: #b22222;
+    color: #fff;
+    text-decoration: none;
+    width: 100%;
+}
+#button td {
+    width: 210px;
+}
+#button th {
+    width: 210px;
+}
 
 #button li a {
     display: block;
@@ -89,9 +105,12 @@ body{
 html>body #button li a {
     width: auto;
 }
+#button tr:hover {   
+    background-color: #8B0000;
+    color: #fff;
+}
 
-#button li a:hover {
-    
+#button li a:hover {   
     background-color: #8B0000;
     color: #fff;
 }

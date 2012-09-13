@@ -240,52 +240,52 @@ class ModuleBuilder extends Action {
     public function addModule($aData) {
         $aModuleDetails = $aData['module_details'];
         $sModuleName = $this->_cleanDBStringName($aModuleDetails['name']);
-        if ($this->isModuleAvailable($sModuleName)) {
-            //create the database table
-            if (!$this->createTable($sModuleName, $aData['module_field'])) {
-                $this->bResult = true;
-                $this->aMessage[] = 'was not able to create the database table for ' . $sModuleName;
-                return false;
-            } else {//table created so we add the module entry
-                $iModuleId = $this->addItem($sModuleName, $aModuleDetails['display_name'], $aModuleDetails['description'], 'generic', $aModuleDetails['active']);
-                if ($iModuleId > 0) {//add the entries into the module field table
-                    $aFieldProperties = $aData['module_field'];
-                    $aFieldNames = $aFieldProperties['name'];
-                    $aFieldDisplayNames = $aFieldProperties['display_name'];
-                    $aFieldDescription = $aFieldProperties['description'];
-                    $aFieldId = $aFieldProperties['field_id'];
-                    $aFieldOptions = $aFieldProperties['options'];
-                    $aOptions = array('list', 'multiple', 'module_id', 'field_id');
-                    $aColumns = array('active' => 1);
-                    foreach ($aFieldNames as $iIndex => $sValue) {
-                        unset($aStoreMe);
-                        $aStoreMe = array();
-                        $aColumns['module_id'] = $iModuleId;
-                        $aColumns['field_id'] = $aFieldId[$iIndex];
-                        $aColumns['sort_order'] = $iIndex;
-                        $aColumns['name'] = $this->_cleanDBStringName($sValue);
-                        $aColumns['display_name'] = $aFieldDisplayNames[$iIndex];
-                        $aColumns['description'] = $aFieldDescription[$iIndex];
-                        foreach ($aOptions as $sKey){
-                            $aStoreMe[$sKey] = isset($aFieldOptions[$sKey][$iIndex])?$aFieldOptions[$sKey][$iIndex]:'';
-                        }
-                        $aColumns['options'] = serialize($aStoreMe);
-                        $this->addModuleField($aColumns);
-                    }
-                    $this->bResult = true;
-                    $this->aMessage[] = 'Module ' . $sModuleName . ' was created';
-                    return true;
-                } else {//we could not add the new module to the module table
-                    $this->__set('bError',true);
-                    $this->addArrayItem('aMessage', 'was not able to create the database table for ' . $sModuleName);
-                    return false;
-                }
-            }
-        }else{
+        if (!$this->isModuleAvailable($sModuleName)) {
             $this->__set('bError',true);
             $this->addArrayItem('aMessage', $aModuleDetails['name'] . ' is already an existing module');
             return false;
         }
+        //create the database table
+        if (!$this->createTable($sModuleName, $aData['module_field'])) {
+            $this->__set('bError',true);
+            $this->addArrayItem('aMessage', 'was not able to create the database table for ' . $sModuleName);
+            return false;
+        } else {//table created so we add the module entry
+            $iModuleId = $this->addItem($sModuleName, $aModuleDetails['display_name'], $aModuleDetails['description'], 'generic', $aModuleDetails['active']);
+            if ($iModuleId > 0) {//add the entries into the module field table
+                $aFieldProperties = $aData['module_field'];
+                $aFieldNames = $aFieldProperties['name'];
+                $aFieldDisplayNames = $aFieldProperties['display_name'];
+                $aFieldDescription = $aFieldProperties['description'];
+                $aFieldId = $aFieldProperties['field_id'];
+                $aFieldOptions = $aFieldProperties['options'];
+                $aOptions = array('list', 'multiple', 'module_id', 'field_id');
+                $aColumns = array('active' => 1);
+                foreach ($aFieldNames as $iIndex => $sValue) {
+                    unset($aStoreMe);
+                    $aStoreMe = array();
+                    $aColumns['module_id'] = $iModuleId;
+                    $aColumns['field_id'] = $aFieldId[$iIndex];
+                    $aColumns['sort_order'] = $iIndex;
+                    $aColumns['name'] = $this->_cleanDBStringName($sValue);
+                    $aColumns['display_name'] = $aFieldDisplayNames[$iIndex];
+                    $aColumns['description'] = $aFieldDescription[$iIndex];
+                    foreach ($aOptions as $sKey){
+                        $aStoreMe[$sKey] = isset($aFieldOptions[$sKey][$iIndex])?$aFieldOptions[$sKey][$iIndex]:'';
+                    }
+                    $aColumns['options'] = serialize($aStoreMe);
+                    $this->addModuleField($aColumns);
+                }
+                $this->bResult = true;
+                $this->aMessage[] = 'Module ' . $sModuleName . ' was created';
+                return true;
+            } else {//we could not add the new module to the module table
+                $this->__set('bError',true);
+                $this->addArrayItem('aMessage', 'was not able to create the database table for ' . $sModuleName);
+                return false;
+            }
+        }
+        
 
     }
     public function addItem($sName, $sDisplayName, $sDescription, $sType, $iActive){

@@ -26,33 +26,46 @@ class Data{
     
 
     private function _setValues($oItem, $aFields){
-        $oAssociation = new Association();
+        $aAssociationFields = array();
         $this->__set('iId',$oItem->id);
         foreach($aFields as $oPropery){
             $sFieldName = $oPropery->name;
             $sValue = isset($oItem->{$sFieldName})?$oItem->{$sFieldName}:'';
             $this->aContent[$sFieldName]['content'] = $sValue;
             if ($oPropery->type == 'association'){
-                $aOptions = unserialize($oPropery->options);
-                $iModuleId = $aOptions['module_id'];
-               // prePrint($iModuleId, $sFieldName, $oItem->id);
-                $aReturn = $oAssociation->getAssocationValues($oPropery->module_id, $sFieldName, $oItem->id);
+                //store the  properties needed to get the assocaition value
+                unset($oAssociationField);
+                $oAssocaitionField = new stdClass();
+                $oAssocaitionField->module_id = $oPropery->module_id;
+                $oAssocaitionField->field = $sFieldName;
+                $oAssocaitionField->propertyName = $oPropery->name;
+                $aAssociationFields[] = $oAssocaitionField;
+            }
+            
+        }
+        if (count($aAssociationFields)){
+            $oAssociation = new Association();
+            foreach ($aAssociationFields as $oAssocationField){
+                unset($aReturn);
+                $aReturn = $oAssociation->getAssocationValues($oAssocationField->module_id, $oAssocationField->field, $oItem->id);
                 if (!count($aReturn)){
-                    $this->aContent[$sFieldName]['association'] = null;
+                    $this->aContent[$oAssocationField->field]['association'] = null;
+                    $this->aContent[$oAssocationField->field]['content'] = '';
                     continue;
                 }
                 foreach($aReturn as $oAssociationData){
-                    $aPieces = explode('__', $oPropery->name);
+                    unset($aStoreMe);
+                    $aPieces = explode('__', $oAssocationField->propertyName);
                     $oAssociationRender = new Render($aPieces[1]);
                     $oAData = $oAssociationRender->getData($oAssociationData->id);
-                    $this->aContent[$sFieldName]['association'][] = $oAData;
+                    $this->aContent[$oAssocationField->field]['association'][] = $oAData;
                     foreach ($oAData as $oStoreThis){
                             $aStoreMe[] = $oStoreThis->aContent[$aPieces[2]]['content'];
                     }
-                    $this->aContent[$sFieldName]['content'] = $aStoreMe;
+                    $this->aContent[$oAssocationField->field]['content'] = $aStoreMe;
                 }
+
             }
-            
         }
     }
     
@@ -86,7 +99,10 @@ class Data{
             //strip of the trailing seperator
             $sOutput = substr($sOutput, 0, (strlen($sSeperator)) * -1);
         }else{
-            $sOutput = $this->aContent[$sField]['content'];
+            $sOutput = @unserialize($this->aContent[$sField]['content']);
+            if ($sOutput === false) {
+                $sOutput = $this->aContent[$sField]['content'];
+            }
         }
         echo $sOutput;
     }

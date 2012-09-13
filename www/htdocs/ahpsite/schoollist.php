@@ -9,7 +9,7 @@ $aSchools = $oSchool->getData();
     <head>
         <script type="text/javascript" language="javascript" src="/includes/js/jquery-1.7.1.min.js" ></script>
         <script type="text/javascript" language="javascript" src="/includes/js/init.js" ></script>
-        <link href="/includes/themes/schoollist.css" rel="stylesheet" type="text/css" media="screen">
+        <link href="/includes/themes/ahpsite.css" rel="stylesheet" type="text/css" media="screen">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title></title>
     </head>

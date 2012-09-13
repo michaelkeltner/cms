@@ -6,10 +6,17 @@ if (session_id() == ''){
 require_once('../../app/includes/config.php');
 require_once(APP_INCLUDES . 'init.php');
 require_once(APP_INCLUDES . 'functions.php');
-if (getParam(1) == 'cms') {
+$sParam1 = str_replace('.php', '', getParam(1));
+if ($sParam1 == 'cms') {
     include_once('cms/index.php');
     exit;
 }
+
+if (file_exists('ahpsite/' . $sParam1 .'.php')){
+    include_once('ahpsite/' . $sParam1 .'.php');
+    exit;
+}
+
 if (getParam(1) == 'schoollist' || getParam(1) == 'schoollist.php') {
     include_once('ahpsite/schoollist.php');
     exit;
