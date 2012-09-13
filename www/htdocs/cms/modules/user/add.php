@@ -1,7 +1,6 @@
 <?php
 //used to determine the menu link that should have the class "active" on it
 $sActiveLink = 'user';
-require_once (CMS_INCLUDES . 'header.php');
 $oRole = new Role();
 $sMessage = '';
 $sMessageClass = '';
@@ -33,6 +32,7 @@ if (formSubmit()) {
 }
 
 $aRole = $oRole->getAll();
+require_once (CMS_INCLUDES . 'header.php');
 ?>
 <?php if ($sMessage != ''): ?>
     <div id="results_message" class="message<?php echo $sMessageClass ?>"><?php echo $sMessage ?></div>

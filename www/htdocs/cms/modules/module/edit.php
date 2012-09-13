@@ -46,7 +46,7 @@ if (isset($_SESSION['module_action'] )){
 ?>
 
 <?php require_once (CMS_INCLUDES . 'header.php');?>
-<?php if ($sRenderPage == 'edit'):?>
+<?php if ($sRenderPage == 'edit'   || $sRenderPage == 'add'):?>
 <form action="<?php echo currentURL() ?>" method="post" class="module_builder noEnterSubmit">
     <?php endif;?>
     <?php if ($oModuleBuilder->__get('bError')):?>
@@ -108,7 +108,7 @@ if (isset($_SESSION['module_action'] )){
             <input type="hidden" name="module_details[orig_name]" value="<?php echo $sName ?>"/>
         </div>
         <div class="form_actions">
-            <?php if ($sRenderPage == 'edit'):?>
+            <?php if ($sRenderPage == 'edit' || $sRenderPage == 'add'):?>
             <p class="submit">
                 <input type="submit" value="<?php echo $sFormSubmitText?>"/>
             </p>
@@ -117,7 +117,7 @@ if (isset($_SESSION['module_action'] )){
 
     </div>
 </div>
-<?php if ($sRenderPage == 'edit'):?>
+<?php if ($sRenderPage == 'edit'  || $sRenderPage == 'add'):?>
 </form>
 <?php endif; ?>
 

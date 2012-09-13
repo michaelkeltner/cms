@@ -69,7 +69,7 @@ require_once (CMS_INCLUDES . 'header.php');
     <div id="results_message" class="message<?php echo $sMessageClass ?>"><?php echo $sMessage ?></div>
 <?php endif; ?>
 <div class="form">
-    <?php if ($sRenderPage == 'edit'):?>
+    <?php if ($sRenderPage == 'edit'  || $sRenderPage == 'add'):?>
     <form class="form" id="add_<?echo $sModule?>" method="post" action="<?php echo currentUrl()?>">
     <?php endif;?>
          <input id="item_id" type="hidden" name="id"  value="<?php if (isset($oItem->id)){echo $oItem->id;} ?>" />
@@ -88,7 +88,7 @@ require_once (CMS_INCLUDES . 'header.php');
                 include('fields/common.php');
             }
         ?>
-         <?php if ($sRenderPage == 'edit'):?>
+         <?php if ($sRenderPage == 'edit' || $sRenderPage == 'add'):?>
         <p class="submit">
             <input type="submit" value="update" />
         </p>

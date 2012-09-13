@@ -39,7 +39,7 @@ require_once (CMS_INCLUDES . 'header.php');
     <div id="results_message" class="message<?php echo $sMessageClass ?>"><?php echo $sMessage ?></div>
 <?php endif; ?>
 <div class="form">
-    <?php if ($sRenderPage == 'edit'):?>
+    <?php if ($sRenderPage == 'edit'  || $sRenderPage == 'add'):?>
     <form class="form" id="add_role" method="post" action="">
     <?php endif;?>
         <input type="hidden" name="id"  value="<?php echo $iRoleId ?>" />
