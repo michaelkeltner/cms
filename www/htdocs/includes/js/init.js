@@ -1,8 +1,28 @@
 $(document).ready(function() {
     
     linksSearch();
+    faqSetup();
     
 });
+
+function faqSetup(){
+    $('div.answer').toggle();
+    $('a.question').click(function(e){
+        e.preventDefault();
+        iId = $(this).attr('rel');
+        if ($('#' + iId).hasClass('showing')){
+             $('#' + iId).addClass('hiding').removeClass('showing');
+            $('#' + iId).slideUp('250');
+        }else{
+            $('#' + iId).addClass('showing').removeClass('hiding');
+            $('#' + iId).slideDown('250');
+           
+            
+        }
+        
+        
+    })
+}
 
 function linksSearch(){
 
