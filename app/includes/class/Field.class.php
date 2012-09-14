@@ -57,6 +57,13 @@ class Field extends Action {
                 $sReturn .= $oValue->{$oLinkTothisField->name} . ', ';
             }
             return substr($sReturn, 0, -2);
+        }elseif ($sType == 'select'){
+            $aData = unserialize($oItem->{$sFieldName});
+            $sReturn = '';
+            if (is_array($aData)){
+                $sReturn = implode('<br/>', $aData);
+            }
+            return $sReturn;
         }elseif ($sType == 'file'){
             $sReturn = '';
             $oAsset = new Asset();

@@ -67,6 +67,7 @@ $iId = isset($oFieldItem->id)?$oFieldItem->id:'';
                 <option <?php if ($bRequiredSelected):?>selected="selected"<?php endif; ?> value=1>Required field</option>
                 <option <?php if(!$bRequiredSelected):?>selected="selected"<?php endif; ?> value=0>Not Required</option>
             </select>
+             <input type="hidden" name="module_field[options][select_values][]" value="0">
         </p>
     </div>
 </div>

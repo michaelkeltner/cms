@@ -400,6 +400,7 @@ class ModuleBuilder extends Action {
             case 'text':
             case 'file':
             case 'image':
+            case 'select':
                 return 'varchar(255)';
                 break;
             case 'date':

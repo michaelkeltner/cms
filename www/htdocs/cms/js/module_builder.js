@@ -2,7 +2,7 @@ $(document).ready(function() {
     cleanLoadedFields();
     sortable();
     toggleModuleFields();
-    disableEnterKeyFormSubmit();
+    //disableEnterKeyFormSubmit();
     fadeResultsMessage();
     removeColumnContent()
     hideColumnContent();

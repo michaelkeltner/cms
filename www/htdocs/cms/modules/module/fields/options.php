@@ -16,5 +16,6 @@ $bRequiredSelected = (isset($aOptions['required']) && $aOptions['required'])?tru
  <input type="hidden" name="module_field[options][module_id][]" value="0">
  <input type="hidden" name="module_field[options][field_id][]" value="0">
  <input type="hidden" name="module_field[options][multiple][]" value="0">
+ <input type="hidden" name="module_field[options][select_values][]" value="0">
  <br/>
 </p>
