@@ -10,8 +10,5 @@ $oUserStatsItem = $oUserStats->getWithUserId($oUserItem->id);
 ?>
 hello <?php echo $oUserItem->name?>!
 <div class="stats">
-    <ul>
-        <li>Last login: <?php echo date("m/d/Y (l) h:i a", strtotime($oUserStatsItem->last_login))?></li>
-    </ul>
 </div>
 <?php require_once (CMS_INCLUDES . 'footer.php'); ?>
