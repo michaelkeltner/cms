@@ -92,7 +92,9 @@ class Data{
     
     public function show($sField, $sSeperator = ''){
         $sOutput = '';
-        if (is_array($this->aContent[$sField]['content'])){
+        if ($sField == 'id'){
+          $sOutput = $this->iId;  
+        }elseif (is_array($this->aContent[$sField]['content'])){
             foreach ($this->aContent[$sField]['content'] as $sShowMe){
                 $sOutput .= $sShowMe . $sSeperator;
             }
@@ -108,7 +110,7 @@ class Data{
     }
     
     public function get($sField){
-        return $this->aContent[$sField]['content'];
+        return ($sField == 'id')?$this->iId:$this->aContent[$sField]['content'];
     }
     
     public function cleanData(){
