@@ -28,6 +28,7 @@ class Data{
     private function _setValues($oItem, $aFields){
         $aAssociationFields = array();
         $this->__set('iId',$oItem->id);
+        if (!count($aFields)){return false;}
         foreach($aFields as $oPropery){
             $sFieldName = $oPropery->name;
             $sValue = isset($oItem->{$sFieldName})?$oItem->{$sFieldName}:'';
