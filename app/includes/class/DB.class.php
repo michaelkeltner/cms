@@ -91,6 +91,26 @@ class DB {
         }
         return $aReturn;
     }
+    
+     /**
+     * Method returns an array of records
+     * @param string $sSql - the query to execute
+     * @return array Array populated with the records returned by the DB
+     */
+    public function getRowsAsArray($sSql) {
+
+        $rs = $this->getResultSet($sSql);
+        if (!$rs) {
+            return null;
+        }
+        $aReturn = array();
+        $i = 0;
+        while ($aRow =  mysql_fetch_array($rs, MYSQL_NUM)) {
+            $aReturn[$i++] = $aRow[0];
+        }
+        return $aReturn;
+        
+    }
 
     public function getTableInfo($sTable) {
         $sSql = 'DESCRIBE ' . $sTable;

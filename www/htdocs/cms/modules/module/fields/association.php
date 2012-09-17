@@ -21,7 +21,7 @@ $iFieldId = isset($oFieldItem->field_id)?$oFieldItem->field_id:'';
 $iId = isset($oFieldItem->id)?$oFieldItem->id:'';
 ?>
             <label>Name</label><br/>
-            <input type="text" fieldtype="association_name" readonly="readonly" name="module_field[name][]" value="<?php echo $sFieldName?>"/><br/>
+            <input type="text" fieldtype="association_name" name="module_field[name][]" value="<?php echo $sFieldName?>"/><br/>
             <label>Display Name</label><br/>
             <input type="text" name="module_field[display_name][]" value="<?php echo $sFieldDisplayName?>"/><br/>
             <label>Description</label><br/>
@@ -68,6 +68,9 @@ $iId = isset($oFieldItem->id)?$oFieldItem->id:'';
                 <option <?php if(!$bRequiredSelected):?>selected="selected"<?php endif; ?> value=0>Not Required</option>
             </select>
              <input type="hidden" name="module_field[options][select_values][]" value="0">
+             <input type="hidden" name="module_field[options][select_table][]" value="0">
+             <input type="hidden" name="module_field[options][select_table_field][]" value="0">
+             <input type="hidden" name="module_field[options][select_populated][]" value="0">
         </p>
     </div>
 </div>

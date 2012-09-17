@@ -7,6 +7,20 @@ $bListSelected = (isset($aOptions['list']) && $aOptions['list']) ? true : false;
 $bRequiredSelected = (isset($aOptions['required']) && $aOptions['required']) ? true : false;
 $sSelectValues = (isset($aOptions['select_values']) && $aOptions['select_values']) ? $aOptions['select_values'] : '';
 $bMultipleSelected = (isset($aOptions['multiple']) && $aOptions['multiple'])?true:false;
+$bSelectType = (isset($aOptions['select_populated']))?$aOptions['select_populated']:false;
+$sDBModule = '';
+if ($bSelectType == 'database'){
+    $sDBModule = $aOptions['select_table'];
+     $oDBModuleGeneric = new ModuleGeneric($sDBModule);
+    $aDBFields = $oDBModuleGeneric->__get('aFields');
+    if ($aDBFields){
+        foreach ($aDBFields as $oDBField){
+            $aDBFieldOptions[$oDBField->name] = $oDBField->display_name;
+        }
+    }
+
+}
+$aModuleItems = $oModuleBuilder->getAll(' WHERE `type` != "system" ORDER BY `name` ASC');
 ?>
 
 
@@ -17,9 +31,27 @@ $bMultipleSelected = (isset($aOptions['multiple']) && $aOptions['multiple'])?tru
         <?php include('common.php') ?> 
         
         <p class="select_values">
-            <label>Values</label><br/>
-            
-            <textarea rows="4" cols="5" name="module_field[options][select_values][]"><?php echo $sSelectValues ?></textarea><br/>
+            <input class="radio_select_type" type="radio" name="module_field[options][select_populated][]" value="database" <?php if($bSelectType =='database'){echo 'checked="checked"';}?>/>Database
+            <input class="radio_select_type" type="radio" name="module_field[options][select_populated][]" value="manual"  <?php if($bSelectType =='manual'){echo 'checked="checked"';}?>/>Manual
+            <div class="database"<?php if($bSelectType !='database'){echo ' style="display: none"';}?>>
+                <select class="db_tables" name="module_field[options][select_table][]">
+                    <option value="">--choose--</option>
+                    <?php foreach($aModuleItems as $oModuleItem):?>
+                    <option value="<?php echo $oModuleItem->name?>"<?php if($sDBModule == $oModuleItem->name):?> selected="selected"<?php endif;?>><?php echo $oModuleItem->display_name?></option>
+                    <?php endforeach;?>
+                </select>
+                <select class="table_fields" name="module_field[options][select_table_field][]" <?php if($bSelectType !='database'){echo ' style="display: none"';}?>>
+                <?php if (count($aDBFieldOptions)):?>
+                <?php foreach ($aDBFieldOptions as $iDBIndex=> $sDBValue):?>
+                    <option value="<?php echo $iDBIndex?>"<?php if($iDBIndex == $aOptions['select_table_field']):?> selected="selected"<?php endif;?>><?php echo $sDBValue?></option>
+                <?php endforeach;?>
+                <?php endif;?>
+                </select>
+            </div>
+            <div class="manual"<?php if($bSelectType !='manual'){echo ' style="display: none"';}?>>
+                <label>Values</label><br/>
+                <textarea rows="4" cols="5" name="module_field[options][select_values][]"><?php echo $sSelectValues ?></textarea><br/>
+            </div>
         </p>
         <p class="options">Options<br/>
             <select name="module_field[options][list][]">

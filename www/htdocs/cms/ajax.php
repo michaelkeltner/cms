@@ -20,15 +20,20 @@ switch (postVar('action')) {
         exit;
         break;
     case 'load_module_fields':
-        $oModuleBuilder = new ModuleBuilder;
+        $oModuleBuilder = new ModuleBuilder();
         echo json_encode($oModuleBuilder->getModuleFields(postVar('module_id')));
         exit;
+        break;
+    case 'load_database_fields':
+        echo json_encode(getModuleFields(postVar('module_name')));
+        exit;
+        break;
     case 'delete':
         echo deleteItem(postVar('module'), postVar('id'));
         exit;
         break;
     case 'delete_module':
-        $oModuleBuilder = new ModuleBuilder;
+        $oModuleBuilder = new ModuleBuilder();
         if ($oModuleBuilder->delete(postVar('id'))){
             echo json_encode(true);
         }else{
@@ -89,6 +94,12 @@ $oClass = new $sClass();
 $mResult = $oClass->delete(postVar('id'));
 echo $mResult;
 exit;
+
+function getModuleFields($sModuleName){
+    $oModuleGeneric = new ModuleGeneric($sModuleName);
+    return $oModuleGeneric->__get('aFields');
+    
+}
 
 function deleteItem($sModule, $iId){
     $oModuleGeneric = new ModuleGeneric($sModule);

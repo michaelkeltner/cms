@@ -9,7 +9,45 @@ $(document).ready(function() {
     addField();
     removeFormItem();
     setupAssociationActions();
+    setupLinkField();
 })
+
+function setupLinkField(){
+    $('.radio_select_type').click(function(){
+        sType = $(this).val();
+        oDatabaseDiv = $(this).parent().parent().find('div.database');
+        oManualDiv = $(this).parent().parent().find('div.manual');
+      
+        if (sType == 'database'){
+            oDatabaseDiv.show();
+            oManualDiv.hide();
+        }else{
+            oManualDiv.show();
+            oDatabaseDiv.hide();
+        }
+        
+    }).live();
+    
+    $('.db_tables').change(function(){
+        mySelect = $(this).next('.table_fields');
+        mySelect.html('');
+        mySelect.append($('<option></option>').val('0').html('--Select field value to show--'));
+        $.post('/cms/ajax.php', {
+            action: 'load_database_fields',
+            module_name: $(this).val()
+        }, function (data){
+            if (data != undefined){
+               $.each(data, function(index) {
+                   if (data[index].type == 'text'){
+                        mySelect.append($('<option></option>').val(data[index].name).html(data[index].display_name));
+                    }
+                });
+                mySelect.removeClass('hide');
+            }
+        }, 'JSON');
+         mySelect.show();
+    })
+}
 
 function setupAssociationActions(){
     $('.association_module_select').change(function(){
@@ -29,22 +67,6 @@ function setupAssociationActions(){
                 mySelect.removeClass('hide');
             }
         }, 'JSON');
-    });
-    
-    $('.association_field_select').change(function(){
-
-        moduleName = $(this).parent('p').find('.association_module_select option:selected').text();
-        fieldName = $('option:selected', this).text();
-        
-        association_field_name = '__' + moduleName.replace(' ', '_') + '__' + fieldName.replace(' ', '_');
-        pName = $(this).parent().parent().find('p.name');
-        pName.find('input').each(function(){
-            if ($(this).attr('fieldtype') == 'association_name'){
-                $(this).val(association_field_name.toLowerCase());
-            }
-                
-            
-        })
     });
 }
 

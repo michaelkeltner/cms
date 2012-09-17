@@ -24,6 +24,9 @@ $iId = isset($oFieldItem->id)?$oFieldItem->id:'';
             <input type="hidden" name="module_field[options][multiple][]" value="0">
             <input type="hidden" name="module_field[options][required][]" value="0">   
             <input type="hidden" name="module_field[options][select_values][]" value="0">
+            <input type="hidden" name="module_field[options][select_table][]" value="0">
+            <input type="hidden" name="module_field[options][select_table_field][]" value="0">
+            <input type="hidden" name="module_field[options][select_populated][]" value="0">
         </p>
     </div>
 </div>
