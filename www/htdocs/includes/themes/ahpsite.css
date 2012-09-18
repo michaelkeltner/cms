@@ -70,11 +70,6 @@ body{
     border: none;
 }
 
-#button li {
-    border-bottom: 1px solid #CD5C5C;
-    margin: 0;
-}
-
 #button tr {
     display: block;
     padding: 5px 5px 5px 0.5em;
@@ -92,17 +87,23 @@ body{
     width: 210px;
 }
 
-#button li a {
-    display: block;
-    padding: 5px 5px 5px 0.5em;
-    border-left: 10px solid #8B0000;
+#button li  {
+    height: 40px;
     background-color: #b22222;
-    color: #fff;
-    text-decoration: none;
-    width: 100%;
+    border-left: 10px solid #8B0000;
+    border-bottom: 1px solid #CD5C5C;
+    margin: 0;
 }
 
-html>body #button li a {
+#button li a {
+    padding: 5px 5px 5px 5px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.school_website_url{
+    position: relative;
+    top: 2.5px;
     width: auto;
 }
 #button tr:hover {   
@@ -110,7 +111,61 @@ html>body #button li a {
     color: #fff;
 }
 
-#button li a:hover {   
+.school_website_url:hover{
     background-color: #8B0000;
     color: #fff;
+}
+
+.information_alert img{
+    position: relative;
+    border: none;  
+    width:24px;
+    height:24px;
+    top: 5px;
+}
+/* --------------  Details on an individual item ----------------- */
+#details {
+    width: 670px;
+    margin: 0 auto;
+    padding: 0 0 1em 0;
+    margin-bottom: 1em;
+    font-family: 'Trebuchet MS', 'Lucida Grande',
+        Verdana, Lucida, Geneva, Helvetica, 
+        Arial, sans-serif;
+    background-color: #ffffff;
+    color: #333;
+}
+
+#details ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: none;
+    color: #ffffff;
+}
+
+#details li {
+     position: relative;
+    height: 40px;
+    background-color: #b22222;
+    border-left: 10px solid #8B0000;
+    border-bottom: 1px solid #CD5C5C;
+    margin: 0;
+    padding: 5px 5px 5px 5px;
+}
+
+#details li a {
+    position: relative;
+     padding: 5px 5px 5px 5px;
+    color: #fff;
+    text-decoration: none;
+    width: auto;
+   
+}
+
+#details li a:hover {
+    padding: 5px 5px 5px 5px;
+    background-color: #8B0000;
+    color: #fff;
+    text-decoration: none;
 }

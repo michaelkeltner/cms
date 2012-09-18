@@ -39,7 +39,7 @@ function linksSearch(){
                         newList = '<ul>';
                         for (i = 0; i < data.length; i++) {
                             oSchool = data[i];
-                            newList += ' <li><a href="http://ahpcare.com/' + oSchool.slug + '/" target="_blank">' + oSchool.name + '</a></li>';
+                            newList += ' <li><a href="' + document.URL + '/details/' + oSchool.slug +' " class="information_alert"><img src="includes/images/menu-information.png"/></a><a href="http://ahpcare.com/' + oSchool.slug + '/" target="_blank">' + oSchool.name + '</a></li>';
 
                         }
                         newList += '</ul>';

@@ -3,12 +3,22 @@
     
 class ModuleGeneric extends Action {
     public $oProperties;
+    //store the fields by ID
     public $aFields = array();
+    //store the fields by name
+    public $aNameFields = array();
     
     function __construct($mModule) {
+        if (is_int($mModule)){
+            //convert mModule from Id to the module name
+            $mModule = $this->getModuleName($mModule);
+        }
         parent::__construct($mModule);
         $this->__set('oProperties', $this->_getProperties($mModule));
-        $this->__set('aFields', $this->_getFields());
+        $aAllFields = $this->_getFields();
+        $this->__set('aFields', $aAllFields['id']);
+        $this->__set('aNameFields', $aAllFields['name']);
+        
 
     }
 
@@ -137,11 +147,32 @@ class ModuleGeneric extends Action {
     }
     
     private function _getFields(){
+        $aReturn = array();
         $oDb = $this->__get('oDb');
         $sSql = 'SELECT `f`.`type`, `mf`.* FROM `module_field` `mf`';
         $sSql .=' JOIN `field` `f` ON `mf`.`field_id` = `f`.`id`';
         $sSql .= 'WHERE `mf`.`module_id` = ' . $this->__get('oProperties')->id . ' ORDER BY `mf`.`sort_order` ASC';
-        return $oDb->getRowsAsObjects($sSql); 
+        $aFields = $oDb->getRowsAsObjects($sSql); 
+        if (count($aFields)){
+            foreach ($aFields as $oField){
+                $aReturn['name'][$oField->name] = $oField;
+                $aReturn['id'][$oField->id] = $oField;
+            }
+        }
+        return $aReturn;
+    }
+    
+    public function getModuleName($iId){
+        if (isset($_SESSION['modules'][$iId])){
+            return $_SESSION['modules'][$iId];
+        }else{
+            $oDB = new DB();
+            $sSql = "SELECT `name` from `module` WHERE `id` = $iId";
+            $aData = $oDB->getRowsAsObjects($sSql);
+            $oData = $aData[0];
+            return $oData->name;
+            
+        }
     }
     
 }
