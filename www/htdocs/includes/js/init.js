@@ -24,7 +24,7 @@ function linksSearch(){
                         }
                         newList += '</ul>';
                     }else{
-                        newList = '<p>No schools found with the query.</p>'
+                        newList = '<p>No schools found with the query "' + value + '".</p>'
                     }
                     
                     $('#button').html(newList);
