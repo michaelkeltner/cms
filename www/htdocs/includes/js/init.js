@@ -1,28 +1,8 @@
 $(document).ready(function() {
     
     linksSearch();
-    faqSetup();
     
 });
-
-function faqSetup(){
-    $('div.answer').toggle();
-    $('a.question').click(function(e){
-        e.preventDefault();
-        iId = $(this).attr('rel');
-        if ($('#' + iId).hasClass('showing')){
-             $('#' + iId).addClass('hiding').removeClass('showing');
-            $('#' + iId).slideUp('250');
-        }else{
-            $('#' + iId).addClass('showing').removeClass('hiding');
-            $('#' + iId).slideDown('250');
-           
-            
-        }
-        
-        
-    })
-}
 
 function linksSearch(){
 
@@ -48,6 +28,33 @@ function linksSearch(){
                     }
                     
                     $('#button').html(newList);
+                },'json');            
+            }
+        },250);
+    });
+    
+    
+    $("#search_faq").live('keyup', function () {
+        var value=$("#search_faq").val();
+        setTimeout(function(){
+            if ($("#search_faq").val()  == value)
+            {
+                $.post('/ajax.php',{
+                    action:'search_faq',
+                    value:$("#search_faq").val() 
+                }, function(data) {
+                    if (data.length > 0){
+                        newList = '<ul>';
+                        for (i = 0; i < data.length; i++) {
+                            oData = data[i];
+                            newList += ' <li  class="question"><span class="marker question_marker">Q</span>' + oData.question + '</li>';
+                            newList += ' <li  class="answer"><span class="marker answer_marker">A</span>' + oData.answer + '</li>';
+                        }
+                        newList += '</ul>';
+                    }else{
+                        newList = '<p>No FAQs found with the query "' + value + '".</p>'
+                    }
+                    $('#button').html(newList);   
                 },'json');     
             }
         },250);

@@ -12,6 +12,10 @@ switch (postVar('action')) {
         echo liveSchoolSearch(postVar('value'));
         exit;
         break;
+    case 'search_faq':
+        echo liveFAQSearch(postVar('value'));
+        exit;
+        break;
     default:
         echo 0;
         exit;
@@ -22,6 +26,12 @@ switch (postVar('action')) {
 function liveSchoolSearch($mValue) {
     $oDb = new DB();
     $sSql = 'SELECT * from `school` WHERE `name` like "%'.  $mValue .'%" ORDER BY `name` ASC';
+    return json_encode($oDb->getRowsAsObjects($sSql));
+}
+
+function liveFAQSearch($mValue) {
+    $oDb = new DB();
+    $sSql = 'SELECT * from `faq` WHERE `question` like "%'.  $mValue .'%" OR `answer` like "%'.  $mValue .'%" ORDER BY `question` ASC';
     return json_encode($oDb->getRowsAsObjects($sSql));
 }
 

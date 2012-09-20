@@ -7,27 +7,24 @@ $aData = $oRender->getData();
 <html>
     <head>
         <script type="text/javascript" language="javascript" src="/includes/js/jquery-1.7.1.min.js" ></script>
-        <script type="text/javascript" language="javascript" src="/includes/js/init.js" ></script>
-        <link href="/includes/themes/ahpsite.css" rel="stylesheet" type="text/css" media="screen">
+        <script type="text/javascript" language="javascript" src="/includes/js/init.js?<?php echo FILE_DECACHER?>" ></script>
+        <link href="/includes/themes/ahpsite.css?<?php echo FILE_DECACHER?>" rel="stylesheet" type="text/css" media="screen">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title></title>
     </head>
     <body>
         
         <div id="wrapper" class="rounded-corners">
-            <div id="title">
-                FAQ
+            <div id="title">FAQ</br>
+                <input type="text" id="search_faq" placeholder='Search' class="search"/>
             </div>
+
             <div id="button">
                 <ul>
                     <?php if (count($aData)): ?>
                         <?php foreach ($aData as $oData): ?>
-                        <li class="question">
-                            <a href="#" class="question" rel="<?php $oData->show('id')?>"><?php $oData->show('question') ?></a>
-                            <div class="answer" id="<?php $oData->show('id')?>">
-                                <?php $oData->show('answer') ?>
-                            </div>
-                        </li>
+                        <li class="question"><span class="marker question_marker">Q</span><?php $oData->show('question')?></li>
+                        <li class="answer"><span class="marker answer_marker">A</span><?php $oData->show('answer') ?></li>
                         <?php endforeach; ?>
                     </table>
                     <?php else: ?>
