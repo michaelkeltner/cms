@@ -115,6 +115,11 @@ div #used_menu_modules{
 
 div .menu_module{
     margin-bottom: 15px;
+    background: #7087A7;
+    border: 5px;
+    border-color: #607797;
+    margin: 5px;
+    padding: 5px;
 }
 .locked{
     position: absolute;

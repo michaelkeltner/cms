@@ -29,7 +29,17 @@ class Render extends ModuleGeneric{
     
     public function where(){
         if (!func_num_args()){return false;}
-        $this->aWhere = func_get_args();
+        $aWhere = array();
+        foreach(func_get_args() as $mArg){
+            if (is_array($mArg)){
+                foreach($mArg as $sArg){
+                    $aWhere[] = $sArg;
+                }
+            }else{
+                $aWhere[] = $mArg;
+            }
+        }
+        $this->aWhere = $aWhere;
         return true;
     }
 
@@ -126,7 +136,7 @@ class Render extends ModuleGeneric{
                     $sWhere .= '`' . $aPieces[0] .'` ' . $aPieces[1] . '"' . $aPieces[2] . '" ';
                     $sWhere .= (isset($aPieces[3]))?$aPieces[3] . ' ':' AND ';
                 }
-            }
+            }            
             //strip off trailing condistional key word
             $sWhere = trim($sWhere);
             if (substr(strtoupper($sWhere), -4) == ' AND'){
@@ -143,6 +153,11 @@ class Render extends ModuleGeneric{
         if (!$aItemData){return null;}
         $oAssociation = new Association();
         foreach ($aItemData as $oItem){
+            if (isset($oItem->active)){
+                if (!$oItem->active){
+                    continue;
+                }
+            }
             $oPropery = $this->oProperties;
             //assume we can store this value
             $bMatch = true;
@@ -170,34 +185,33 @@ class Render extends ModuleGeneric{
                         $sValidateMe = $oAssociatedItem->{$sFilterField};
                         //special case for blank values
                         if ($sValidateMe == "" && $sDesiredValue != "" && $sCondition != '!='){
-                            echo 'test';
                             $bMatch = false; 
-                            continue;
-                        }
+                                continue;
+                            }
                         if ($sCondition == '='){
                             if ($sValidateMe != $sDesiredValue){
-                               $bMatch = false; 
-                               continue;
-                            }
+                                $bMatch = false; 
+                                    continue;
+                                }
                         }elseif($sCondition == '!='){
                             if ($sValidateMe == $sDesiredValue){
-                               $bMatch = false; 
-                               continue;
-                            }
+                               $bMatch = false;
+                                    continue;
+                                }
                         }elseif(strtolower($sCondition) == 'like'){
                             if (!stristr($sValidateMe, $sDesiredValue)){
                                $bMatch = false; 
-                               continue;
+                                    continue;
+                                }
                             }
                         }
+                                }
                     }
-                }
-            }
             if ($bMatch){
                 
                 $oData = new Data($oItem, $aFields);
                 $aData[] = $oData;
-            }
+                }
             //reset our match flag
             $bMatch = true;
         }

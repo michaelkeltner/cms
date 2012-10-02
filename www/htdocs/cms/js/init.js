@@ -19,7 +19,92 @@ $(document).ready(function() {
     setupGenericModuleForm();
     setTableheaderWidth();
     sortListing();
+    multipleFileSelection();  
+    multipleImageSelection();  
 });
+
+function multipleImageSelection(){
+    //setup the fields as sortable
+    //loop through each item to determine if the add a file button is available
+    $(".sortable").sortable();
+    $('.image_selector').each(function(){
+        addAnotherLink = $(this).parent().parent().find('a.add_image_select');
+        if ($(this).val() == 0){
+            addAnotherLink.hide();
+        }else{
+            addAnotherLink.show();
+        }
+    })
+    
+       //remove an item
+    $('.delete_field').click(function(e){
+       e.preventDefault();
+       $(this).parent().remove();
+    });
+    
+    //show or hide the add a file button based on the selection action
+    $('.image_selector').change(function(){
+        addAnotherLink = $(this).parent().parent().parent().find('a.add_image_select');
+        asset_id = $(this).val()
+        previewArea = $(this).parent().find('.preview_image');
+        if (asset_id != 0){
+            addAnotherLink.show();
+            //change the preview image
+            $.post('/cms/ajax.php', {
+                action: 'get_image_src',
+                asset_id: asset_id
+            }, function (data){
+                if (data != undefined){
+                    sHTML = '<img src="'+data.src+'" class="image_preview"/>(' + data.width +' x ' + data.height +')<br/>';
+                    previewArea.html(sHTML);
+                }
+            }, 'JSON');
+        }else{
+            addAnotherLink.hide();
+        }
+    });
+    $('.add_image_select').click(function(e){
+        e.preventDefault();
+        cloneMe = $(this).parent().find('.span_' + $(this).attr('id')).last();
+        cloneMe.clone(true).insertAfter(cloneMe);
+    });
+}
+
+
+function multipleFileSelection(){
+    //setup the fields as sortable
+    //loop through each item to determine if the add a file button is available
+    $(".sortable").sortable();
+    $('.file_selector').each(function(){
+        addAnotherLink = $(this).parent().parent().find('a.add_file_select');
+        if ($(this).val() == 0){
+            addAnotherLink.hide();
+        }else{
+            addAnotherLink.show();
+        }
+    })
+    
+       //remove an item
+    $('.delete_field').click(function(e){
+       e.preventDefault();
+       $(this).parent().remove();
+    });
+    
+    //show or hide the add a file button based on the selection action
+    $('.file_selector').change(function(){
+        addAnotherLink = $(this).parent().parent().parent().find('a.add_file_select');
+        if ($(this).val() != 0){
+            addAnotherLink.show();
+        }else{
+            addAnotherLink.hide();
+        }
+    });
+    $('.add_file_select').click(function(e){
+        e.preventDefault();
+        cloneMe = $(this).parent().find('.span_' + $(this).attr('id')).last();
+        cloneMe.clone(true).insertAfter(cloneMe);
+    });
+}
 
 function sortListing(){
     $('.header_description').click(function(){

@@ -110,7 +110,7 @@ class Asset extends Action {
             return '';
         }
     }
-    
+       
 }
 
 ?>

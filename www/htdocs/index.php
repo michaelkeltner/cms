@@ -13,15 +13,26 @@ if ($sParam1 == 'cms') {
 }
 
 if (file_exists('ahpsite/' . $sParam1 .'.php')){
-    include_once('ahpsite/' . $sParam1 .'.php');
-    exit;
+    $sIP = getIP();
+    $bLocal = ($sIP == '127.0.0.1')?true:false;
+    $bInternal = (substr($sIP, 0, 7) == '192.168')?true:false;
+    $bInternal2 = (substr($sIP, 0, 5) == '10.8.')?true:false;
+    if ($bLocal || $bInternal || $bInternal2){
+        include_once('ahpsite/' . $sParam1 .'.php');
+        exit;
+    }else{
+        include_once('ahpsite/403.php');
+        exit;
+    }
 }
 
-if (getParam(1) == 'schoollist' || getParam(1) == 'schoollist.php') {
-    include_once('ahpsite/schoollist.php');
-    exit;
-}
 $sFile = '';
+
+//If we are here then it is a school page
+//pass control to the school site dispatcher
+include_once('site/index.php');
+exit;
+
 /**TODO Finish out rest of logic to host school sites*/
 /*
 Render::setSchoolSlug(getParam(1));
@@ -93,5 +104,6 @@ if (file_exists($sFile)) {
 }
  * 
  */
+ include_once('site/404.php');
 exit;
 ?>

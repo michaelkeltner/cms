@@ -32,14 +32,14 @@ if (count($aSchools)) {
                 <div id="details">
                     <p>
                         <ul class="detail_listing">
-                            <?php $oData->show('account_manager', ', ', 'Account Manager: ', '', 'li', true) ?>
-                            <?php $oData->show('client_service_rep', ', ', 'Client Service Representative: ', '', 'li', true) ?>
-                            <?php $oData->show('carrier', ', ', 'Carrier: ', '', 'li', true) ?>
+                            <?php $oData->show('account_manager', ', ', 'Account Manager: ', '', array('li'), true) ?>
+                            <?php $oData->show('client_service_rep', ', ', 'Client Service Representative: ', '', array('li'), true) ?>
+                            <?php $oData->show('carrier', ', ', 'Carrier: ', '', array('li'), true) ?>
                             <li>Website : <a href="http://ahpcare.com/<?php $oData->show('slug') ?>/" target="_blank">http://ahpcare.com/<?php $oData->show('slug') ?>/</a></li>
                             <?php if ($aFileTransfers):?>
                             <?php foreach($aFileTransfers as $oFileTransferData):?>
-                            <?php $oFileTransferData->show('time', ', ', 'File Trasnfer Schedule: ', '', 'li', true) ?>
-                            <?php $oFileTransferData->show('notes', ', ', 'File Transfer Notes: ', '', 'li', true) ?>
+                            <?php $oFileTransferData->show('time', ', ', 'File Trasnfer Schedule: ', '', array('li'), true) ?>
+                            <?php $oFileTransferData->show('notes', ', ', 'File Transfer Notes: ', '', array('li'), true) ?>
                             <?php endforeach;?>
                             <?php endif;?>
                         </ul>

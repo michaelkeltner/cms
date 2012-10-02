@@ -145,8 +145,13 @@ function getCopyPeriodMenu($sSchoolSlug, $sPeriodSlug, $sPeriodName){
 function getImageUrl($iId){
     $oAsset = new Asset();
     $oItem = $oAsset->getWithId($iId);
+    
     $oObject = new stdClass();
     $oObject->src = '/assets/images/'. $oItem->name;
+    $aProperties = getimagesize(SITE_URL . '/assets/images/'. $oItem->name);
+    $oObject->width = $aProperties[0];
+    $oObject->height = $aProperties[1];
+
     //$aReturn[0] = $oObject;
     return json_encode($oObject);
     

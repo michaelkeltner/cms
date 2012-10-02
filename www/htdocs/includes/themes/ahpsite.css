@@ -49,7 +49,7 @@ body{
     text-align: center;
     background: #555;
     width: 780px;
-    margin: 0 auto;
+    margin: 10px auto 0px auto;
 }
 #button {
     width: 670px;
@@ -220,4 +220,60 @@ body{
     color: #000000;
 }
 
+/*------------------ Listing Div   ----------*/
 
+.listing {
+   margin-top: 6px;
+   color: #EFEFEF;
+}
+
+
+/*------------- Form input -----------------*/
+
+form{
+    display: block;
+    margin-left: 100px;
+    padding-bottom: 10px;
+ 
+}
+
+input {
+
+
+	outline: none;
+	background-color: white;
+	color: #3C3C46;
+    width: 417px;
+}
+ 
+input :hover {
+	background-color: #66C;
+	color: white;
+}
+ 
+textarea, select, input {
+    margin-left: 25px;
+	color: #667;
+	padding: 7px;
+	border: 1px solid #CCC;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+
+}
+
+#submit {
+    background: #e3e3e6;
+    cursor: pointer;
+}
+.dynamic_list{
+    width: 400px;
+    margin-left: 35px;
+    
+}
+.dynamic_list ul{
+    border: 2px solid #CECECE;
+    list-style: none;
+    background: #EFEFEF;
+    
+}

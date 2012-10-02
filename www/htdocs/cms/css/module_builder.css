@@ -99,3 +99,10 @@ margin-top: 0;
 #field_option_list{
     text-align: right;
 }
+
+.module_field{
+    background: #7087A7;
+    border: 5px;
+    border-color: #607797;
+    margin: 5px;
+}

@@ -418,6 +418,7 @@ class ModuleBuilder extends Action {
                 return 'int(11)';
                 break;
             case 'wysiwyg':
+            case 'link':
                 return 'text';
                 break;
             default:

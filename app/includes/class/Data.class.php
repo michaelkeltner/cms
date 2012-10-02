@@ -34,6 +34,7 @@ class Data {
             $sFieldName = $oPropery->name;
             $sValue = isset($oItem->{$sFieldName}) ? $oItem->{$sFieldName} : '';
             $this->aContent[$sFieldName]['content'] = $sValue;
+            $this->aContent[$sFieldName]['type'] = $oPropery->type;
             if ($oPropery->type == 'association') {
                 //get the options needed to get the assocaition value
                 $aOptions = unserialize($oPropery->options);
@@ -43,6 +44,7 @@ class Data {
                 $aReturn = $oAssociation->getAssocationValues($oPropery->module_id, $sFieldName, $oItem->id);
 
                 if (!count($aReturn)) {
+                    
                     $this->aContent[$sFieldName]['association'] = null;
                     $this->aContent[$sFieldName]['content'] = '';
                     continue;
@@ -96,11 +98,60 @@ class Data {
      * value.  The text "Account Manager: " will show before the value and it 
      * will all be wrapped in <li></li> tag
      */
-    public function show($sField, $sSeperator = '', $sPrefix = '', $sSuffix = '', $sHTMLWrapper = '', $bHTMLWrapAll = false) {
+    public function show($sField, $sSeperator = '', $sPrefix = '', $sSuffix = '', $aHTMLWrapper = array(), $bHTMLWrapAll = false) {
         $sOutput = '';
         if ($sField == 'id') {
-            $sOutput = $this->iId;
-        } elseif (is_array($this->aContent[$sField]['content'])) {
+            echo  $this->iId;
+            return;
+        } 
+        $sType = $this->aContent[$sField]['type'];
+        switch($sType){
+            case 'file':
+                $aFileId = unserialize($this->aContent[$sField]['content']);
+                if (count($aFileId) == 1 && $aFileId[0] == 0){
+                    echo '';
+                    return;
+                }
+                $oAsset = new Asset();
+                foreach ($aFileId as $iFileId){
+                    $oItem = $oAsset->getWithId($iFileId);
+                    $sOutput .= '<a href="http://' . BASE_URL . $oAsset->getAssetItemPath($oItem->name, 'doc') . '" class="embed" alt="' . $oItem->display_name . '"/>' . $oItem->display_name . '</a>';
+                    $sOutput .= '<br/>';
+                }
+                $sOutput = $this->_formatOutput( $sOutput, $sPrefix, $sSuffix, $aHTMLWrapper, $bHTMLWrapAll);
+                 echo $sOutput;
+                 return;
+                break;
+            case 'image';
+                $aFileId = unserialize($this->aContent[$sField]['content']);
+                $oAsset = new Asset();
+                foreach ($aFileId as $iFileId){
+                    $oItem = $oAsset->getWithId($iFileId);
+                    $sOutput .= '<img src="http://' . BASE_URL . $oAsset->getAssetItemPath($oItem->name, 'image') . '"/>';
+                }
+                $sOutput = $this->_formatOutput( $sOutput, $sPrefix, $sSuffix, $aHTMLWrapper, $bHTMLWrapAll);
+                 echo $sOutput;
+                 return;
+                break;
+             case 'select':
+                 if ($this->aContent[$sField]['content'] == ''){
+                     return;
+                 }
+                 $aOutput = @unserialize($this->aContent[$sField]['content']);
+                 foreach ($aOutput as $sShowMe) {
+                    $sOutput .= $sShowMe . $sSeperator;
+                }
+                if ($sSeperator != ''){
+                    $sOutput = substr($sOutput, 0, (strlen($sSeperator)) * -1);
+                }
+                echo $this->_formatOutput($sOutput, $sPrefix, $sSuffix, $aHTMLWrapper, $bHTMLWrapAll);
+                return;
+            default:
+                break;
+        }
+ 
+        
+        if (is_array($this->aContent[$sField]['content'])) {
             foreach ($this->aContent[$sField]['content'] as $sShowMe) {
                 $sOutput .= $sShowMe . $sSeperator;
             }
@@ -109,27 +160,87 @@ class Data {
                 $sOutput = substr($sOutput, 0, (strlen($sSeperator)) * -1);
             }
         } else {
-            $sOutput = @unserialize($this->aContent[$sField]['content']);
+            $sOutput = @unserialize($this->aContent[$sField]['content']);          
             if ($sOutput === false) {
                 $sOutput = $this->aContent[$sField]['content'];
-            }
+            }                  
         }
-        if ($sOutput != ''){
-            if ($sHTMLWrapper != ''){
-                if ($bHTMLWrapAll){
-                    echo "<$sHTMLWrapper>" . $sPrefix . $sOutput . $sSuffix ."</$sHTMLWrapper>";
-                }else{
-                    echo  $sPrefix . "<$sHTMLWrapper>" . $sOutput  ."</$sHTMLWrapper>" . $sSuffix;
-                }
-            }else{
-                echo $sPrefix . $sOutput . $sSuffix;
-            }
+        if ($sOutput == ''){
+            return;
+        }
+        if (!count($aHTMLWrapper)){
+            echo $sPrefix . $sOutput . $sSuffix;
+            return;
+        }
+        echo $this->_formatOutput($sOutput, $sPrefix, $sSuffix, $aHTMLWrapper, $bHTMLWrapAll);
+        return;
+    }
+    
+  
+    
+    private function _formatOutput($sOutput, $sPrefix, $sSuffix, $aHTMLWrapper, $bHTMLWrapAll){
+        if ($sOutput == ''){ 
+            return '';  
+        }
+        if (!count($aHTMLWrapper)){
+            return  $sPrefix . $sOutput . $sSuffix; 
         }
         
+        $sHTMLStart = '';
+        $sHTMLEnd = '';
+        
+        foreach($aHTMLWrapper as $sHTMLWrapper ){
+            $sHTMLStart .= "<$sHTMLWrapper>";
+        }
+        foreach (array_reverse($aHTMLWrapper) as $sHTMLWrapper ){
+            $sHTMLEnd .= "</$sHTMLWrapper>";
+        }
+        
+        
+        if ($bHTMLWrapAll){
+            return $sHTMLStart . $sPrefix . $sOutput . $sSuffix . $sHTMLEnd;
+        }else{
+            return $sPrefix . $sHTMLStart . $sOutput  .$sHTMLEnd . $sSuffix;
+        } 
     }
 
     public function get($sField) {
-        return ($sField == 'id') ? $this->iId : $this->aContent[$sField]['content'];
+         if ($sField == 'id') {
+            return $this->iId;
+        } 
+        $sFieldIndex = (stristr($sField, '|'))?substr($sField, 0, strpos($sField, '|')):$sField;
+        $sType = $this->aContent[$sFieldIndex]['type'];
+        switch($sType){
+            case 'file':
+            case 'image';
+                $aFileId = unserialize($this->aContent[$sField]['content']);
+                $oAsset = new Asset();
+                $sOutput = '';
+                $aReturn = array();
+                foreach ($aFileId as $iFileId){
+                    $oItem = $oAsset->getWithId($iFileId);
+                    if (!$oItem){
+                        continue;
+                    }
+                    $aReturn[] = $oItem;
+                }
+                return $aReturn;
+                break;
+             case 'link':
+                  return unserialize($this->aContent[$sField]['content']);
+             case 'association':
+                 $aPices = explode('|', $sField);
+                 //are they requesting a field off the association object
+                 if (count($aPices) > 1){
+                     return $this->aContent[$sFieldIndex]['association'][0]->{$aPices[1]};
+                 }else{//no, then return the default setup in on module
+                     return $this->aContent[$sFieldIndex]['content'];
+                 }
+                 break;
+            default:
+                break;
+        }
+        return $this->aContent[$sField]['content'];
     }
 
     public function cleanData() {

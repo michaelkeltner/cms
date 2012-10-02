@@ -1,7 +1,7 @@
 <?php
 $sFieldType = 'select';
 $sFieldDisplayType = 'Select';
-$aOptions = isset($oFieldItem->options) ? unserialize($oFieldItem->options) : array();
+$aOptions = isset($oFieldItem->options) ? @unserialize($oFieldItem->options) : array();
 $iId = isset($oFieldItem->id) ? $oFieldItem->id : '';
 $bListSelected = (isset($aOptions['list']) && $aOptions['list']) ? true : false;
 $bRequiredSelected = (isset($aOptions['required']) && $aOptions['required']) ? true : false;

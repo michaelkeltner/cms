@@ -153,4 +153,8 @@ function sendEmail($aTo, $aFrom, $sSubject, $sBody, $aBCC = array()) {
   $bResults = $mailer->Send();
   return $bResults;
 }
+
+function getIP(){
+    return $_SERVER['REMOTE_ADDR'];
+}
 ?>

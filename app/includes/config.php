@@ -22,11 +22,11 @@ define('CMS_INCLUDES', CMS_ROOT . 'includes'.$sDs);
 define('CMS_CSS', CMS_ROOT . 'css'.$sDs);
 define('CMS_JS', CMS_ROOT . 'js'.$sDs);
 
-define('MODULES_ROOT', CMS_ROOT . 'modules'.$sDs);
+define('MODULES_ROOT', APP_ROOT . 'modules'.$sDs);
 define('BASE_URL', $_SERVER['HTTP_HOST']);
 
 define ('SITE_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/');
-define("FILE_DECACHER", "09202012");
+define("FILE_DECACHER", "09262012");
 define("APIKEY", "MB00ar82S2a027oyN08do0n5");
 define("JQUERYFILE", "jquery-1.8.0.min.js");
 define("JQUERYUIJSFILE", "jquery-ui-1.8.22.custom.min.js");

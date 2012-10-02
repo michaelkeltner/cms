@@ -1,4 +1,7 @@
 <?php
+
+$bAdHoc = (getParam(4) == 'ad-hoc')?true:false;
+
 //used to determine the menu link that should have the class "active" on it
 $sActiveLink = 'asset';
 $sMessage = '';
@@ -12,7 +15,12 @@ if (formSubmit()) {
     } else {//re-direct to the listing view and they will see the asset
         $_SESSION['sMessage'] = 'Asset added';
         $_SESSION['sMessageClass'] = ' added';
-        gotoURL('/cms/asset/list');
+        if (!$bAdHoc){
+            gotoURL('/cms/asset/list');
+        }else{
+            echo '<h3>Added ' .  postVar('display_name') . '</h3>';
+            exit;
+        }
     }
 }
 

@@ -32,7 +32,7 @@ if (formSubmit()){
         <div class="innertube">
             <div class="form">
 <form action="<?php echo currentURL() ?>" method="post" class="menu_builder noEnterSubmit">
-    <div id="used_menu_modules" class="sortable">
+    <div id="used_menu_modules" class="sortable"> 
         <?php if (count($aMenuOptions)):?>
         <?php foreach ($aMenuOptions as $oItem):?>
         <div class="menu_module">
@@ -48,11 +48,13 @@ if (formSubmit()){
         </div>
         <?php endforeach ?>
         <?php endif; ?>
-    </div><br/>
-    <p class="submit">
-    <input type="submit" value="Save"/>
-    </p>
-    
+    </div>
+    <div id="used_menu_modules">
+        <p class="submit">
+            <input type="submit" value="Save"/>
+        </p>
+    </div>
+   
 </form>
 </div>
         </div>

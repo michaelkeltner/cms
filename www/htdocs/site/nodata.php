@@ -7,6 +7,6 @@
 <!-- Main Banner !-->
     <div class="banner">Sorry...</div>
     <!-- Sub Banner !-->
-    <div class="sub_banner">we could not load the data for the url provided</div>
+    <div class="sub_banner">No data is available for the URL provided.</div>
 <?php require_once ('includes/footer.php'); ?>
 

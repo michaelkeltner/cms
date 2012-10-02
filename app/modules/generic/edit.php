@@ -52,7 +52,7 @@ if (formSubmit()) {
             $sMessageClass = ' error';
         }
         if ($bResults > 0) {
-            $sMessage = $sModule . ' updated.';
+            $sMessage = $oProperties->display_name . ' updated.';
             $sMessageClass = ' added';
             $_SESSION['sMessage'] = $sMessage;
             $_SESSION['sMessageClass'] = $sMessageClass;

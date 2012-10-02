@@ -3,6 +3,10 @@
 $oRender = new Render('faq');
 $oRender->order('`sort_order` ASC');
 $aData = $oRender->getData();
+
+$oRenderSchool = new Render('school');
+$oRenderSchool->order('`name` ASC');
+$aSchoolData = $oRenderSchool->getData();
 ?>
 <html>
     <head>
@@ -16,7 +20,25 @@ $aData = $oRender->getData();
         
         <div id="wrapper" class="rounded-corners">
             <div id="title">FAQ</br>
-                <input type="text" id="search_faq" placeholder='Search' class="search"/>
+                <input type="text" id="search_faq" placeholder='Search' class="search"/><br/>
+            </div>
+            <div id="filter">
+                <div id="categories">
+                    Category<br/> 
+                    <input type="checkbox" name="category[]" value="General">General</input>
+                    <input type="checkbox" name="category[]" value="RFP">RFP</input>
+                    <input type="checkbox" name="category[]" value="Enrollment">Enrollment</input>
+                    <input type="checkbox" name="category[]" value="Waiver">Waiver</input>
+                    <input type="checkbox" name="category[]" value="IT">IT</input>
+                </div>
+                School<br/>
+                <select name="school" id="school">
+                    <option value="none">-- select --</option>
+                <?php foreach($aSchoolData as $oSchool):?>
+                    <option value="<?php echo $oSchool->show('name')?>"><?php echo $oSchool->show('name')?></option>
+                <?php endforeach; ?>
+                </select>
+                
             </div>
 
             <div id="button">
@@ -26,7 +48,6 @@ $aData = $oRender->getData();
                         <li class="question"><span class="marker question_marker">Q</span><?php $oData->show('question')?></li>
                         <li class="answer"><span class="marker answer_marker">A</span><?php $oData->show('answer') ?></li>
                         <?php endforeach; ?>
-                    </table>
                     <?php else: ?>
                         <p>No FAQ's available</p>
                     <?php endif; ?>

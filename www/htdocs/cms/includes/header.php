@@ -14,6 +14,7 @@
         <?php endif?>
         <script type="text/javascript" language="javascript" src="/cms/plugins/markitup/jquery.markitup.js?<?php echo FILE_DECACHER?>"  ></script>
         <script type="text/javascript" language="javascript" src="/cms/plugins/markitup/sets/html/set.js?<?php echo FILE_DECACHER?>"  ></script>
+        <script type="text/javascript" language="javascript" src="/cms/plugins/popupWindow/jquery.popupWindow.js?<?php echo FILE_DECACHER?>"  ></script>
         <script type="text/javascript" language="javascript" src="/cms/js/init.js?<?php echo FILE_DECACHER?>"></script>
         <?php if ($sActiveLink == 'module'):?>
         <link href="/cms/css/module_builder.css?<?php echo FILE_DECACHER?>" rel="stylesheet" type="text/css" media="screen" />
@@ -33,7 +34,7 @@
         <title></title>
     </head>
     <body>    
-        <div id="main">
-<?php require_once ('banner.php'); ?>      
+        <div id="main">          
+<?php require_once ('banner.php'); ?>   
 <?php require_once ('menu.php'); ?>
             <div id="wrapper" class="rounded-corners">

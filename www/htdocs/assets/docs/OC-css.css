@@ -1,0 +1,270 @@
+
+/*------------------------ Main Body ------------------*/
+
+html {min-height: 100%;}
+
+body{
+    border:0; 
+    margin:0; 
+    padding:0;
+    background: #221111;
+    color: #f8f1f1;
+    font: 1em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif; 
+}
+
+img{border: none;}
+a{
+    text-decoration: underline;
+    color:#f7e2e2
+}
+
+a:hover{
+    text-decoration: none;
+    color:#f7e2e2
+}
+
+#wrapper{
+    margin: 5px auto 50px auto;
+    width: 1200px;
+    display: block;
+    background: #fefefe;
+ 
+    
+}
+
+.patch {
+  
+}
+
+
+
+.reverse_patch {
+   padding: 5px 10px;
+   margin: 10px;
+   background: #333;
+   color: #f5f5f5;
+   border: 2px dashed #010101;
+   border-top-left-radius: 3px;
+   -moz-border-radius-topleft: 3px;
+   -webkit-border-top-left-radius: 3px;
+   border-bottom-right-radius: 3px;
+   -moz-border-radius-bottomright: 3px;
+   -webkit-border-bottom-right-radius: 3px;
+   border-top-right-radius: 3px;
+   -moz-border-radius-topright: 3px;
+   -webkit-border-top-right-radius: 3px;
+   -moz-box-shadow: 0 0 0 4px #333, 2px 1px 4px 4px rgba(10,10,0,.5);
+   -webkit-box-shadow: 0 0 0 4px #333, 2px 1px 4px 4px rgba(10,10,0,.5);
+   box-shadow: 0 0 0 4px #333, 2px 1px 6px 4px rgba(10,10,0,.5);
+}
+
+#page_logo{
+    background: #221111;
+      position: fixed;
+    -moz-transform:rotate(-90deg); 
+    -moz-transform:skewx(-90deg) translatex(150px);
+    -webkit-transform:rotate(-90deg);
+    -o-transform:rotate(-90deg);
+    -ms-transform:rotate(-90deg);
+    filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+    top: 250px;
+    left: -100px;
+    
+    
+}
+
+#page_logo img{
+    
+}
+
+
+
+
+
+/*------------------------ Header ---------------------*/
+#header{
+    background: #553333;
+    height: 50px;
+}
+
+
+.banner{
+    display: none;
+}
+
+#header ul{
+  list-style: none;  
+  display: inline;
+  
+}
+#header li{
+  display: inline;
+  padding-left: 20px;
+}
+
+#header_links ul{
+  top: 10px;
+}
+
+#header_links li{
+  display: inline;
+  padding-left: 20px;
+  padding-top: 20px;
+}
+
+
+#phone{
+  position: absolute;
+  top: 10px;
+  right: 125px;
+}
+
+#phone ul{
+    list-style: none;
+    display: inline;
+    
+}
+#login_links{
+    position: absolute;
+    top: 5px;
+    left: 650px;
+}
+
+#login_links li{
+    font: bold 14px Arial;
+    text-decoration: none;
+    background-color: #711b1a;
+    color: #333333;
+    border: 1px solid #CCCCCC;
+    border-right: 1px solid #333333;
+    border-bottom: 1px solid #333333;
+    border-left: 1px solid #CCCCCC;
+    padding: 5px 25px;
+
+}
+
+
+
+
+.clear_both{
+     clear: both;
+}
+
+/*-------------------- site content wrapper ----------------*/ 
+#content{
+    background:#411a1a;
+}
+
+
+
+
+/*------------------------ sidebar links -------------------*/
+
+.sidebar_links{
+    float: left;
+    width:250px;  
+    height: 100%;
+    padding:0 0 0 25px;
+   
+}
+
+.sidebar_links ul{
+  list-style: none;  
+  
+}
+.sidebar_links li{
+    position: relative;
+    left: -30px;
+}
+
+/*------------------------ Sections -------------------*/
+.section{ 
+    float: left;
+	width:250px;  
+    height: 100%;
+    padding:0 0 0 25px; 
+    border-left: 2px solid;
+    border-color: #f8f1f1;
+}
+
+
+
+.section ul{
+  list-style: none;  
+}
+
+.section li{
+    position: relative;
+    left: -30px;
+}
+
+.section_banner{
+    margin: 5px auto 5px auto;
+    height: 135px;
+    width: 200px;
+}
+
+/* ----------------  School Content -----------------------*/
+
+.school_content{
+    
+}
+
+.school_content h2{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 36px;
+}
+
+/*------------------------ Footer ---------------------*/
+#footer{
+    clear: both;
+    background: #221111;
+    height: 50px;
+}
+
+#footer ul{
+  list-style: none;  
+  display: inline;
+  padding-left: 10px;
+}
+
+#footer li{
+  display: inline;
+  padding-left: 20px;
+ 
+}
+
+.copyright{
+    clear:both;
+    color: #eeebeb;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 15px;
+    padding-left: 25px;
+    
+   
+     
+}
+
+#footer a{
+    margin-left: 20px;
+}
+
+#footer img{
+    margin-top: 5px;
+}
+
+#footer img:hover{
+    background: #f0f0f0;
+}
+
+/*-----------------------   Multi Banner ----------------------*/
+
+.multi-banner{
+    clear:both;
+    display: block;
+    margin: 5px auto 5px auto;
+}
