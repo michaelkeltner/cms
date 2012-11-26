@@ -27,6 +27,9 @@ if (isset($_SESSION['sMessage'])){
 <div  class="add_item">
     <a href="/cms/<?php echo $sModule ?>/add/" alt="add <?php echo $sModule ?>"><image src="/cms/images/add-item.png" alt="Add <?php echo $sModule ?>" class="add"/></a>
 </div>
+<div  class="edit_module">
+    <a href="/cms/module/edit/<?php echo $oProperties->id ?>/" alt="Edit <?php echo $sModule ?> Module"><image src="/cms/images/edit.png" alt="Edit <?php echo $sModule ?> Module" class="edit_module_link"/></a>
+</div>
 <?php endif; ?>
 <div id="listing_div">
 <?php if (count($aItems)):?>
