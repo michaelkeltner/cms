@@ -250,7 +250,7 @@ input :hover {
 	background-color: #66C;
 	color: white;
 }
- 
+
 textarea, select, input {
     margin-left: 25px;
 	color: #667;
@@ -261,7 +261,10 @@ textarea, select, input {
 	border-radius: 10px;
 
 }
-
+#filter input{
+    width: 30px;
+    border: none;
+}
 #submit {
     background: #e3e3e6;
     cursor: pointer;
@@ -269,11 +272,153 @@ textarea, select, input {
 .dynamic_list{
     width: 400px;
     margin-left: 35px;
+    background: #EFEFEF;
     
 }
 .dynamic_list ul{
-    border: 2px solid #CECECE;
     list-style: none;
-    background: #EFEFEF;
+}
+
+.dynamic_list li{
+    border-bottom: 1px solid #999999;
+    margin-left: -39px;
+}
+
+.dynamic_list a{
+    text-decoration: none;
+    color: #111111;  
+}
+
+.dynamic_list a:hover{
+    text-decoration: none;
+    color: #777777;  
+}
+
+/*------------Call Information -----------------*/
+
+
+.close_button {
     
+    padding-left: 5px;
+    padding-right: 5px;
+    
+    margin-right:5px;
+    
+    background: #000000;
+    color: #eeeeee;
+    
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -khtml-border-radius: 10px;
+    
+    border-radius: 10px;
+    font-weight: bold;
+    
+    outline: 0;
+}
+
+/*-------------Input Error -------------*/
+
+.error_input{
+    background:#FFFF80;
+}
+
+.error{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background:#FFFF80;
+}
+
+.error ul{
+    list-style: none;
+    font-size: 18px;
+    text-align: center;
+}
+
+.submitted{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background:#3F6219;
+    font-size: 18px;
+    color:#EFEFEF;
+    text-align: center;
+}
+
+/*------------- button for yes no -------------*/
+
+.hand_cursor{
+    cursor: url(/includes/images/hand_finger.png), hand;
+    cursor: url(/includes/images/hand_finger.png), pointer;
+}
+
+#button_wrapper {
+    width: 900px;
+    margin: 200px auto;
+    text-align: left;
+
+}
+
+.cd_button{
+    font: bold 11px Arial;
+    text-decoration: none;
+    color: #333333;
+    font-size: 250px;
+    padding: 2px 6px 2px 6px;
+    cursor: url(/includes/images/hand_finger.png), hand;
+    cursor: url(/includes/images/hand_finger.png), pointer;
+    -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
+    -khtml-border-radius: 25px;
+    border-radius: 25px;
+}
+
+.cd_button_yes {
+    background-color: #11EE11;
+    border-top: 1px solid #11CC11;
+    border-right: 1px solid #00CC00;
+    border-bottom: 1px solid #00CC00;
+    border-left: 1px solid #11CC11;
+}
+   
+.cd_button_no {
+    float: right;
+    background-color: #EE1111;
+    border-top: 1px solid #CC1111;
+    border-right: 1px solid #CC0000;
+    border-bottom: 1px solid #CC0000;
+    border-left: 1px solid #CC1111;
+}
+
+.cd_button_again{
+    font-size: 48px;
+    color: #EFEFEF;
+    background-color: #1111EE;
+    border-top: 1px solid #1111CC;
+    border-right: 1px solid #0000CC;
+    border-bottom: 1px solid #0000CC;
+    border-left: 1px solid #1111CC;
+    
+}
+
+.cd_button_ok_yes
+{
+    clear: both;
+    float: left;
+    margin: auto;
+}
+
+
+.cd_button_ok_no
+{
+    clear: both;
+    float: right;
+    margin: auto;
+}
+
+.item_group{
+    margin: 10px 10px;
+    background-color: #DDDDDD;
+    padding: 5px 5px;
 }

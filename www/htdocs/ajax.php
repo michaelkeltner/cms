@@ -7,7 +7,9 @@ require_once(APP_INCLUDES . 'functions.php');
 $mResult = '';
 
 switch (postVar('action')) {
- 
+    case 'search_change_log':
+        echo liveChangeSearch(postVar('value'), postVar('system'), postVar('category'));
+        exit;
     case 'search_school':
         echo liveSchoolSearch(postVar('value'));
         exit;
@@ -65,6 +67,54 @@ function liveSubjectSearch($mValue) {
     $oDb = new DB();
     $sSql = 'SELECT distinct(`subject`) from `call_information` WHERE `subject` like "%'.  $mValue .'%" ORDER BY `subject` ASC';
     return json_encode($oDb->getRowsAsObjects($sSql));
+}
+
+function liveChangeSearch($mValue, $sSystem, $aCategory) {
+    $oChangeLog = new Render('change_log');
+    $oChangeLog->where('title|LIKE|%' . $mValue .'%| OR', 'reason|LIKE|%' . $mValue .'%| OR', 'changes|LIKE|%' . $mValue .'%| OR');
+    $oChangeLog->order('`change_date` ASC');
+    $aData = $oChangeLog->getData();
+    $aReturn = array();
+    if (count($aData)){
+        foreach ($aData as $oData){
+            //now filter by categories
+            if (count($aCategory)){
+                $aThisCategory = unserialize($oData->get('category'));
+                if(!count(array_intersect($aThisCategory, $aCategory))){
+                    //Not in the category we are looking for
+                    continue;
+                }
+            }
+            //now filter by system
+            
+            if ($sSystem != 'none'){
+                $mSystem = unserialize($oData->get('system'));
+                if (is_array($mSystem)){
+                    if (!in_array($sSystem, $mSystem)){
+                        //not linked to the system specified
+                        continue;
+                    }
+                }else{
+                    if ($mSystem != $sSystem){
+                        //not linked to the system specified
+                        continue;
+                    }
+                }
+            }
+            //everything is matched up so we add this to the return array
+            $oReturn = new stdClass();
+            $oReturn->system = unserialize($oData->get('system'));
+            $oReturn->category = unserialize($oData->get('category'));
+            $oReturn->title = $oData->get('title');
+            $oReturn->changes = unserialize($oData->get('changes'));
+            $oReturn->reason = $oData->get('reason');
+            $oReturn->change_date = $oData->get('change_date');
+            $aReturn[] = $oReturn;
+            unset($oReturn);
+        }
+    }
+    return json_encode($aReturn);
+
 }
 
 function liveSchoolSearch($mValue) {
@@ -136,12 +186,12 @@ function liveFAQSearch($mValue, $sSchool, $aCategory) {
                 $mSchool = $oData->get('school');
                 if (is_array($mSchool)){
                     if (!in_array($sSchool, $oData->get('school'))){
-                        //not linked to the school specifiec
+                        //not linked to the school specified
                         continue;
                     }
                 }else{
                     if ($mSchool != $sSchool){
-                        //not linked to the school specifiec
+                        //not linked to the school specified
                         continue;
                     }
                 }
