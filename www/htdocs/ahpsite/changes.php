@@ -14,7 +14,7 @@ $aData = $oRender->getData();
         <title></title>
     </head>
     <body>
-        
+        <?php include_once('includes/menu.php')?> 
         <div id="wrapper" class="rounded-corners">
             <div id="title">System Changes</br>
                 <input type="text" id="search_change_log" placeholder='Search' class="search"/><br/>

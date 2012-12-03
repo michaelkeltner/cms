@@ -25,8 +25,8 @@ if (count($aSchools)) {
         <title></title>
     </head>
     <body>
+        <?php include_once('includes/menu.php')?>
         <div id="wrapper" class="rounded-corners">
-            &nbsp;&nbsp;&nbsp;&nbsp;<a href="<?php echo SITE_URL . 'schoollist'; ?>" class="menu_link"> School List</a> / Details
             <?php if (isset($oData)): ?>
                 <div id="title">Details for <?php $oData->show('name') ?></br></div>
                 <div id="details">

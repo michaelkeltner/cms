@@ -17,8 +17,8 @@ $aSchools = $oSchool->getData();
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title></title>
     </head>
-    <body>
-        
+    <body>  
+        <?php include_once('includes/menu.php')?>
         <div id="wrapper" class="rounded-corners">
             <div id="title">AHP Schools</br>
                 <input type="text" id="search_school" placeholder='Search' class="search"/>
@@ -28,7 +28,7 @@ $aSchools = $oSchool->getData();
                 <ul>
                     <?php if (count($aSchools)): ?>
                         <?php foreach ($aSchools as $oData): ?>
-                        <li><a href="<?php echo currentURL() . 'details/' . $oData->get('slug')?>" class="information_alert"><img src="includes/images/menu-information.png" /></a><a href="http://ahpcare.com/<?php $oData->show('slug') ?>/" target="_blank" class="school_website_url"><?php $oData->show('name') ?></a></li>
+                        <li><a href="<?php echo currentURL() . 'details/' . $oData->get('slug')?>" class="information_alert"><img src="includes/images/menu-information.png" /></a><a href="http://ahpcare.com/<?php $oData->show('slug') ?>/" target="_blank" class="school_website_url"><?php $oData->show('name') ?></a> [<a href="<?php echo currentURL() . 'details/' . $oData->get('slug')?>">details</a>]</li>
                         <?php endforeach; ?>
                     <?php else: ?>
                         <p>No schools available</p>

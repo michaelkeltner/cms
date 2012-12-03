@@ -17,7 +17,7 @@ $aSchoolData = $oRenderSchool->getData();
         <title></title>
     </head>
     <body>
-        
+        <?php include_once('includes/menu.php')?>
         <div id="wrapper" class="rounded-corners">
             <div id="title">FAQ</br>
                 <input type="text" id="search_faq" placeholder='Search' class="search"/><br/>

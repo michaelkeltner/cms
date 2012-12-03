@@ -14,7 +14,7 @@ $aFileTransfers = $oFileTransfer->getData();
         <title></title>
     </head>
     <body>
-        
+        <?php include_once('includes/menu.php')?>
         <div id="wrapper" class="rounded-corners">
             <div id="title">
                 Eligibility File Transfers
