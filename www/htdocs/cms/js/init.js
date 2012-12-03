@@ -132,6 +132,16 @@ function setupGenericModuleForm(){
         }
     });
     
+    
+    $('.edit_module_link').qtip({
+        content: 'Edit this module',
+        position: {
+                    my: 'bottom left',  // Position my top left...
+                    at: 'top right' // at the bottom right of...
+                    
+        }
+    });
+    
     $('.edit').qtip({
         content: 'Edit this',
         position: {
