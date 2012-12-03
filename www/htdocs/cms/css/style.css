@@ -159,8 +159,14 @@ div#banner{
     width:150px; 
     z-index:99; 
     position:absolute}
-.copy_menu_options ul {margin:0px; padding:0px;}
-.copy_menu_options li {list-style: none;} 
+
+.copy_menu_options ul 
+{margin:0px; 
+ padding:0px;
+}
+.copy_menu_options li {
+    list-style: none;
+} 
 
 ul.top-level {}
 ul.top-level li {
@@ -179,6 +185,7 @@ ul.top-level li {
     text-decoration:none;
     width:100%;
 }
+
 .copy_menu_options a:hover{
     text-decoration:none;
     background: #B22222;
@@ -189,10 +196,7 @@ ul.top-level li {
     position: relative;
 }
 
-
-
 /*  --------------------  FORMS  -------------------- */
-
 
 .form{
     margin:auto;
@@ -338,8 +342,6 @@ input:focus, textarea:focus, select:focus{
 
 /*  -------------------- Always on the page -------------------- */
 
-
-
 .visible_div, #topLeft, #topRight, #bottomLeft, #bottomRight, #middleLeft
 {
     position: fixed;
@@ -382,7 +384,6 @@ input:focus, textarea:focus, select:focus{
 
 /* -------------------- Messages -------------------- */
 
-
 #results_message{
     position:fixed;
     top:0px;
@@ -404,7 +405,6 @@ input:focus, textarea:focus, select:focus{
     background: #8A4B44;
     color: #FFFFFE;
 }
-
 
 /* -------------------- item listing style -------------------- */
 
@@ -445,7 +445,6 @@ input:focus, textarea:focus, select:focus{
     width:100px;
 }
 
-
 #listing_div li.alt, tr.alt{
     list-style: none;
     background-color: #C0C0C0; 
@@ -462,8 +461,6 @@ input:focus, textarea:focus, select:focus{
     /*background: #FFFFF0;*/
     background: #7187A8;
 }
-
-
 
 #table_header{
     position:fixed;
@@ -502,6 +499,7 @@ input:focus, textarea:focus, select:focus{
     margin-right: 32px;
     margin-left: 32px;
 }
+
 .move_item{
     background: url("/cms/images/move-small.png") no-repeat;
     position: relative; 
@@ -511,7 +509,6 @@ input:focus, textarea:focus, select:focus{
     width: 16px;
     margin-right: 32px;
 }
-
 
 span.showing_details{
     background: url("/cms/images/show-less.png") no-repeat;
@@ -550,7 +547,6 @@ span.hiding_details{
     border-radius: 10px;
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
 }
-
 
 /*  -------------------- content add section -------------------- */
 
@@ -674,7 +670,6 @@ span.hiding_details{
 .module_details textarea{
     width: 90%;
 }
-
 
 #rightcolumn{
     position: fixed;
