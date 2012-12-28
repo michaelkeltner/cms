@@ -3,5 +3,4 @@ deny from all
 allow from 192.168
 allow from 10.8
 allow from 127.0.0.1
-allow from 172.16.0.0
-allow from 172.16.0.24
+allow from 172.16.0.0/24

@@ -17,7 +17,10 @@ if (file_exists('ahpsite/' . $sParam1 .'.php')){
     $bLocal = ($sIP == '127.0.0.1')?true:false;
     $bInternal = (substr($sIP, 0, 7) == '192.168')?true:false;
     $bInternal2 = (substr($sIP, 0, 5) == '10.8.')?true:false;
-    if ($bLocal || $bInternal || $bInternal2){
+    $bInternal3 = (substr($sIP, 0, 8) == '172.16.0')?true:false;
+    $bInternal4 = (substr($sIP, 0, 9) == '127.0.0.1')?true:false;
+    
+    if ($bLocal || $bInternal || $bInternal2 || $bInternal3 || $bInternal4){
         include_once('ahpsite/' . $sParam1 .'.php');
         exit;
     }else{
