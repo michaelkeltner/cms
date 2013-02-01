@@ -3,6 +3,46 @@ body{
     background: #333;
 }
 
+/* ahp site menu */
+
+.ahpsite_menu{
+    width: 100%;
+    background-color: #333;
+}
+
+.ahpsite_menu ul{
+    margin: 0 auto; 
+    padding: 0;
+    width: 35%;
+}
+ 
+.ahpsite_menu ul li{
+    display: inline;
+}
+ 
+.ahpsite_menu ul li a{
+    float: left; text-decoration: none;
+    color: white; 
+    padding: 10.5px 11px;
+    background-color: #333; 
+}
+ 
+.ahpsite_menu ul li a:visited{
+    color: white;
+}
+ 
+.ahpsite_menu ul li a:hover, .ahpsite_menu ul li .current{
+    color: #fff;
+    background-color:#0b75b2;
+    background-color:#844c4b;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;
+}
+
+/*  Done with the AHP site menu */
+
 .rounded-corners {
      -moz-border-radius: 25px;
     -webkit-border-radius: 25px;
@@ -260,6 +300,11 @@ textarea, select, input {
 	-moz-border-radius: 10px;
 	border-radius: 10px;
 
+}
+
+textarea{
+    width: 420px;
+    height: 100px
 }
 #filter input{
     width: 30px;
