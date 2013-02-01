@@ -121,6 +121,10 @@ function currentURL(){
     return $sUrl;
 }
 
+function isInUrl($sValue){
+    return stristr(currentUrl(), $sValue);
+}
+
 function sendEmail($aTo, $aFrom, $sSubject, $sBody, $aBCC = array()) {
   //SMTP details		
   $smtp_host = 'smtp.1and1.com';

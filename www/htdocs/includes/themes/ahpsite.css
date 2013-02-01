@@ -41,6 +41,17 @@ body{
     border-radius: 5px;
 }
 
+.ahpsite_menu ul li a.current{
+    float: left; text-decoration: none;
+    color: white; 
+    padding: 10.5px 11px;
+    background-color:#844c4b;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;
+}
+
 /*  Done with the AHP site menu */
 
 .rounded-corners {
