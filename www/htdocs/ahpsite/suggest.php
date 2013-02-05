@@ -3,7 +3,7 @@
 $bError = false;
 $sMessage = '';
 if (formSubmit()){
-    $aTo = array('terry.lyons@ahpcare.com');
+    $aTo = array('kristin.lemons@ahpcare.com');
     $sender = postVar('email');
     
     $aFrom['name'] = $sender;
