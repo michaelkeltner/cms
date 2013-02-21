@@ -36,6 +36,7 @@ if (count($aSchools)) {
                             <?php $oData->show('client_service_rep', ', ', 'Client Service Representative: ', '', array('li'), true) ?>
                             <?php $oData->show('carrier', ', ', 'Carrier: ', '', array('li'), true) ?>
                             <li>Website : <a href="http://ahpcare.com/<?php $oData->show('slug') ?>/" target="_blank">http://ahpcare.com/<?php $oData->show('slug') ?>/</a></li>
+                            <?php $oData->show('eligibility_file', ', ', 'Eligibility File Transfer to secure FTP: ', '', array('li'), true) ?>
                             <?php if ($aFileTransfers):?>
                             <?php foreach($aFileTransfers as $oFileTransferData):?>
                             <?php $oFileTransferData->show('time', ', ', 'File Trasnfer Schedule: ', '', array('li'), true) ?>
