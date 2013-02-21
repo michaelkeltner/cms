@@ -25,27 +25,26 @@ $aFileTransfers = $oFileTransfer->getData();
                     <table>
                         <tr>
                             <th>Company</th>
+                            <th>School</th>
                             <th>Schedule</th>
                             <th>Notes</th>
+                            <th>Transfer to FTP</th>
                         </tr>
                         <?php foreach ($aFileTransfers as $oData): ?>
                         <tr>
-                            <?php 
-                            
-                            //get the carrier/other text
+                            <td><?php 
                                 $sContent =  ($oData->get('carrier')!= '')?$oData->get('carrier'):$oData->get('other');
-                                $sCompanyOutput = (is_array($sContent))?$sContent[0]:$sContent;
-                            //get the school
-                               $sContent = ($oData->get('school') !='')?'<br/>(' . $oData->get('school') .')':'';
-                               if ($oData->get('school')){
-                                   $sContent = $oData->get('school');
-                                   $sSchool = (is_array($sContent))?$sContent[0]:$sContent;
-                                   $sCompanyOutput .= '<br/>(' . $sSchool .')';
-                               }   
-                            ?>
-                            <td><?php echo $sCompanyOutput; ?></td>
+                                echo (is_array($sContent))?$sContent[0]:$sContent;  
+                            ?></td>
+                            <td><?php 
+                                if ($oData->get('school')){
+                                    $sContent = $oData->get('school');
+                                    echo (is_array($sContent))?implode(',', $sContent):$sContent;
+                                } 
+                            ?></td>
                             <td><?php $oData->show('time') ?></td>
                             <td><?php $oData->show('notes') ?></td>
+                            <td><?php $oData->show('eligibility_file') ?></td>
                         </tr>
                         <?php endforeach; ?>
                     </table>
