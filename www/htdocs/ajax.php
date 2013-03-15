@@ -144,15 +144,22 @@ function liveStaffSearch($mValue) {
             }
             $sReturnDepartment = substr($sReturnDepartment, 0, -1);
             $oReturn->department ='<td class="table_department">' . $sReturnDepartment . '</td>'; 
+        }else{
+            $oReturn->department ='<td class="table_department"> </td>';
         }
         
         $oReturn->phone = '';
         if ($oStaff->phone){
             $oReturn->phone = '<td class="table_phone">' . $oStaff->phone . '</td>';
+        }else{
+            $oReturn->phone = '<td class="table_phone"> </td>';
         }
+        
         $oReturn->email = '';
         if ($oStaff->email){
             $oReturn->email = '<td class="table_email"><a href="mailto:' . $oStaff->email . '">' . $oStaff->email . '</a></td>';
+        }else{
+            $oReturn->email = '<td class="table_email"> </td>';
         }
         $aReturn[] = $oReturn;
         unset($oReturn);
