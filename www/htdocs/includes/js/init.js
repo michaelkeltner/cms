@@ -58,16 +58,21 @@ function staffSearch(){
                     value:$("#search_staff").val() 
                 }, function(data) {
                     if (data.length > 0){
-                        newList = '';
+                        newList = '<table class="staff">' +
+                            '<tr>' + 
+                            '<th>Name</th>' +
+                            '<th>Department</th>' +
+                            '<th>Phone</th>' +
+                            '<th>Email</th>' +
+                            '</tr>';
                         for (i = 0; i < data.length; i++) {
                             oStaff = data[i];
-                            newList += '<div class="listing"><ul>' +
-                                '<li>' + oStaff.first_name +' ' + oStaff.last_name +'</li>' + 
+                            newList += '<tr class="listing">' +
+                                '<td class="table_name">' + oStaff.first_name +' ' + oStaff.last_name +'</td>' + 
                                 oStaff.department + 
-                                oStaff.title +
                                 oStaff.phone + 
                                 oStaff.email +
-                                '</ul></div>';
+                                '</tr>';
                         }
                     }else{
                         newList = '<p>No staff found with the query "' + value + '".</p>'

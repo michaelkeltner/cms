@@ -18,7 +18,11 @@ body {
     background: #A3A3A3;
     font: 1em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif; 
 }
-
+select:disabled[option]{
+    text-color:white;
+    background: #991111;
+    
+}
 #watermark {
     position: fixed;
     color: hsla(0,0%,20%,1);

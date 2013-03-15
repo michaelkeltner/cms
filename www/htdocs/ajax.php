@@ -143,20 +143,16 @@ function liveStaffSearch($mValue) {
                 $sReturnDepartment .= $sDepartment . '/';
             }
             $sReturnDepartment = substr($sReturnDepartment, 0, -1);
-            $oReturn->department ='<li>Department: ' . $sReturnDepartment . '</li>'; 
-        }
-        $oReturn->title = '';
-        if ($oStaff->title){
-            $oReturn->title = '<li>Title: ' . $oStaff->title . '</li>';
+            $oReturn->department ='<td class="table_department">' . $sReturnDepartment . '</td>'; 
         }
         
         $oReturn->phone = '';
         if ($oStaff->phone){
-            $oReturn->phone = '<li>Phone: ' . $oStaff->phone . '</li>';
+            $oReturn->phone = '<td class="table_phone">' . $oStaff->phone . '</td>';
         }
         $oReturn->email = '';
         if ($oStaff->email){
-            $oReturn->email = '<li><a href="mailto:' . $oStaff->email . '">' . $oStaff->email . '</a></li>';
+            $oReturn->email = '<td class="table_email"><a href="mailto:' . $oStaff->email . '">' . $oStaff->email . '</a></td>';
         }
         $aReturn[] = $oReturn;
         unset($oReturn);

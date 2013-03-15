@@ -7,7 +7,7 @@ $bListSelected = (isset($aOptions['list']) && $aOptions['list']) ? true : false;
 $bRequiredSelected = (isset($aOptions['required']) && $aOptions['required']) ? true : false;
 $sSelectValues = (isset($aOptions['select_values']) && $aOptions['select_values']) ? $aOptions['select_values'] : '';
 $bMultipleSelected = (isset($aOptions['multiple']) && $aOptions['multiple'])?true:false;
-$bSelectType = (isset($aOptions['select_populated']))?$aOptions['select_populated']:false;
+$bSelectType = (isset($aOptions['select_populated']))?$aOptions['select_populated']:'manual';
 $sDBModule = '';
 if ($bSelectType == 'database'){
     $sDBModule = $aOptions['select_table'];

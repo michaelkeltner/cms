@@ -21,18 +21,22 @@ $aData = $oRender->getData();
             </div>
             <div id="button">
                     <?php if (count($aData)): ?>
+                <table class="staff">
+                    <tr>
+                        <th>Name</th>
+                        <th>Department</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                    </tr>
                         <?php foreach ($aData as $oData): ?>
-                <div class="listing">
-                    <ul>
-                        <li><?php $oData->show('first_name')?> <?php $oData->show('last_name') ?></li>
-                        <?php $oData->show('department', '/', 'Department: ', '', array('li'), true) ?>
-                        <?php $oData->show('title', '', 'Title: ', '', array('li'), true) ?>
-                        <?php $oData->show('phone', '', 'Phone: ', '', array('li'), true) ?>
-                        <li><a href="mailto:<?php $oData->show('email')?>"><?php $oData->show('email')?></a></li>
-
-                    </ul>
-                </div>
+                    <tr class="listing">
+                        <td class="table_name"><?php $oData->show('first_name')?> <?php $oData->show('last_name') ?></td>
+                        <td class="table_department"><?php $oData->show('department', '/') ?></td>
+                        <td class="table_phone"><?php $oData->show('phone') ?></td>
+                        <td class="table_email"><a href="mailto:<?php $oData->show('email')?>"><?php $oData->show('email')?></a></td>
+                    </tr>
                         <?php endforeach; ?>
+                </table>
                     <?php else: ?>
                         <p>No Staff list available</p>
                     <?php endif; ?>

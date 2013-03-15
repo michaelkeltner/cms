@@ -18,7 +18,7 @@ if (!getParam(2)){
 $aData = $oRender->getData();
 if (!count($aData)){
     //there was no data returned for the where clause
-    include ('site/nodata.php');
+    include ('site/404.php');
     exit;    
 }
 if (count($aData)> 1){

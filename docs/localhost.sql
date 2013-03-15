@@ -9,202 +9,385 @@
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
+delimiter $$
 
+CREATE DATABASE `cms` /*!40100 DEFAULT CHARACTER SET latin1 */$$
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+delimiter $$
 
---
--- Database: `cms`
---
-CREATE DATABASE `cms` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `cms`;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `asset`
---
-
-CREATE TABLE IF NOT EXISTS `asset` (
+CREATE TABLE `asset` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `school_slug` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `display_name` varchar(255) NOT NULL,
   `type` varchar(50) NOT NULL,
   `size` int(11) NOT NULL,
   `modify_date` datetime NOT NULL,
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `school_id` (`school_slug`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
-
--- --------------------------------------------------------
-
---
--- Table structure for table `content`
---
-
-CREATE TABLE IF NOT EXISTS `content` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `section_id` int(11) NOT NULL,
-  `content` text NOT NULL,
-  `type` varchar(255) NOT NULL,
-  `sort_order` int(11) NOT NULL,
-  `period_id` int(11) NOT NULL,
-  `school_id` int(11) NOT NULL,
-  `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `modify_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `section_id` (`section_id`),
-  KEY `school_period_id` (`period_id`),
-  KEY `school_id` (`school_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
-
--- --------------------------------------------------------
-
---
--- Table structure for table `period`
---
-
-CREATE TABLE IF NOT EXISTS `period` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `slug` varchar(255) NOT NULL,
-  `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `modify_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=latin1$$
 
 
--- --------------------------------------------------------
+delimiter $$
 
---
--- Table structure for table `school`
---
-
-CREATE TABLE IF NOT EXISTS `school` (
+CREATE TABLE `association` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `image` text COMMENT 'path the school image',
-  `theme_id` int(11) NOT NULL,
-  `slug` varchar(255) NOT NULL,
-  `status` int(11) NOT NULL DEFAULT '1',
-  `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `modify_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `theme_id` (`theme_id`),
-  KEY `slug` (`slug`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
-
--- --------------------------------------------------------
-
---
--- Table structure for table `school_period`
---
-
-CREATE TABLE IF NOT EXISTS `school_period` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `school_id` int(11) NOT NULL,
-  `period_id` int(11) NOT NULL,
-  `start_date` date NOT NULL,
-  `end_date` date NOT NULL,
+  `module_field_owner_id` int(11) NOT NULL,
+  `module_item_owner_id` int(11) NOT NULL,
+  `module_field_requester_id` int(11) NOT NULL,
+  `module_item_requester_id` int(11) NOT NULL,
   `modify_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `create_date` datetime NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `school_id` (`school_id`),
-  KEY `period_id` (`period_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Dumping data for table `school_period`
---
+  KEY `module_field_owner_id` (`module_field_owner_id`,`module_field_requester_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=762 DEFAULT CHARSET=latin1$$
 
 
--- --------------------------------------------------------
+delimiter $$
 
---
--- Table structure for table `section`
---
-
-CREATE TABLE IF NOT EXISTS `section` (
+CREATE TABLE `call_information` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `modify_date` datetime DEFAULT NULL,
+  `subject` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `resolution` varchar(255) DEFAULT NULL,
+  `department` varchar(255) DEFAULT NULL,
+  `call_end` varchar(255) DEFAULT NULL,
+  `modify_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `create_date` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1$$
 
---
--- Dumping data for table `section`
---
 
-INSERT INTO `section` (`id`, `name`, `create_date`, `modify_date`) VALUES
-(1, 'Main', '2012-06-14 14:34:33', '2012-06-14 09:34:33'),
-(2, 'Enrolment', '2012-06-14 14:34:42', '2012-06-14 09:34:42'),
-(3, 'Benefits', '2012-06-14 14:34:48', '2012-06-14 09:34:48'),
-(4, 'Claims', '2012-06-14 14:34:54', '2012-06-14 09:34:54'),
-(5, 'Alert', '2012-06-19 14:33:23', '2012-06-19 09:33:23'),
-(6, 'Contact-Benefits', '2012-06-21 14:45:30', '2012-06-21 09:45:30');
+delimiter $$
 
--- --------------------------------------------------------
+CREATE TABLE `carrier` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `notes` text,
+  `name` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `address2` varchar(255) DEFAULT NULL,
+  `city` varchar(255) DEFAULT NULL,
+  `state` varchar(255) DEFAULT NULL,
+  `zip` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `toll_free` varchar(255) DEFAULT NULL,
+  `fax` varchar(255) DEFAULT NULL,
+  `website` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `modify_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `create_date` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1$$
 
---
--- Table structure for table `theme`
---
 
-CREATE TABLE IF NOT EXISTS `theme` (
+delimiter $$
+
+CREATE TABLE `facility_access_request` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `approved_signatures` varchar(255) DEFAULT NULL,
+  `requester_name` varchar(255) DEFAULT NULL,
+  `requester_department_name` varchar(255) DEFAULT NULL,
+  `request_date` date DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `user_name` varchar(255) DEFAULT NULL,
+  `department_name` varchar(255) DEFAULT NULL,
+  `office_location` varchar(255) DEFAULT NULL,
+  `employee_start_date` date DEFAULT NULL,
+  `user_status` varchar(255) DEFAULT NULL,
+  `status_other` varchar(255) DEFAULT NULL,
+  `set_up_like` varchar(255) DEFAULT NULL,
+  `id_action` varchar(255) DEFAULT NULL,
+  `id_information` varchar(255) DEFAULT NULL,
+  `access_requirements` varchar(255) DEFAULT NULL,
+  `existing_equipment` varchar(255) DEFAULT NULL,
+  `purchase_equipment` varchar(255) DEFAULT NULL,
+  `existing_monitor` varchar(255) DEFAULT NULL,
+  `purchase_monitor` varchar(255) DEFAULT NULL,
+  `other_existing_items` varchar(255) DEFAULT NULL,
+  `other_purchase_items` varchar(255) DEFAULT NULL,
+  `complete_user_name` varchar(255) DEFAULT NULL,
+  `complete_password` varchar(255) DEFAULT NULL,
+  `complete_email` varchar(255) DEFAULT NULL,
+  `ahp_user_id` varchar(255) DEFAULT NULL,
+  `ahp_password` varchar(255) DEFAULT NULL,
+  `door_code` varchar(255) DEFAULT NULL,
+  `door_key` varchar(255) DEFAULT NULL,
+  `complete_phone_number` varchar(255) DEFAULT NULL,
+  `voice_mail_code` varchar(255) DEFAULT NULL,
+  `complete_date` date DEFAULT NULL,
+  `modify_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `create_date` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1$$
+
+
+delimiter $$
+
+CREATE TABLE `faq` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `category` varchar(255) DEFAULT NULL,
+  `question` varchar(255) DEFAULT NULL,
+  `answer` varchar(255) DEFAULT NULL,
+  `sort_order` int(11) DEFAULT NULL,
+  `active` tinyint(1) DEFAULT NULL,
+  `modify_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `create_date` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1$$
+
+
+delimiter $$
+
+CREATE TABLE `field` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `css_file` text NOT NULL,
-  `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `modify_date` datetime DEFAULT NULL,
+  `type` varchar(255) NOT NULL,
+  `sort_order` int(11) NOT NULL,
+  `description` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1$$
 
---
--- Dumping data for table `theme`
---
 
-INSERT INTO `theme` (`id`, `name`, `css_file`, `create_date`, `modify_date`) VALUES
-(1, 'Default', 'default.css', '2012-06-08 20:14:52', '2012-06-08 15:15:22');
+delimiter $$
 
---
--- Constraints for dumped tables
---
+CREATE TABLE `file_transfers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `other` varchar(255) DEFAULT NULL,
+  `time` varchar(255) DEFAULT NULL,
+  `notes` text,
+  `modify_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `create_date` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=latin1$$
 
---
--- Constraints for table `asset`
---
-ALTER TABLE `asset`
-  ADD CONSTRAINT `asset_ibfk_1` FOREIGN KEY (`school_slug`) REFERENCES `school` (`slug`) ON DELETE CASCADE ON UPDATE CASCADE;
 
---
--- Constraints for table `content`
---
-ALTER TABLE `content`
-  ADD CONSTRAINT `content_ibfk_1` FOREIGN KEY (`section_id`) REFERENCES `section` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  ADD CONSTRAINT `content_ibfk_2` FOREIGN KEY (`period_id`) REFERENCES `period` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `content_ibfk_3` FOREIGN KEY (`school_id`) REFERENCES `school` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+delimiter $$
 
---
--- Constraints for table `school`
---
-ALTER TABLE `school`
-  ADD CONSTRAINT `school_ibfk_1` FOREIGN KEY (`theme_id`) REFERENCES `theme` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+CREATE TABLE `menu` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `module_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `sort_order` int(11) NOT NULL,
+  `icon` varchar(255) NOT NULL,
+  `modify_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `create_date` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `module_id` (`module_id`),
+  CONSTRAINT `menu_ibfk_1` FOREIGN KEY (`module_id`) REFERENCES `module` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=latin1$$
 
---
--- Constraints for table `school_period`
---
-ALTER TABLE `school_period`
-  ADD CONSTRAINT `school_period_ibfk_2` FOREIGN KEY (`period_id`) REFERENCES `period` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  ADD CONSTRAINT `school_period_ibfk_1` FOREIGN KEY (`school_id`) REFERENCES `school` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+delimiter $$
+
+CREATE TABLE `module` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `display_name` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `active` tinyint(1) NOT NULL,
+  `modify_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `create_date` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=latin1$$
+
+
+delimiter $$
+
+CREATE TABLE `module_field` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `module_id` int(11) NOT NULL,
+  `field_id` int(11) NOT NULL,
+  `sort_order` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `display_name` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `options` longtext NOT NULL,
+  `active` tinyint(1) NOT NULL,
+  `modify_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `create_date` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `module_id` (`module_id`,`field_id`),
+  KEY `field_id` (`field_id`),
+  CONSTRAINT `module_field_ibfk_1` FOREIGN KEY (`module_id`) REFERENCES `module` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `module_field_ibfk_2` FOREIGN KEY (`field_id`) REFERENCES `field` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=253 DEFAULT CHARSET=latin1$$
+
+
+delimiter $$
+
+CREATE TABLE `period` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `description` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `slug` varchar(255) DEFAULT NULL,
+  `active` tinyint(1) DEFAULT NULL,
+  `sort_order` int(11) DEFAULT NULL,
+  `modify_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `create_date` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1$$
+
+
+delimiter $$
+
+CREATE TABLE `permission` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `modify_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `create_date` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1$$
+
+
+delimiter $$
+
+CREATE TABLE `permission_role_module` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `role_id` int(11) NOT NULL,
+  `permission_id` int(11) NOT NULL,
+  `module_id` int(11) NOT NULL,
+  `modify_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `create_date` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `role_id` (`role_id`),
+  KEY `module_id` (`module_id`),
+  KEY `permission_id` (`permission_id`),
+  CONSTRAINT `permission_role_module_ibfk_3` FOREIGN KEY (`module_id`) REFERENCES `module` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `permission_role_module_ibfk_4` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `permission_role_module_ibfk_5` FOREIGN KEY (`permission_id`) REFERENCES `permission` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=1396 DEFAULT CHARSET=latin1$$
+
+
+delimiter $$
+
+CREATE TABLE `role` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `modify_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `create_date` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1$$
+
+
+delimiter $$
+
+CREATE TABLE `school` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `school_health_url` varchar(255) DEFAULT NULL,
+  `school_url` varchar(255) DEFAULT NULL,
+  `student_id_regex` varchar(255) DEFAULT NULL,
+  `contact_email` varchar(255) DEFAULT NULL,
+  `contact_phone` varchar(255) DEFAULT NULL,
+  `contact_name` varchar(255) DEFAULT NULL,
+  `logo` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `slug` varchar(255) DEFAULT NULL,
+  `active` tinyint(1) DEFAULT NULL,
+  `sort_order` int(11) DEFAULT NULL,
+  `modify_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `create_date` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=261 DEFAULT CHARSET=latin1$$
+
+
+delimiter $$
+
+CREATE TABLE `school_content` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `claim_links` text,
+  `benefit_links` text,
+  `enrollment_links` text,
+  `main_links` text,
+  `css` varchar(255) DEFAULT NULL,
+  `section_image` varchar(255) DEFAULT NULL,
+  `main_files` varchar(255) DEFAULT NULL,
+  `banner` varchar(255) DEFAULT NULL,
+  `claim_files` varchar(255) DEFAULT NULL,
+  `benefit_files` varchar(255) DEFAULT NULL,
+  `enrollment_files` varchar(255) DEFAULT NULL,
+  `second_wysiwyg` text,
+  `name` varchar(255) DEFAULT NULL,
+  `content` text,
+  `active_date` datetime DEFAULT NULL,
+  `inactive_date` datetime DEFAULT NULL,
+  `sort_order` int(11) DEFAULT NULL,
+  `active` tinyint(1) DEFAULT NULL,
+  `modify_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `create_date` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1$$
+
+
+delimiter $$
+
+CREATE TABLE `staff` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `department` varchar(255) DEFAULT NULL,
+  `vacation_end` datetime DEFAULT NULL,
+  `vacation_start` date DEFAULT NULL,
+  `end_office` time DEFAULT NULL,
+  `start_office` time DEFAULT NULL,
+  `birthday` datetime DEFAULT NULL,
+  `active` tinyint(1) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
+  `first_name` varchar(255) DEFAULT NULL,
+  `modify_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `create_date` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1$$
+
+
+delimiter $$
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `temp_password` varchar(255) DEFAULT NULL,
+  `modify_date` datetime NOT NULL,
+  `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1$$
+
+
+delimiter $$
+
+CREATE TABLE `user_role` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL,
+  `modify_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `create_date` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `role_id` (`role_id`),
+  CONSTRAINT `user_role_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  CONSTRAINT `user_role_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=latin1$$
+
+
+delimiter $$
+
+CREATE TABLE `user_stats` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `current_login` datetime NOT NULL,
+  `last_login` datetime NOT NULL,
+  `login_count` int(11) NOT NULL,
+  `last_duration` int(11) NOT NULL,
+  `average_duration` int(11) NOT NULL,
+  `last_pages_viewed` int(11) NOT NULL,
+  `total_pages_viewd` int(11) NOT NULL,
+  `create_date` datetime NOT NULL,
+  `modify_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_id` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1$$
+

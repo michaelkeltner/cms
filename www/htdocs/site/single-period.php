@@ -17,6 +17,8 @@
             foreach ($aCSSFiles as $oFile) {
                 echo '<link href="http://' . BASE_URL . '/assets/docs/' . $oFile->name . '" rel="stylesheet" type="text/css" />';
             }
+        }else{
+            echo '<link href="http://' . BASE_URL . '/assets/docs/default.css" rel="stylesheet" type="text/css" />';
         }
         ?>
     </head>
