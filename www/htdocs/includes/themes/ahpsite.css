@@ -478,3 +478,76 @@ textarea{
     background-color: #DDDDDD;
     padding: 5px 5px;
 }
+
+/* Staff Table Listing*/
+#staff_list{
+    width: 670px;
+    margin: 0 auto;
+    padding: 0 0 1em 0;
+    margin-bottom: 1em;
+    font-family: 'Trebuchet MS', 'Lucida Grande',
+        Verdana, Lucida, Geneva, Helvetica, 
+        Arial, sans-serif;
+    background-color: #ffffff;
+    color: #333;
+}
+
+
+
+table.staff {
+    background: #333;
+   
+}
+
+.staff th{
+	color: #333;
+	border-right: 1px solid #C1DAD7;
+	border-bottom: 1px solid #C1DAD7;
+	border-top: 1px solid #C1DAD7;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	text-align: left;
+	padding: 6px 6px 6px 12px;
+	background: #CCC;
+}
+/*
+.staff tr{
+    display: block;
+    padding: 5px 5px 5px 0.5em;
+    border-left: 10px solid #8B0000;
+    border-bottom: 1px solid #CD5C5C;
+    background-color: #b22222;
+    color: #fff;
+    text-decoration: none;
+    width: 100%;
+    background: #333;
+}
+*/
+.staff td{
+
+	padding: 6px 6px 6px 12px;
+}
+
+
+.staff tr{
+    background: #b22222;
+    color: #FFF;
+}
+
+.staff tr:nth-child(odd) { background: #8B0000;}
+/*
+.table_name td{
+    width: 30%;
+}
+.table_department td{
+    width: 30%;
+}
+.table_phone td{
+    width: 10%;
+}
+.table_email td{
+
+    width: 30%;
+
+}
+*/

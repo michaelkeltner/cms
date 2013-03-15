@@ -78,7 +78,7 @@ function staffSearch(){
                         newList = '<p>No staff found with the query "' + value + '".</p>'
                     }
                     
-                    $('#button').html(newList);
+                    $('#staff_list').html(newList);
                 },'json');            
             }
         },250);

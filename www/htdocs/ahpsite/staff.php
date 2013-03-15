@@ -19,7 +19,7 @@ $aData = $oRender->getData();
             <div id="title">Staff</br>
                 <input type="text" id="search_staff" placeholder='Search' class="search"/><br/>
             </div>
-            <div id="button">
+            <div id="staff_list">
                     <?php if (count($aData)): ?>
                 <table class="staff">
                     <tr>
