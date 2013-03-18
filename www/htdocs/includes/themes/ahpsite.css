@@ -485,9 +485,10 @@ textarea{
     margin: 0 auto;
     padding: 0 0 1em 0;
     margin-bottom: 1em;
-    font-family: 'Trebuchet MS', 'Lucida Grande',
+    /*font-family: 'Trebuchet MS', 'Lucida Grande',
         Verdana, Lucida, Geneva, Helvetica, 
         Arial, sans-serif;
+    */
     background-color: #ffffff;
     color: #333;
 }
@@ -496,6 +497,10 @@ textarea{
 
 table.staff {
     background: #333;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;
    
 }
 
@@ -504,8 +509,6 @@ table.staff {
 	border-right: 1px solid #C1DAD7;
 	border-bottom: 1px solid #C1DAD7;
 	border-top: 1px solid #C1DAD7;
-	letter-spacing: 2px;
-	text-transform: uppercase;
 	text-align: left;
 	padding: 6px 6px 6px 12px;
 	background: #CCC;
@@ -530,7 +533,7 @@ table.staff {
 
 
 .staff tr{
-    background: #b22222;
+    background: #9E0000;
     color: #FFF;
 }
 
