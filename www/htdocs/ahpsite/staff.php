@@ -14,9 +14,9 @@ $aData = $oRender->getData();
         <title></title>
     </head>
     <body>
-        
+         <?php include_once('includes/menu.php')?>
         <div id="wrapper" class="rounded-corners">
-            <div id="title">Staff</br>
+            <div id="title">AHP Staff</br>
                 <input type="text" id="search_staff" placeholder='Search' class="search"/><br/>
             </div>
             <div id="staff_list">
