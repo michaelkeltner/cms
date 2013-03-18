@@ -88,8 +88,8 @@ class Render extends ModuleGeneric{
         return $aReturn;
     }
     
-    public function getData($iId=null){
-        return ($iId)?$this->_getSingleData($iId):$this->_getAllData();
+    public function getData($iId=null, $bIgnoreActive = false){
+        return ($iId)?$this->_getSingleData($iId):$this->_getAllData($bIgnoreActive);
     }
     
     private function _getSingleData($iId){
@@ -101,7 +101,7 @@ class Render extends ModuleGeneric{
         return $aData;
     }  
     
-    private function _getAllData($bIgnoreActive = false){
+    private function _getAllData($bIgnoreActive){
         $aData = array();
         $aWhereAssocaiton = array();
         $sSortOrder ='';

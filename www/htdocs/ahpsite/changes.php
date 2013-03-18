@@ -2,7 +2,7 @@
 <?php
 $oRender = new Render('change_log');
 $oRender->order('`change_date` DESC');
-$aData = $oRender->getData();
+$aData = $oRender->getData(null, true);
 
 ?>
 <html>

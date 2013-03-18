@@ -73,7 +73,7 @@ function liveChangeSearch($mValue, $sSystem, $aCategory) {
     $oChangeLog = new Render('change_log');
     $oChangeLog->where('title|LIKE|%' . $mValue .'%| OR', 'reason|LIKE|%' . $mValue .'%| OR', 'changes|LIKE|%' . $mValue .'%| OR');
     $oChangeLog->order('`change_date` ASC');
-    $aData = $oChangeLog->getData();
+    $aData = $oChangeLog->getData(null, true);
     $aReturn = array();
     if (count($aData)){
         foreach ($aData as $oData){
@@ -172,7 +172,7 @@ function liveFAQSearch($mValue, $sSchool, $aCategory) {
     $oFAQ = new Render('faq');
     $oFAQ->where('question|LIKE|%' . $mValue .'%| OR', 'answer|LIKE|%' . $mValue .'%| OR');
     $oFAQ->order('`sort_order` ASC');
-    $aData = $oFAQ->getData();
+    $aData = $oFAQ->getData(null, true);
     $aReturn = array();
     if (count($aData)){
         foreach ($aData as $oData){

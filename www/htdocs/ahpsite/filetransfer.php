@@ -3,7 +3,7 @@
 $oFileTransfer = new Render('file_transfers');
 $oFileTransfer->order('`id` ASC');
 $oFileTransfer->limit(100);
-$aFileTransfers = $oFileTransfer->getData();
+$aFileTransfers = $oFileTransfer->getData(null,true);
 ?>
 <html>
     <head>
