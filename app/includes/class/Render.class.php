@@ -101,7 +101,7 @@ class Render extends ModuleGeneric{
         return $aData;
     }  
     
-    private function _getAllData(){
+    private function _getAllData($bIgnoreActive = false){
         $aData = array();
         $aWhereAssocaiton = array();
         $sSortOrder ='';
@@ -117,6 +117,9 @@ class Render extends ModuleGeneric{
         }
         if ($this->iLimit){
             $sLimit = ' LIMIT ' . $this->iLimit;
+        }
+        if (!$bIgnoreActive){
+            $this->aWhere[] = 'active|=|1';
         }
         if (count($this->aWhere)){
             
@@ -145,7 +148,7 @@ class Render extends ModuleGeneric{
                 $sWhere = substr($sWhere, 0, -3);
             } 
         }
-       
+
         $aItemData = $this->getAll($sWhere . $sSortOrder . $sLimit);
         $aFields = $this->__get('aFields');
         

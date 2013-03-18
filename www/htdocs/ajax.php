@@ -125,7 +125,7 @@ function liveSchoolSearch($mValue) {
 
 function liveStaffSearch($mValue) {
     $oDb = new DB();
-    $sSql = 'SELECT * from `staff` WHERE `first_name` like "%'.  $mValue .'%" OR `last_name` like "%'.  $mValue .'%" ORDER BY `first_name` ASC';
+    $sSql = 'SELECT * from `staff` WHERE (`first_name` like "%'.  $mValue .'%" OR `last_name` like "%'.  $mValue .'%") AND `active` = 1 ORDER BY `first_name` ASC';
     $aStaff = $oDb->getRowsAsObjects($sSql);
     if (!count($aStaff)){ 
         return json_encode(array());
