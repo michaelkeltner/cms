@@ -27,6 +27,7 @@ $aData = $oRender->getData();
                         <th>Department</th>
                         <th>Phone</th>
                         <th>Email</th>
+                        <th>Birthday</th>
                     </tr>
                         <?php foreach ($aData as $oData): ?>
                     <tr class="listing">
@@ -34,6 +35,10 @@ $aData = $oRender->getData();
                         <td class="table_department"><?php $oData->show('department', '/') ?></td>
                         <td class="table_phone"><?php $oData->show('phone') ?></td>
                         <td class="table_email"><a href="mailto:<?php $oData->show('email')?>"><?php $oData->show('email')?></a></td>
+                        <?php 
+                            $sBirthday = ($oData->get('birthday'))?date('m/d', strtotime($oData->get('birthday'))):'';
+                        ?>
+                        <td class="table_birthday"><?php echo $sBirthday ?></td>
                     </tr>
                         <?php endforeach; ?>
                 </table>

@@ -64,6 +64,7 @@ function staffSearch(){
                             '<th>Department</th>' +
                             '<th>Phone</th>' +
                             '<th>Email</th>' +
+                            '<th>Birthday</th>' +
                             '</tr>';
                         for (i = 0; i < data.length; i++) {
                             oStaff = data[i];
@@ -72,6 +73,7 @@ function staffSearch(){
                                 oStaff.department + 
                                 oStaff.phone + 
                                 oStaff.email +
+                                oStaff.birthday +
                                 '</tr>';
                         }
                     }else{

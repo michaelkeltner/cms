@@ -135,6 +135,11 @@ function liveStaffSearch($mValue) {
         $oReturn = new stdClass();
         $oReturn->first_name = $oStaff->first_name;
         $oReturn->last_name = $oStaff->last_name;
+        if ($oStaff->birthday){
+            $oReturn->birthday = '<td class="table_birthday">' . date('m/d', strtotime($oStaff->birthday)) . '</td>';
+        }else{
+            $oReturn->birthday = '<td class="table_birthday"></td>';
+        }
         $aDepartment = @unserialize($oStaff->department);
         $oReturn->department = '';
         $sReturnDepartment = '';
