@@ -34,6 +34,7 @@ if (count($aSchools)) {
                         <ul class="detail_listing">
                             <?php $oData->show('account_manager', ', ', 'Account Manager: ', '', array('li'), true) ?>
                             <?php $oData->show('client_service_rep', ', ', 'Client Service Representative: ', '', array('li'), true) ?>
+                            <?php $oData->show('support_number', ', ', 'Support Number: ', '', array('li'), true) ?>
                             <?php $oData->show('carrier', ', ', 'Carrier: ', '', array('li'), true) ?>
                             <li>Website : <a href="http://ahpcare.com/<?php $oData->show('slug') ?>/" target="_blank">http://ahpcare.com/<?php $oData->show('slug') ?>/</a></li>
                             <?php $oData->show('sftp', ', ', 'Uses SFTP: ', '', array('li'), true) ?>

@@ -715,3 +715,7 @@ span.hiding_details{
     margin: 10px; /*Margins for inner DIV inside each column (to provide padding)*/
     margin-top: 0;
 }
+
+ .table_email a{
+     color: #E1E4FC
+ }
