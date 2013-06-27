@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    
+    TipsSearch();
     FAQSearch();
     schoolSearch();
     staffSearch();
@@ -269,6 +269,33 @@ function ChangeAJAXSearch(){
         },250);
     
 
+}
+function TipsSearch(){
+    $("#search_tip").live('keyup', function(){
+     var value=$("#search_tip").val();
+      setTimeout(function(){
+            if ($("#search_tip").val()  == value)
+            {
+                $.post('/ajax.php',{
+                    action:'search_tip',
+                    value:$("#search_tip").val()  
+                }, function(data) {
+                    if (data.length > 0){
+                        newList = '<ul>';
+                        for (i = 0; i < data.length; i++) {
+                            oData = data[i];
+                            newList += ' <li class="question">' + oData.title + '</li>';
+                            newList += ' <li class="answer">' + oData.content + '</li>';
+                        }
+                        newList += '</ul>';
+                    }else{
+                        newList = '<p>No Tips found with the search criteria.</p>'
+                    }
+                    $('#button').html(newList);   
+                },'json');     
+            }
+        },250);
+    });
 }
 
 function FAQAJAXSearch(){

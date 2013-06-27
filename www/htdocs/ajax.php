@@ -38,12 +38,21 @@ switch (postVar('action')) {
         echo liveDepartmentSearch(postVar('value'));
         exit;
         break;
+    case 'search_tip':
+        echo liveTipSearch(postVar('value'));
+        exit;
+        break;
     default:
         echo 0;
         exit;
         break;
 }
 
+function liveTipSearch($mValue) {
+    $oDb = new DB();
+    $sSql = 'SELECT * from `tips` WHERE `title` like "%'.  $mValue .'%" OR `content` like "%'.  $mValue .'%" ORDER BY `sort_order` ASC';
+    return json_encode($oDb->getRowsAsObjects($sSql));
+}
 
 function liveDepartmentSearch($mValue) {
     $oDb = new DB();
