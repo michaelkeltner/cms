@@ -47,7 +47,7 @@ class User extends Action {
     }
 
     private function validateLogin($sEmail, $sPassword) {
-        $oDb = new DB();
+        $oDb = DB::getDB();
         $sSql = 'SELECT *
                 FROM `user`
                 WHERE `password` = "' . md5($sPassword) . '"

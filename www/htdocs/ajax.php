@@ -49,31 +49,31 @@ switch (postVar('action')) {
 }
 
 function liveTipSearch($mValue) {
-    $oDb = new DB();
+    $oDb = DB::getDB();
     $sSql = 'SELECT * from `tips` WHERE `title` like "%'.  $mValue .'%" OR `content` like "%'.  $mValue .'%" ORDER BY `sort_order` ASC';
     return json_encode($oDb->getRowsAsObjects($sSql));
 }
 
 function liveDepartmentSearch($mValue) {
-    $oDb = new DB();
+    $oDb = DB::getDB();
     $sSql = 'SELECT distinct(`department`) from `call_information` WHERE `department` like "%'.  $mValue .'%" ORDER BY `department` ASC';
     return json_encode($oDb->getRowsAsObjects($sSql));
 }
 
 function liveDescriptionSearch($mValue) {
-    $oDb = new DB();
+    $oDb = DB::getDB();
     $sSql = 'SELECT distinct(`description`) from `call_information` WHERE `subject` like "%'.  $mValue .'%" ORDER BY `description` ASC';
     return json_encode($oDb->getRowsAsObjects($sSql));
 }
 
 function liveResolutionSearch($mValue) {
-    $oDb = new DB();
+    $oDb = DB::getDB();
     $sSql = 'SELECT distinct(`resolution`) from `call_information` WHERE `subject` like "%'.  $mValue .'%" ORDER BY `resolution` ASC';
     return json_encode($oDb->getRowsAsObjects($sSql));
 }
 
 function liveSubjectSearch($mValue) {
-    $oDb = new DB();
+    $oDb = DB::getDB();
     $sSql = 'SELECT distinct(`subject`) from `call_information` WHERE `subject` like "%'.  $mValue .'%" ORDER BY `subject` ASC';
     return json_encode($oDb->getRowsAsObjects($sSql));
 }
@@ -127,13 +127,13 @@ function liveChangeSearch($mValue, $sSystem, $aCategory) {
 }
 
 function liveSchoolSearch($mValue) {
-    $oDb = new DB();
+    $oDb = DB::getDB();
     $sSql = 'SELECT * from `school` WHERE `name` like "%'.  $mValue .'%" ORDER BY `name` ASC';
     return json_encode($oDb->getRowsAsObjects($sSql));
 }
 
 function liveStaffSearch($mValue) {
-    $oDb = new DB();
+    $oDb = DB::getDB();
     $sSql = 'SELECT * from `staff` WHERE (`first_name` like "%'.  $mValue .'%" OR `last_name` like "%'.  $mValue .'%") AND `active` = 1 ORDER BY `first_name` ASC';
     $aStaff = $oDb->getRowsAsObjects($sSql);
     if (!count($aStaff)){ 

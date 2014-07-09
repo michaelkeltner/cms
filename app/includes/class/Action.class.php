@@ -11,7 +11,7 @@ class Action {
 
     public function __construct($sTable = null) {
         $this->__set('sTable', $sTable);
-        $this->__set('oDb', new DB());
+        $this->__set('oDb', DB::getDB());
     }
 
     public function __get($sName) {

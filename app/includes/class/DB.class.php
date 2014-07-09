@@ -2,7 +2,16 @@
 
 class DB {
 
-    public function __construct() {
+    private static $oDB;
+    
+    public static function getDB(){
+        if (self::$oDB === null){
+            self::$oDB = new DB();
+        }
+        return self::$oDB;
+    }
+    
+    private function __construct() {
         $this->ConnectDB();
     }
 

@@ -69,10 +69,11 @@ class Field extends Action {
             $oAsset = new Asset();
             $aData = unserialize($oItem->{$sFieldName});
             $aAsset = $oAsset->getAll(' WHERE `id` in (' . implode (',', $aData). ')');
-            if (count($aAsset)){
-                foreach ($aAsset as $oAssetItem){
-                    $sReturn .= $oAssetItem->display_name . '<br/>';
-                }
+            if (!count($aAsset)){
+                return $sReturn;
+            } 
+            foreach ($aAsset as $oAssetItem){
+                $sReturn .= $oAssetItem->display_name . '<br/>';
             }
             return $sReturn;
         }elseif (is_array($oItem->{$sFieldName})){

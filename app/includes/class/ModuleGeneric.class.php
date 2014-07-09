@@ -166,7 +166,7 @@ class ModuleGeneric extends Action {
         if (isset($_SESSION['modules'][$iId])){
             return $_SESSION['modules'][$iId];
         }else{
-            $oDB = new DB();
+            $oDB = DB::getDB();
             $sSql = "SELECT `name` from `module` WHERE `id` = $iId";
             $aData = $oDB->getRowsAsObjects($sSql);
             $oData = $aData[0];

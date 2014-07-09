@@ -4,7 +4,7 @@ $aFieldOptions = unserialize($oPropery->options);
     if ($aFieldOptions['select_populated'] == 'database'){
         $sTable = $aFieldOptions['select_table'];
         $sColumn = $aFieldOptions['select_table_field'];
-        $oDB = new DB();
+        $oDB = DB::getDB();
         $sSQL = "SELECT `$sColumn` FROM `$sTable` ORDER BY `$sColumn` ASC";
         $aSelectValues = $oDB->getRowsAsArray($sSQL);
     }else{

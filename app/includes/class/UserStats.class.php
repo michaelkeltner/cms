@@ -7,7 +7,7 @@ class UserStats {
     
     public function __construct() {
         $this->__set('sTable', 'user_stats');
-        $this->__set('oDb', new DB());
+        $this->__set('oDb', DB::getDB());
     }
 
     public function __get($sName) {

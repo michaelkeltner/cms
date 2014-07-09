@@ -11,7 +11,7 @@ switch (postVar('action')) {
         $sTable =  postVar('module_name');
         $iItemId = postVar('item_id');
         $sColumnName = postVar('field_name');
-        $oDb = new DB();
+        $oDb = DB::getDB();
         $sSql = 'SELECT `' . $sColumnName . '` FROM `' . $sTable . '` WHERE `id` = ' . $iItemId;
         $aData = $oDb->getRowsAsObjects($sSql);
         $oReturn = array_shift($aData);
@@ -158,7 +158,7 @@ function getImageUrl($iId){
 }
 
 function isSlugUnique($sSlug, $sTable){
-    $oDb = new DB();
+    $oDb = DB::getDB();
     $sSql = 'SELECT 1 from `' . $sTable .'` WHERE `slug` = "' . $sSlug . '"';
     if ($oDb->getNumberOfRows($sSql)){
         return json_encode(false);

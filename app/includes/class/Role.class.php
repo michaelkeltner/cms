@@ -78,7 +78,7 @@ class Role extends Action {
     }
     
     public function getPermissions($iId){
-        $oDb = new DB();
+        $oDb = DB::getDB();
         $sSql = 'SELECT `prm`.*, `m`.`name` as `module_name`, `p`.`name` as `permission_name` From `permission_role_module` `prm`
                     JOIN `module` `m` ON `m`.`id` = `prm`.`module_id`
                     JOIN `permission` `p` ON `prm`.`permission_id` = `p`.`id`
